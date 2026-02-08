@@ -18,14 +18,18 @@
 }
 
 :root {
-  --background: #FDF8F0; /* Warm Cream */
-  --foreground: #2D3748; /* Charcoal */
+  --background: #FAFAFA;
+  /* Crisp Off-White */
+  --foreground: #2D3748;
+  /* Charcoal */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0C2340; /* Deep Navy */
-    --foreground: #F7FAFC; /* Off-white */
+    --background: #0B1120;
+    /* Darker Navy for contrast */
+    --foreground: #F7FAFC;
+    /* Off-white */
   }
 }
 
@@ -35,6 +39,11 @@ body {
   font-family: var(--font-body), sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display), serif;
 }

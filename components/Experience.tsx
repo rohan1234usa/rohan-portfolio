@@ -12,54 +12,44 @@ interface JobProps {
 }
 
 const ExperienceItem = ({ job }: { job: JobProps }) => (
-    <div className="relative pl-8 md:pl-0 group">
-        <div className="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 items-start">
+    <div className="relative pl-8 md:pl-0 group mb-12">
+        <div className="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-12 items-start">
             {/* Date (Left Side on Desktop) */}
             <div className="hidden md:block text-right pt-2">
-                <span className="text-sm font-bold tracking-wide text-brand-charcoal/70 group-hover:text-brand-purple transition-colors">
+                <span className="text-sm font-bold tracking-widest text-brand-charcoal/50 group-hover:text-brand-navy transition-colors font-mono uppercase">
                     {job.date}
                 </span>
             </div>
 
             {/* Timeline Dot & Line */}
             <div className="hidden md:flex flex-col items-center h-full">
-                <div className="w-4 h-4 rounded-full bg-brand-gold border-4 border-white shadow-md z-10 group-hover:scale-125 transition-transform duration-300"></div>
-                <div className="w-0.5 h-full bg-brand-lavender/50 -mt-2 group-last:hidden"></div>
+                <div className="w-3 h-3 rounded-full bg-brand-charcoal/20 group-hover:bg-brand-purple transition-all duration-300"></div>
+                <div className="w-px h-full bg-brand-charcoal/10 -mt-2 group-last:hidden"></div>
             </div>
 
             {/* Content Card */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-brand-lavender/30 hover:border-brand-gold hover:shadow-md transition-all mb-8 md:mb-0 relative">
-                {/* Mobile Dot */}
-                <div className="md:hidden absolute -left-[39px] top-6 w-4 h-4 rounded-full bg-brand-gold border-4 border-white shadow-md z-10"></div>
-                <div className="md:hidden absolute -left-[32px] top-10 bottom-[-32px] w-0.5 bg-brand-lavender/50"></div>
+            <div className="relative">
+                <div className="md:hidden absolute -left-[35px] top-2 w-3 h-3 rounded-full bg-brand-charcoal/20"></div>
 
-                <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-bold text-lg text-brand-navy font-display">{job.role}</h3>
-                    <a
-                        href={job.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-brand-purple/50 hover:text-brand-purple transition-colors"
-                    >
-                        <ExternalLink size={16} />
+                <h3 className="font-bold text-xl text-brand-navy font-display mb-1">{job.role}</h3>
+                <div className="text-brand-purple font-medium text-sm mb-4 flex items-center gap-2">
+                    {job.company}
+                    <a href={job.url} target="_blank" rel="noopener noreferrer" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ExternalLink size={12} />
                     </a>
                 </div>
-                <div className="text-brand-purple font-semibold text-sm mb-4">
-                    {job.company}
-                </div>
-                <div className="md:hidden mb-4 text-xs font-mono text-slate-500">
+
+                <div className="md:hidden mb-4 text-xs font-mono text-slate-400 uppercase tracking-widest">
                     {job.date}
                 </div>
+
                 <ul className="space-y-3">
                     {job.points.map((point: string, i: number) => (
                         <li
                             key={i}
-                            className="flex items-start gap-3 text-brand-charcoal text-sm leading-relaxed"
+                            className="flex items-start gap-4 text-brand-charcoal/80 text-sm leading-relaxed font-light"
                         >
-                            <ChevronRight
-                                size={16}
-                                className="mt-0.5 text-brand-gold flex-shrink-0"
-                            />
+                            <div className="w-1.5 h-1.5 bg-brand-gold rounded-full mt-2 flex-shrink-0"></div>
                             <span>{point}</span>
                         </li>
                     ))}
@@ -108,15 +98,11 @@ export const Experience = () => {
     ];
 
     return (
-        <section id="experience" className="py-24 bg-brand-cream relative overflow-hidden">
-            {/* Bridge Motif: Diagonal Line */}
-            <div className="absolute top-0 left-0 w-full h-24 bg-white transform -skew-y-2 origin-top-left z-0"></div>
-
-            <div className="container mx-auto px-6 max-w-4xl relative z-10">
-                <div className="mb-16 text-center">
-                    <span className="text-brand-purple font-bold tracking-wider uppercase text-sm">Career Journey</span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mt-2 mb-4">Experience</h2>
-                    <div className="w-20 h-1 bg-brand-gold mx-auto rounded-full"></div>
+        <section id="experience" className="py-32 bg-white relative">
+            <div className="container mx-auto px-6 max-w-5xl relative z-10">
+                <div className="mb-20">
+                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">Experience</h2>
+                    <div className="w-full h-px bg-brand-charcoal/10"></div>
                 </div>
 
                 <div className="space-y-0">

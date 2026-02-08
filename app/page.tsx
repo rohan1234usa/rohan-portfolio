@@ -46,16 +46,14 @@ export default function Home() {
 
       <Experience />
 
-      <section id="projects" className="py-24 bg-brand-blue-light/30 relative">
-        {/* Background curve or separator could be added here */}
+      <section id="projects" className="py-32 bg-white relative">
         <div className="container mx-auto px-6 max-w-5xl">
-          <div className="mb-12 text-center">
-            <span className="text-brand-purple font-bold tracking-wider uppercase text-sm">Portfolio</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mt-2 mb-4 font-display">Featured Projects</h2>
-            <div className="w-20 h-1 bg-brand-gold mx-auto rounded-full"></div>
+          <div className="mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">Selected Work</h2>
+            <div className="w-full h-px bg-brand-charcoal/10"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-12">
             {PROJECTS.map((p, i) => (
               <ProjectCard key={i} project={p} />
             ))}

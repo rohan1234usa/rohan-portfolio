@@ -8,40 +8,42 @@ const LINKS = {
 };
 
 export const Hero = () => (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-hero">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10 background-pattern"></div>
-
-        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+    <section className="relative pt-40 pb-32 lg:pt-56 lg:pb-40 overflow-hidden">
+        <div className="container mx-auto px-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
             <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                <div className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-wider text-brand-gold uppercase bg-brand-navy/30 border border-brand-gold/20 rounded-full backdrop-blur-sm">
-                    CS @ UC Irvine • GPA 3.9
+                <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-xs font-bold tracking-[0.2em] text-brand-navy uppercase border-b border-brand-gold/50">
+                    CS @ UC Irvine
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    GPA 3.9
                 </div>
-                <h1 className="text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-6 font-display">
-                    Building the Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-brand-yellow">Computer Vision</span> & AI.
+
+                <h1 className="text-5xl lg:text-7xl font-bold text-brand-navy leading-[1.1] mb-8 font-display tracking-tight">
+                    Building the Future of <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-navy">
+                        Computer Vision
+                    </span>
+                    <span className="text-brand-gold">.</span>
                 </h1>
-                <p className="text-lg text-brand-blue-light/90 mb-8 max-w-lg leading-relaxed">
-                    I'm Rohan Singh. I bridge the gap between academic research and
-                    production code, specializing in RAG pipelines, Generative AI, and YOLO
-                    architectures.
-                    {/* Accent Line */}
-                    <span className="block w-16 h-1 bg-brand-gold mt-6 rounded-full"></span>
+
+                <p className="text-xl text-brand-charcoal/80 mb-10 max-w-lg leading-relaxed font-light">
+                    I bridge the gap between <span className="font-medium text-brand-purple">academic research</span> and <span className="font-medium text-brand-navy">production code</span>.
+                    Specializing in RAG pipelines, Generative AI, and YOLO architectures.
                 </p>
 
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-6">
                     <a
                         href="#projects"
-                        className="px-8 py-3 bg-brand-gold text-brand-navy font-bold rounded-lg hover:bg-brand-yellow transition-all shadow-lg hover:shadow-brand-gold/20 transform hover:-translate-y-0.5"
+                        className="px-8 py-4 bg-brand-navy text-white font-medium rounded-sm hover:bg-brand-purple transition-colors duration-300 shadow-xl shadow-brand-navy/10"
                     >
                         View Work
                     </a>
                     <a
                         href={LINKS.email}
-                        className="px-8 py-3 border border-brand-lavender/30 text-white font-medium rounded-lg hover:bg-white/10 transition-colors backdrop-blur-sm"
+                        className="px-8 py-4 border-b-2 border-brand-charcoal/10 text-brand-charcoal font-medium hover:border-brand-purple hover:text-brand-purple transition-all duration-300"
                     >
                         Contact Me
                     </a>
@@ -49,15 +51,12 @@ export const Hero = () => (
             </motion.div>
 
             <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative flex justify-center"
+                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                className="relative flex justify-center lg:justify-end"
             >
-                {/* Decorative Blob */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-purple/30 rounded-full blur-3xl -z-10"></div>
-
-                <div className="relative w-72 h-72 lg:w-[400px] lg:h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 rotate-3 hover:rotate-0 transition-all duration-500">
+                <div className="relative w-80 h-96 lg:w-[450px] lg:h-[550px] overflow-hidden transition-all duration-700 ease-in-out shadow-2xl shadow-brand-navy/20">
                     <Image
                         src="/images/profile.png"
                         alt="Rohan Singh"
@@ -65,10 +64,13 @@ export const Hero = () => (
                         className="object-cover"
                         priority
                     />
+                    {/* Subtle Frame */}
+                    <div className="absolute inset-0 border-[1px] border-white/20"></div>
                 </div>
+
+                {/* Abstract "Bridge" Element */}
+                <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-brand-gold/10 -z-10 blur-xl"></div>
             </motion.div>
         </div>
-
-        {/* Bottom Wave/Bridge Element could go here */}
     </section>
 );
