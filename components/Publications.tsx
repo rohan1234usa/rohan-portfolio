@@ -19,7 +19,7 @@ export const Publications = () => {
     ];
 
     return (
-        <section className="py-24 bg-brand-cream/30">
+        <section className="py-24 lg:py-32 bg-brand-cream/30">
             <div className="container mx-auto px-6 max-w-4xl">
                 <h2 className="text-3xl font-bold text-brand-navy mb-12 flex items-center gap-3 font-display">
                     <BookOpen className="text-brand-purple" /> Publications
@@ -29,7 +29,7 @@ export const Publications = () => {
                         <a
                             key={i}
                             href={pub.link}
-                            className="group block bg-white p-6 rounded-xl border border-brand-lavender hover:border-brand-purple hover:shadow-lg transition-all"
+                            className="group block bg-white p-6 rounded-sm border border-brand-charcoal/10 hover:border-brand-purple/50 transition-all duration-300"
                         >
                             <div className="flex justify-between items-start">
                                 <div>

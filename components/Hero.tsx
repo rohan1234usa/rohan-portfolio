@@ -1,21 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Linkedin } from "lucide-react";
 import Image from "next/image";
 
 const LINKS = {
     email: "mailto:rohans9@uci.edu",
+    linkedin: "https://linkedin.com/in/rohan123",
 };
 
 export const Hero = () => (
-    <section className="relative pt-40 pb-32 lg:pt-56 lg:pb-40 overflow-hidden">
+    <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
         <div className="container mx-auto px-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-xs font-bold tracking-[0.2em] text-brand-navy uppercase border-b border-brand-gold/50">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 text-xs font-medium tracking-wide text-brand-charcoal/70 border-b border-brand-charcoal/20">
                     CS @ UC Irvine
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
                     GPA 3.89
@@ -33,18 +35,27 @@ export const Hero = () => (
                     Specializing in Computer Vision, Generative AI, and High-Performance Pipelines.
                 </p>
 
-                <div className="flex flex-wrap gap-6">
+                <div className="flex flex-wrap gap-4">
                     <a
                         href="#projects"
-                        className="px-8 py-4 bg-brand-navy text-white font-medium rounded-sm hover:bg-brand-purple transition-colors duration-300 shadow-xl shadow-brand-navy/10"
+                        className="px-8 py-4 bg-brand-navy text-white font-medium rounded-sm hover:bg-brand-purple transition-colors duration-300"
                     >
                         View Work
+                    </a>
+                    <a
+                        href={LINKS.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-8 py-4 bg-brand-purple text-white font-medium rounded-sm hover:bg-brand-navy transition-colors duration-300 inline-flex items-center gap-2"
+                    >
+                        <Linkedin size={18} />
+                        Connect on LinkedIn
                     </a>
                     <a
                         href="/resume.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-8 py-4 border-b-2 border-brand-charcoal/10 text-brand-charcoal font-medium hover:border-brand-purple hover:text-brand-purple transition-all duration-300"
+                        className="px-8 py-4 border border-brand-charcoal/20 text-brand-charcoal font-medium rounded-sm hover:border-brand-purple hover:text-brand-purple transition-all duration-300"
                     >
                         Resume
                     </a>
@@ -57,7 +68,7 @@ export const Hero = () => (
                 transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                 className="relative flex justify-center lg:justify-end"
             >
-                <div className="relative w-80 h-96 lg:w-[450px] lg:h-[550px] overflow-hidden transition-all duration-700 ease-in-out shadow-2xl shadow-brand-navy/20">
+                <div className="relative w-80 h-96 lg:w-[450px] lg:h-[550px] overflow-hidden transition-all duration-500 ease-out border border-brand-charcoal/10">
                     <Image
                         src="/images/profile.png"
                         alt="Rohan Singh"

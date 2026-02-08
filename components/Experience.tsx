@@ -16,7 +16,7 @@ const ExperienceItem = ({ job }: { job: JobProps }) => (
         <div className="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-12 items-start">
             {/* Date (Left Side on Desktop) */}
             <div className="hidden md:block text-right pt-2">
-                <span className="text-sm font-bold tracking-widest text-brand-charcoal/50 group-hover:text-brand-navy transition-colors font-mono uppercase">
+                <span className="text-sm font-medium text-brand-charcoal/50 group-hover:text-brand-navy transition-colors">
                     {job.date}
                 </span>
             </div>
@@ -39,7 +39,7 @@ const ExperienceItem = ({ job }: { job: JobProps }) => (
                     </a>
                 </div>
 
-                <div className="md:hidden mb-4 text-xs font-mono text-slate-400 uppercase tracking-widest">
+                <div className="md:hidden mb-4 text-xs text-brand-charcoal/50">
                     {job.date}
                 </div>
 

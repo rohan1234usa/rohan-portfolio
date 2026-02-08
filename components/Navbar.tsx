@@ -28,7 +28,7 @@ export const Navbar = () => {
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <Link href="/" className="group">
                     <h1
-                        className={`text-xl font-bold tracking-tight transition-colors ${scrolled ? "text-brand-navy" : "text-brand-navy"
+                        className={`text-xl font-bold tracking-tight transition-colors ${scrolled ? "text-brand-navy" : "text-brand-charcoal/80"
                             }`}
                     >
                         Rohan{" "}
@@ -44,7 +44,7 @@ export const Navbar = () => {
                         href={LINKS.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 text-brand-charcoal hover:text-brand-purple hover:bg-brand-lavender/20 rounded-full transition-all"
+                        className="p-2 text-brand-charcoal/70 hover:text-brand-navy border border-transparent hover:border-brand-charcoal/20 rounded-sm transition-all duration-300"
                     >
                         <Github size={20} />
                     </a>
@@ -52,7 +52,7 @@ export const Navbar = () => {
                         href={LINKS.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 text-brand-charcoal hover:text-brand-purple hover:bg-brand-lavender/20 rounded-full transition-all"
+                        className="p-2 text-brand-charcoal/70 hover:text-brand-navy border border-transparent hover:border-brand-charcoal/20 rounded-sm transition-all duration-300"
                     >
                         <Linkedin size={20} />
                     </a>

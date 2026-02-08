@@ -14,7 +14,7 @@ const SkillColumn = ({ title, icon, skills }: SkillOne) => (
             <div className="text-brand-navy">
                 {icon}
             </div>
-            <h3 className="font-bold text-lg text-brand-navy font-display uppercase tracking-wider">{title}</h3>
+            <h3 className="font-semibold text-base text-brand-navy font-display">{title}</h3>
         </div>
         <div className="flex flex-wrap gap-x-2 gap-y-3">
             {skills.map((s, i) => (
@@ -47,7 +47,7 @@ export const Skills = () => {
     };
 
     return (
-        <section className="py-24 bg-brand-cream/30">
+        <section className="py-24 lg:py-32 bg-brand-cream/30">
             <div className="container mx-auto px-6 max-w-6xl">
                 {/* Section Header */}
                 <div className="grid md:grid-cols-3 gap-8">

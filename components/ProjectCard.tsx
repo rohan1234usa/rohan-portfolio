@@ -15,8 +15,8 @@ interface ProjectProps {
 
 export const ProjectCard = ({ project }: { project: ProjectProps }) => (
     <motion.div
-        whileHover={{ y: -5 }}
-        className="group relative bg-white border-t-4 border-brand-navy hover:border-brand-purple transition-all duration-500 shadow-sm hover:shadow-xl p-8 flex flex-col h-full"
+        whileHover={{ y: -3 }}
+        className="group relative bg-white border border-brand-charcoal/10 hover:border-brand-purple/50 transition-all duration-300 ease-out p-8 flex flex-col h-full"
     >
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
@@ -38,7 +38,7 @@ export const ProjectCard = ({ project }: { project: ProjectProps }) => (
             {project.tech.map((t: string, i: number) => (
                 <span
                     key={i}
-                    className="px-3 py-1 bg-brand-charcoal/5 text-brand-charcoal/80 text-xs font-semibold uppercase tracking-wider rounded-sm"
+                    className="px-3 py-1 bg-brand-charcoal/5 text-brand-charcoal/70 text-xs font-medium tracking-wide rounded-sm"
                 >
                     {t}
                 </span>
