@@ -90,7 +90,7 @@ export const Experience = () => {
             role: "Software Engineer Intern",
             date: "June 2023 – Aug 2023",
             location: "Remote",
-            url: "#",
+            url: "https://asterbyte.com/",
             points: [
                 "Designed ML solutions for emotion detection on human faces in videos.",
                 "Generated synthetic training data using Unreal Engine MetaHumans to improve model robustness.",
@@ -102,7 +102,7 @@ export const Experience = () => {
             role: "Android Software Intern",
             date: "June 2022 – Aug 2022",
             location: "Remote",
-            url: "#",
+            url: "https://asterbyte.com/",
             points: [
                 "Developed Hue Christmas, a Philips Hue app that plays festive Christmas light shows.",
                 "Reconstructed the Android app Pitch Prime from the ground up, revamping the GUI and optimizing performance.",

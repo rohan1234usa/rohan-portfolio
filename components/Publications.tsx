@@ -8,13 +8,13 @@ export const Publications = () => {
             title: "Enhancing Face Emotion Recognition with FACS-Based Synthetic Dataset",
             conference: "8th International Conference on Computer Vision & Image Processing",
             date: "Nov 2023",
-            link: "#",
+            link: "https://iitjammu.ac.in/cvip2023/index.html",
         },
         {
             title: "Face Emotion Recognition with New Auto Generated Emotions Dataset: EMOTE-2023",
             conference: "WCSET 2023 & IRAJ",
             date: "Mar 2023",
-            link: "#",
+            link: "https://digitalxplore.org/proceeding.php?pid=1914",
         },
     ];
 
