@@ -7,19 +7,7 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        brand: {
-          purple: "#6A1B9A", // Deep Royal Purple
-          gray: "#64748b",   // Slate Gray
-          accent: "#F59E0B", // Muted Gold
-          bg: "#f8fafc",     // Light Background
-        },
-      },
-      animation: {
-        'bounce-slow': 'bounce 3s infinite',
-      }
-    },
+    extend: {},
   },
   plugins: [],
 };

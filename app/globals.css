@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-navy: #0C2340;
+  --color-brand-purple: #6B2C91;
+  --color-brand-gold: #F4B942;
+  --color-brand-yellow: #FFD200;
+  --color-brand-lavender: #E8D5F2;
+  --color-brand-blue-light: #E6F3FF;
+  --color-brand-cream: #FDF8F0;
+  --color-brand-charcoal: #2D3748;
+
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-inter);
+
+  --background-image-gradient-hero: linear-gradient(135deg, #6B2C91 0%, #0C2340 100%);
+  --background-image-gradient-accent: linear-gradient(90deg, #F4B942 0%, #FFD200 100%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --background: #FDF8F0; /* Warm Cream */
+  --foreground: #2D3748; /* Charcoal */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0C2340; /* Deep Navy */
+    --foreground: #F7FAFC; /* Off-white */
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), serif;
 }
