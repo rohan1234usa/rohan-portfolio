@@ -96,6 +96,18 @@ export const Experience = () => {
                 "Generated synthetic training data using Unreal Engine MetaHumans to improve model robustness.",
                 "Published research on facial emotion recognition at WCSET 2023."
             ]
+        },
+        {
+            company: "Asterbyte Software Systems",
+            role: "Android Software Intern",
+            date: "June 2022 – Aug 2022",
+            location: "Remote",
+            url: "#",
+            points: [
+                "Developed Hue Christmas, a Philips Hue app that plays festive Christmas light shows.",
+                "Reconstructed the Android app Pitch Prime from the ground up, revamping the GUI and optimizing performance.",
+                "Translated the app from Spanish to English, expanding accessibility to a wider audience."
+            ]
         }
     ];
 

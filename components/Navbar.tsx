@@ -21,8 +21,8 @@ export const Navbar = () => {
     return (
         <nav
             className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-                    ? "bg-white/90 backdrop-blur-md shadow-sm py-3"
-                    : "bg-transparent py-5"
+                ? "bg-white/90 backdrop-blur-md shadow-sm py-3"
+                : "bg-transparent py-5"
                 }`}
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
@@ -31,9 +31,9 @@ export const Navbar = () => {
                         className={`text-xl font-bold tracking-tight transition-colors ${scrolled ? "text-brand-navy" : "text-brand-navy"
                             }`}
                     >
-                        Rohan
+                        Rohan{" "}
                         <span className="text-brand-gold group-hover:text-brand-yellow transition-colors">
-                            .Singh
+                            Singh
                         </span>
                     </h1>
                 </Link>

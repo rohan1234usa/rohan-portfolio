@@ -26,7 +26,6 @@ export const Hero = () => (
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-navy">
                         Intelligent Systems
                     </span>
-                    <span className="text-brand-gold">.</span>
                 </h1>
 
                 <p className="text-xl text-brand-charcoal/80 mb-10 max-w-lg leading-relaxed font-light">
