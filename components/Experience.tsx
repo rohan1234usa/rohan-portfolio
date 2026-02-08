@@ -68,9 +68,9 @@ export const Experience = () => {
             location: "Cupertino, CA",
             url: "https://www.imentiv.ai",
             points: [
-                "Boosted face detection accuracy by 6% via automated ground-truth validation pipelines.",
-                "Optimized YOLO-based models for production and engineered face re-identification mechanisms.",
-                "Migrated legacy models to updated YOLO architectures based on comparative evaluations."
+                "Boosted face detection accuracy by 6% via automated ground-truth validation pipelines, eliminating false positives.",
+                "Implemented face re-identification tracking using dynamic placeholders, validated against ByteTrack and BoT-FaceSORT.",
+                "Led comparative evaluations that drove the migration from legacy models to optimized YOLO architectures."
             ]
         },
         {
@@ -80,8 +80,9 @@ export const Experience = () => {
             location: "Cupertino, CA",
             url: "https://www.imentiv.ai",
             points: [
-                "Engineered an image deduplication pipeline filtering 95% redundancies to reduce noise.",
-                "Built a facial analysis tool using YOLOv8 to detect faces and label emotions."
+                "Engineered an image deduplication tool using DINOv2 and Faiss, removing 95% of redundancies to refine ML datasets.",
+                "Developed algorithms to extract unique video frames, creating diverse datasets for model training.",
+                "Built a facial analysis tool using YOLOv8 to automate emotion labeling across large video datasets."
             ]
         },
         {
@@ -92,6 +93,7 @@ export const Experience = () => {
             url: "#",
             points: [
                 "Designed ML solutions for emotion detection on human faces in videos.",
+                "Generated synthetic training data using Unreal Engine MetaHumans to improve model robustness.",
                 "Published research on facial emotion recognition at WCSET 2023."
             ]
         }

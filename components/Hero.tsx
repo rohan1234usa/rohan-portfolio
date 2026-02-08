@@ -18,20 +18,20 @@ export const Hero = () => (
                 <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-xs font-bold tracking-[0.2em] text-brand-navy uppercase border-b border-brand-gold/50">
                     CS @ UC Irvine
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
-                    GPA 3.9
+                    GPA 3.89
                 </div>
 
                 <h1 className="text-5xl lg:text-7xl font-bold text-brand-navy leading-[1.1] mb-8 font-display tracking-tight">
                     Building the Future of <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-navy">
-                        Computer Vision
+                        Intelligent Systems
                     </span>
                     <span className="text-brand-gold">.</span>
                 </h1>
 
                 <p className="text-xl text-brand-charcoal/80 mb-10 max-w-lg leading-relaxed font-light">
                     I bridge the gap between <span className="font-medium text-brand-purple">academic research</span> and <span className="font-medium text-brand-navy">production code</span>.
-                    Specializing in RAG pipelines, Generative AI, and YOLO architectures.
+                    Specializing in RAG pipelines, Generative AI, and Scalable Architectures.
                 </p>
 
                 <div className="flex flex-wrap gap-6">
@@ -42,10 +42,12 @@ export const Hero = () => (
                         View Work
                     </a>
                     <a
-                        href={LINKS.email}
+                        href="/resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="px-8 py-4 border-b-2 border-brand-charcoal/10 text-brand-charcoal font-medium hover:border-brand-purple hover:text-brand-purple transition-all duration-300"
                     >
-                        Contact Me
+                        Resume
                     </a>
                 </div>
             </motion.div>

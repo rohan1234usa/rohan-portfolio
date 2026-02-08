@@ -20,19 +20,35 @@ const LINKS = {
 const PROJECTS = [
   {
     title: "Behavioural Interview Coach",
-    tech: ["Python", "FastAPI", "Computer Vision", "FFmpeg"],
-    desc: "Real-time interview simulation. Features a behavioral analysis engine quantifying Confidence, Clarity, and Resilience using micro-expression analysis.",
+    tech: ["FastAPI", "Python", "Computer Vision", "FFmpeg"],
+    desc: "Real-time interview simulator that quantifies subconscious cues like eye contact, micro-expressions, and vocal pacing to improve delivery.",
     link: LINKS.behavioralCoach,
     image: "/images/behavioral-coach.jpg",
-    color: "from-brand-purple to-brand-navy", // Academic Gradient: Purple to Navy
+    color: "from-brand-purple to-brand-navy",
   },
   {
     title: "SikhAI",
-    tech: ["RAG", "Next.js", "Vertex AI", "Firebase"],
-    desc: "RAG-based chatbot for spiritual guidance. Includes a full-stack community platform and high-performance Shabad search engine.",
+    tech: ["Next.js", "Firebase", "Vertex AI", "RAG"],
+    desc: "AI-powered spiritual companion featuring a context-aware RAG chatbot, daily Hukamnama integration, and a community event organizer.",
     link: LINKS.sikhAi,
     image: "/images/sikh-ai.jpg",
-    color: "from-brand-gold to-brand-yellow", // Academic Gradient: Gold to Yellow
+    color: "from-brand-gold to-brand-yellow",
+  },
+  {
+    title: "Hue Christmas",
+    tech: ["Android SDK", "Kotlin", "Philips Hue API"],
+    desc: "Mobile application for Philips Hue smart lights, enabling festive light shows and ambient holiday scenes.",
+    link: "#",
+    image: "/images/placeholder-hue.jpg",
+    color: "from-brand-navy to-brand-purple",
+  },
+  {
+    title: "Pitch Prime",
+    tech: ["Android SDK", "Java", "Firebase"],
+    desc: "Reconstructed and optimized mobile application with enhanced performance and user experience improvements.",
+    link: "#",
+    image: "/images/placeholder-pitch.jpg",
+    color: "from-brand-charcoal to-brand-navy",
   },
 ];
 
