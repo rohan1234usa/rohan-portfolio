@@ -29,8 +29,8 @@ export const Hero = () => (
                 </h1>
 
                 <p className="text-xl text-brand-charcoal/80 mb-10 max-w-lg leading-relaxed font-light">
-                    I bridge the gap between <span className="font-medium text-brand-purple">academic research</span> and <span className="font-medium text-brand-navy">production code</span>.
-                    Specializing in RAG pipelines, Generative AI, and Scalable Architectures.
+                    Engineering intelligent systems that <span className="font-medium text-brand-navy">see, understand, and scale</span>.
+                    Specializing in Computer Vision, Generative AI, and High-Performance Pipelines.
                 </p>
 
                 <div className="flex flex-wrap gap-6">
