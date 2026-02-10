@@ -67,7 +67,7 @@ export default function Home() {
       <section id="projects" className="py-32 bg-white relative">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">Selected Work</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">Projects</h2>
             <div className="w-full h-px bg-brand-charcoal/10"></div>
           </div>
 
