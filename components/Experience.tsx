@@ -99,7 +99,7 @@ export const Experience = () => {
         },
         {
             company: "Asterbyte Software Systems",
-            role: "Android Software Intern",
+            role: "Android Developer Intern",
             date: "June 2022 – Aug 2022",
             location: "Remote",
             url: "https://asterbyte.com/",
