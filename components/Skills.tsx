@@ -48,7 +48,7 @@ export const Skills = () => {
 
     return (
         <section className="py-20 bg-brand-cream/30">
-            <div className="container mx-auto px-6 max-w-6xl">
+            <div className="container mx-auto px-6 max-w-5xl">
                 {/* Section Header */}
                 <div className="mb-12">
                     <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">Skills</h2>
