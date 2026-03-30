@@ -13,10 +13,11 @@ const COURSES = [
     { code: "ICS 45C", name: "Programming in C/C++" },
     { code: "INF 43", name: "Software Engineering" },
     { code: "STATS 67", name: "Probability & Statistics" },
+    { code: "MATH 3A", name: "Linear Algebra" },
 ];
 
 export const Education = () => (
-    <section id="education" className="py-32 bg-brand-cream relative">
+    <section id="education" className="py-24 bg-brand-cream relative">
         <div className="container mx-auto px-6 max-w-5xl">
 
             {/* Section header */}
@@ -50,7 +51,7 @@ export const Education = () => (
                     </div>
 
                     {/* Right: stats */}
-                    <div className="flex flex-col sm:flex-row gap-4 md:text-right">
+                    <div className="flex flex-wrap gap-3 md:text-right items-start">
                         {/* GPA pill */}
                         <div className="inline-flex items-center gap-2 px-4 py-2 border border-brand-charcoal/10 text-sm font-medium text-brand-charcoal/70 self-start md:self-auto">
                             <span className="w-1.5 h-1.5 rounded-full bg-brand-gold flex-shrink-0" />
