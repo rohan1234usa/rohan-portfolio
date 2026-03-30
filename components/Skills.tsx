@@ -50,6 +50,10 @@ export const Skills = () => {
         <section className="py-20 bg-brand-cream/30">
             <div className="container mx-auto px-6 max-w-6xl">
                 {/* Section Header */}
+                <div className="mb-12">
+                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">Skills</h2>
+                    <div className="w-full h-px bg-brand-charcoal/10" />
+                </div>
                 <div className="grid md:grid-cols-3 gap-8">
                     <SkillColumn
                         title="Languages"
