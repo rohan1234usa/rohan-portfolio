@@ -17,11 +17,11 @@ const COURSES = [
 ];
 
 export const Education = () => (
-    <section id="education" className="py-24 bg-brand-cream relative">
+    <section id="education" className="py-16 bg-brand-cream relative">
         <div className="container mx-auto px-6 max-w-5xl">
 
             {/* Section header */}
-            <div className="mb-20">
+            <div className="mb-12">
                 <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">
                     Education
                 </h2>

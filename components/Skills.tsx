@@ -47,7 +47,7 @@ export const Skills = () => {
     };
 
     return (
-        <section className="py-24 lg:py-32 bg-brand-cream/30">
+        <section className="py-20 bg-brand-cream/30">
             <div className="container mx-auto px-6 max-w-6xl">
                 {/* Section Header */}
                 <div className="grid md:grid-cols-3 gap-8">

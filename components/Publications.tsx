@@ -19,7 +19,7 @@ export const Publications = () => {
     ];
 
     return (
-        <section className="py-24 lg:py-32 bg-brand-cream/30">
+        <section className="py-16 bg-brand-cream/30">
             <div className="container mx-auto px-6 max-w-4xl">
                 <h2 className="text-3xl font-bold text-brand-navy mb-12 flex items-center gap-3 font-display">
                     <BookOpen className="text-brand-purple" /> Publications
