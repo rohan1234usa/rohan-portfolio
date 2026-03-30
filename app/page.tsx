@@ -61,10 +61,6 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      <Education />
-
-      <Skills />
-
       <Experience />
 
       <section id="projects" className="py-32 bg-white relative">
@@ -81,6 +77,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Skills />
+
+      <Education />
 
       <Publications />
 
