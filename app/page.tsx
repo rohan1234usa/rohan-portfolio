@@ -2,6 +2,7 @@
 
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { Education } from "@/components/Education";
 import { Skills } from "@/components/Skills";
 import { Experience } from "@/components/Experience";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -59,6 +60,8 @@ export default function Home() {
     <main className="min-h-screen bg-brand-cream selection:bg-brand-purple selection:text-white">
       <Navbar />
       <Hero />
+
+      <Education />
 
       <Skills />
 

@@ -20,7 +20,7 @@ export const Hero = () => (
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 text-xs font-medium tracking-wide text-brand-charcoal/70 border-b border-brand-charcoal/20">
                     CS @ UC Irvine
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
-                    GPA 3.89
+                    GPA 3.92
                 </div>
 
                 <h1 className="text-5xl lg:text-7xl font-bold text-brand-navy leading-[1.1] mb-8 font-display tracking-tight">
