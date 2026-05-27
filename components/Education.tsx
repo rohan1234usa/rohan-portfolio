@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, BookOpen, BadgeCheck } from "lucide-react";
+import { Award, BookOpen, BadgeCheck, GraduationCap } from "lucide-react";
 
 const COURSES = [
     { code: "CS 171", name: "Artificial Intelligence" },
@@ -22,7 +22,8 @@ export const Education = () => (
 
             {/* Section header */}
             <div className="mb-12">
-                <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display">
+                <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
+                    <GraduationCap className="text-brand-purple dark:text-brand-gold" size={32} />
                     Education
                 </h2>
                 <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Briefcase } from "lucide-react";
 
 interface JobProps {
     company: string;
@@ -105,7 +105,10 @@ export const Experience = () => {
         <section id="experience" className="py-32 bg-white dark:bg-brand-ink relative">
             <div className="container mx-auto px-6 max-w-5xl relative z-10">
                 <div className="mb-20">
-                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display">Experience</h2>
+                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
+                        <Briefcase className="text-brand-purple dark:text-brand-gold" size={32} />
+                        Experience
+                    </h2>
                     <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"></div>
                 </div>
 

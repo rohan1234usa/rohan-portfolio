@@ -1,7 +1,8 @@
 "use client";
 
 import { ReactNode } from "react";
-import { Code2, BrainCircuit, Database } from "lucide-react";
+import { Code2, BrainCircuit, Database, Wrench } from "lucide-react";
+import { TechIcon } from "./TechIcon";
 
 interface SkillOne {
     title: string;
@@ -17,13 +18,14 @@ const SkillColumn = ({ title, icon, skills }: SkillOne) => (
             </div>
             <h3 className="font-semibold text-base text-brand-navy dark:text-brand-cream font-display">{title}</h3>
         </div>
-        <div className="flex flex-wrap gap-x-2 gap-y-3">
+        <div className="flex flex-wrap gap-2">
             {skills.map((s, i) => (
                 <span
                     key={i}
-                    className="px-0 py-0 text-brand-charcoal/70 dark:text-brand-cream/70 text-sm font-medium hover:text-brand-purple dark:hover:text-brand-gold transition-all cursor-default border-b border-transparent hover:border-brand-purple dark:hover:border-brand-gold"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-brand-charcoal/5 dark:bg-brand-cream/10 text-brand-charcoal/80 dark:text-brand-cream/80 text-xs font-medium rounded-sm border border-transparent hover:border-brand-purple/30 dark:hover:border-brand-gold/30 transition-colors cursor-default"
                 >
-                    {s}{i < skills.length - 1 ? "," : ""}
+                    <TechIcon name={s} />
+                    {s}
                 </span>
             ))}
         </div>
@@ -52,7 +54,10 @@ export const Skills = () => {
             <div className="container mx-auto px-6 max-w-5xl">
                 {/* Section Header */}
                 <div className="mb-12">
-                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display">Skills</h2>
+                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
+                        <Wrench className="text-brand-purple dark:text-brand-gold" size={32} />
+                        Skills
+                    </h2>
                     <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10" />
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { TechIcon } from "./TechIcon";
 
 interface ProjectModalProps {
     isOpen: boolean;
@@ -147,8 +148,9 @@ export const ProjectModal = ({
                                 {tech.map((t, i) => (
                                     <span
                                         key={i}
-                                        className="px-3 py-1 bg-brand-charcoal/5 dark:bg-brand-cream/10 text-brand-charcoal/70 dark:text-brand-cream/70 text-xs font-medium tracking-wide rounded-sm"
+                                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-charcoal/5 dark:bg-brand-cream/10 text-brand-charcoal/70 dark:text-brand-cream/70 text-xs font-medium tracking-wide rounded-sm"
                                     >
+                                        <TechIcon name={t} />
                                         {t}
                                     </span>
                                 ))}

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { ProjectModal } from "./ProjectModal";
+import { TechIcon } from "./TechIcon";
 
 interface ProjectProps {
     title: string;
@@ -74,8 +75,9 @@ export const ProjectCard = ({ project }: { project: ProjectProps }) => {
                         {project.tech.map((t, i) => (
                             <span
                                 key={i}
-                                className="px-3 py-1 bg-brand-charcoal/5 dark:bg-brand-cream/10 text-brand-charcoal/70 dark:text-brand-cream/70 text-xs font-medium tracking-wide rounded-sm border border-transparent group-hover:border-brand-purple/10 dark:group-hover:border-brand-gold/20 transition-colors"
+                                className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-charcoal/5 dark:bg-brand-cream/10 text-brand-charcoal/70 dark:text-brand-cream/70 text-xs font-medium tracking-wide rounded-sm border border-transparent group-hover:border-brand-purple/10 dark:group-hover:border-brand-gold/20 transition-colors"
                             >
+                                <TechIcon name={t} />
                                 {t}
                             </span>
                         ))}

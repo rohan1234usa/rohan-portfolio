@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Linkedin } from "lucide-react";
+import { Linkedin, Briefcase } from "lucide-react";
 import Image from "next/image";
 
 const LINKS = {
@@ -28,6 +28,7 @@ export const Hero = () => (
                             <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping"></span>
                             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                         </span>
+                        <Briefcase size={12} className="text-emerald-600 dark:text-emerald-400" />
                         Open to SWE/ML internships — Summer 2026
                     </div>
                 </div>

@@ -21,9 +21,11 @@ export const Publications = () => {
     return (
         <section id="publications" className="py-16 bg-brand-cream/30 dark:bg-brand-ink">
             <div className="container mx-auto px-6 max-w-5xl">
-                <h2 className="text-3xl font-bold text-brand-navy dark:text-brand-cream mb-12 flex items-center gap-3 font-display">
-                    <BookOpen className="text-brand-purple dark:text-brand-gold" /> Publications
+                <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
+                    <BookOpen className="text-brand-purple dark:text-brand-gold" size={32} />
+                    Publications
                 </h2>
+                <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10 mb-12" />
                 <div className="grid gap-6">
                     {PUBLICATIONS.map((pub, i) => (
                         <a

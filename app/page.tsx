@@ -11,6 +11,7 @@ import { Stats } from "@/components/Stats";
 import { ContactForm } from "@/components/ContactForm";
 import { SectionRail } from "@/components/SectionRail";
 import { Footer } from "@/components/Footer";
+import { FolderGit2, Mail } from "lucide-react";
 
 const LINKS = {
   imentiv: "https://www.imentiv.ai",
@@ -95,7 +96,10 @@ export default function Home() {
       <section id="projects" className="py-32 bg-white dark:bg-brand-ink relative">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display">Projects</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
+              <FolderGit2 className="text-brand-purple dark:text-brand-gold" size={32} />
+              Projects
+            </h2>
             <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"></div>
           </div>
 
@@ -116,7 +120,10 @@ export default function Home() {
       <section id="contact" className="py-20 bg-brand-cream dark:bg-brand-ink">
         <div className="container mx-auto px-6 max-w-3xl">
           <div className="mb-10">
-            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display">Contact</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
+              <Mail className="text-brand-purple dark:text-brand-gold" size={32} />
+              Contact
+            </h2>
             <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"></div>
             <p className="mt-6 text-brand-charcoal/70 dark:text-brand-cream/70 font-light">
               Open to internships, collaborations, or just trading notes on CV pipelines and RAG systems.
