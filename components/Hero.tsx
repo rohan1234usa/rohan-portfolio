@@ -103,16 +103,53 @@ export const Hero = () => (
                 transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                 className="relative flex justify-center lg:justify-end"
             >
-                <div className="relative w-80 h-96 lg:w-[450px] lg:h-[550px] overflow-hidden transition-all duration-500 ease-out border border-brand-charcoal/10 dark:border-brand-cream/10">
-                    <Image
-                        src="/images/profile.png"
-                        alt="Rohan Singh"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                    {/* Subtle Frame */}
-                    <div className="absolute inset-0 border-[1px] border-white/20"></div>
+                <div className="group relative w-80 h-[420px] lg:w-[440px] lg:h-[560px]">
+                    {/* Matte / outer card */}
+                    <div className="absolute inset-0 flex flex-col p-3 bg-brand-cream/70 dark:bg-brand-surface/80 border border-brand-charcoal/15 dark:border-brand-cream/15 shadow-[0_30px_60px_-30px_rgba(12,35,64,0.25)] dark:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-all duration-500 ease-out group-hover:-translate-y-0.5 group-hover:shadow-[0_40px_70px_-30px_rgba(12,35,64,0.3)] dark:group-hover:shadow-[0_40px_70px_-30px_rgba(0,0,0,0.7)]">
+                        {/* Photo cell — square */}
+                        <div className="relative w-full aspect-square overflow-hidden flex-shrink-0">
+                            <Image
+                                src="/images/profile.png"
+                                alt="Rohan Singh"
+                                fill
+                                sizes="(min-width: 1024px) 416px, 304px"
+                                className="object-cover [filter:contrast(0.96)_saturate(0.94)] dark:[filter:contrast(0.95)_saturate(0.92)_brightness(0.98)] transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+                                priority
+                            />
+                            {/* Vignette */}
+                            <div
+                                aria-hidden
+                                className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(12,35,64,0.18)_100%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,0.35)_100%)]"
+                            />
+                            {/* Film grain */}
+                            <div
+                                aria-hidden
+                                className="absolute inset-0 pointer-events-none opacity-[0.08] mix-blend-multiply dark:mix-blend-screen"
+                                style={{
+                                    backgroundImage:
+                                        "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+                                }}
+                            />
+                            {/* Inset hairline (print-border) */}
+                            <div aria-hidden className="absolute inset-0 border border-white/15 pointer-events-none" />
+                        </div>
+
+                        {/* Placard strip */}
+                        <div className="flex-1 mt-3 pt-3 px-1 border-t border-brand-charcoal/10 dark:border-brand-cream/10 flex flex-col justify-center gap-1.5">
+                            <div className="flex items-baseline justify-between gap-3">
+                                <span className="font-display text-lg lg:text-xl text-brand-navy dark:text-brand-cream tracking-tight leading-none">
+                                    Rohan Singh
+                                </span>
+                                <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.18em] uppercase text-brand-charcoal/55 dark:text-brand-cream/50 whitespace-nowrap">
+                                    <span className="w-1 h-1 rounded-full bg-brand-gold" />
+                                    UC Irvine &rsquo;28
+                                </span>
+                            </div>
+                            <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-brand-charcoal/45 dark:text-brand-cream/40 leading-none">
+                                Software &middot; Machine Learning
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Abstract "Bridge" Element */}
