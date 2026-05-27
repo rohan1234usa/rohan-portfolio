@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
+import { ScrollProgress } from "./ScrollProgress";
 
 const LINKS = {
     github: "https://github.com/rohan1234usa",
@@ -78,6 +79,7 @@ export const Navbar = () => {
                     </a>
                 </div>
             </div>
+            <ScrollProgress />
         </nav>
     );
 };

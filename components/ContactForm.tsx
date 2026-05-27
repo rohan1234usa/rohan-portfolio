@@ -3,6 +3,8 @@
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2 } from "lucide-react";
+import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
+import { Magnetic } from "./motion/Magnetic";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -83,68 +85,74 @@ export const ContactForm = () => {
                 className="absolute left-[-9999px] w-px h-px opacity-0"
             />
 
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-                <label className="block">
-                    <span className="block text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/60 font-medium mb-2">
-                        Name
+            <StaggerGroup stagger={0.08}>
+                <StaggerItem className="grid md:grid-cols-2 gap-4 mb-4">
+                    <label className="block">
+                        <span className="block text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/60 font-medium mb-2">
+                            Name
+                        </span>
+                        <input
+                            type="text"
+                            name="name"
+                            required
+                            maxLength={200}
+                            disabled={disabled}
+                            className="w-full px-4 py-3 bg-brand-cream/40 dark:bg-brand-ink/60 border border-brand-charcoal/15 dark:border-brand-cream/15 rounded-sm text-sm text-brand-navy dark:text-brand-cream placeholder:text-brand-charcoal/40 dark:placeholder:text-brand-cream/40 focus:outline-none focus:border-brand-purple dark:focus:border-brand-gold transition-colors"
+                            placeholder="Your name"
+                        />
+                    </label>
+                    <label className="block">
+                        <span className="block text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/60 font-medium mb-2">
+                            Email
+                        </span>
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            disabled={disabled}
+                            className="w-full px-4 py-3 bg-brand-cream/40 dark:bg-brand-ink/60 border border-brand-charcoal/15 dark:border-brand-cream/15 rounded-sm text-sm text-brand-navy dark:text-brand-cream placeholder:text-brand-charcoal/40 dark:placeholder:text-brand-cream/40 focus:outline-none focus:border-brand-purple dark:focus:border-brand-gold transition-colors"
+                            placeholder="you@example.com"
+                        />
+                    </label>
+                </StaggerItem>
+
+                <StaggerItem>
+                    <label className="block mb-4">
+                        <span className="block text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/60 font-medium mb-2">
+                            Message
+                        </span>
+                        <textarea
+                            name="message"
+                            required
+                            rows={5}
+                            maxLength={5000}
+                            disabled={disabled}
+                            className="w-full px-4 py-3 bg-brand-cream/40 dark:bg-brand-ink/60 border border-brand-charcoal/15 dark:border-brand-cream/15 rounded-sm text-sm text-brand-navy dark:text-brand-cream placeholder:text-brand-charcoal/40 dark:placeholder:text-brand-cream/40 focus:outline-none focus:border-brand-purple dark:focus:border-brand-gold transition-colors resize-y"
+                            placeholder="What are you working on?"
+                        />
+                    </label>
+                </StaggerItem>
+
+                {status === "error" && (
+                    <p className="mb-4 text-sm text-red-600">{errorMsg}</p>
+                )}
+
+                <StaggerItem className="flex items-center justify-between flex-wrap gap-4">
+                    <Magnetic>
+                        <button
+                            type="submit"
+                            disabled={disabled}
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-navy dark:bg-brand-cream dark:text-brand-navy text-white font-medium rounded-sm hover:bg-brand-purple dark:hover:bg-brand-gold transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                        >
+                            {disabled ? "Sending..." : "Send message"}
+                            <Send size={16} />
+                        </button>
+                    </Magnetic>
+                    <span className="text-xs text-brand-charcoal/55 dark:text-brand-cream/55">
+                        Typical response within 24 hours.
                     </span>
-                    <input
-                        type="text"
-                        name="name"
-                        required
-                        maxLength={200}
-                        disabled={disabled}
-                        className="w-full px-4 py-3 bg-brand-cream/40 dark:bg-brand-ink/60 border border-brand-charcoal/15 dark:border-brand-cream/15 rounded-sm text-sm text-brand-navy dark:text-brand-cream placeholder:text-brand-charcoal/40 dark:placeholder:text-brand-cream/40 focus:outline-none focus:border-brand-purple dark:focus:border-brand-gold transition-colors"
-                        placeholder="Your name"
-                    />
-                </label>
-                <label className="block">
-                    <span className="block text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/60 font-medium mb-2">
-                        Email
-                    </span>
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        disabled={disabled}
-                        className="w-full px-4 py-3 bg-brand-cream/40 dark:bg-brand-ink/60 border border-brand-charcoal/15 dark:border-brand-cream/15 rounded-sm text-sm text-brand-navy dark:text-brand-cream placeholder:text-brand-charcoal/40 dark:placeholder:text-brand-cream/40 focus:outline-none focus:border-brand-purple dark:focus:border-brand-gold transition-colors"
-                        placeholder="you@example.com"
-                    />
-                </label>
-            </div>
-
-            <label className="block mb-4">
-                <span className="block text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/60 font-medium mb-2">
-                    Message
-                </span>
-                <textarea
-                    name="message"
-                    required
-                    rows={5}
-                    maxLength={5000}
-                    disabled={disabled}
-                    className="w-full px-4 py-3 bg-brand-cream/40 dark:bg-brand-ink/60 border border-brand-charcoal/15 dark:border-brand-cream/15 rounded-sm text-sm text-brand-navy dark:text-brand-cream placeholder:text-brand-charcoal/40 dark:placeholder:text-brand-cream/40 focus:outline-none focus:border-brand-purple dark:focus:border-brand-gold transition-colors resize-y"
-                    placeholder="What are you working on?"
-                />
-            </label>
-
-            {status === "error" && (
-                <p className="mb-4 text-sm text-red-600">{errorMsg}</p>
-            )}
-
-            <div className="flex items-center justify-between flex-wrap gap-4">
-                <button
-                    type="submit"
-                    disabled={disabled}
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-brand-navy dark:bg-brand-cream dark:text-brand-navy text-white font-medium rounded-sm hover:bg-brand-purple dark:hover:bg-brand-gold transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                    {disabled ? "Sending..." : "Send message"}
-                    <Send size={16} />
-                </button>
-                <span className="text-xs text-brand-charcoal/55 dark:text-brand-cream/55">
-                    Typical response within 24 hours.
-                </span>
-            </div>
+                </StaggerItem>
+            </StaggerGroup>
         </form>
     );
 };

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
+import { CountUp } from "./motion/CountUp";
 
 interface Stat {
     value: string;
@@ -17,24 +18,21 @@ const STATS: Stat[] = [
 export const Stats = () => (
     <section className="bg-brand-cream dark:bg-brand-ink">
         <div className="container mx-auto px-6 max-w-5xl">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+            <StaggerGroup
                 className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-brand-charcoal/10 dark:border-brand-cream/10"
+                stagger={0.1}
             >
                 {STATS.map((stat, i) => (
-                    <div key={i} className="text-center md:text-left">
+                    <StaggerItem key={i} className="text-center md:text-left">
                         <div className="text-3xl md:text-4xl font-display font-bold text-brand-navy dark:text-brand-cream tracking-tight">
-                            {stat.value}
+                            <CountUp value={stat.value} />
                         </div>
                         <div className="mt-2 text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/75 font-medium">
                             {stat.label}
                         </div>
-                    </div>
+                    </StaggerItem>
                 ))}
-            </motion.div>
+            </StaggerGroup>
         </div>
     </section>
 );
