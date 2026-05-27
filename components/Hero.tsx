@@ -56,7 +56,7 @@ export const Hero = () => {
                                 as="span"
                                 delay={0.55}
                                 y={32}
-                                className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-navy dark:from-brand-gold dark:via-brand-yellow dark:to-brand-cream"
+                                className="block pb-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-navy dark:from-brand-gold dark:via-brand-yellow dark:to-brand-cream"
                             >
                                 Intelligent Systems
                             </Reveal>

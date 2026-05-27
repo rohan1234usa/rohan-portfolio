@@ -58,7 +58,7 @@ export const WordReveal = ({
                             return (
                                 <span
                                     key={tokenIdx}
-                                    className="inline-block overflow-hidden align-bottom"
+                                    className="inline-block align-bottom [overflow:clip] [overflow-clip-margin:0.3em]"
                                 >
                                     <motion.span
                                         className="inline-block"
