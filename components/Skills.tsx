@@ -1,26 +1,27 @@
 "use client";
 
+import { ReactNode } from "react";
 import { Code2, BrainCircuit, Database } from "lucide-react";
 
 interface SkillOne {
     title: string;
-    icon: any;
+    icon: ReactNode;
     skills: string[];
 }
 
 const SkillColumn = ({ title, icon, skills }: SkillOne) => (
-    <div className="p-8 bg-white border border-brand-charcoal/10 rounded-sm hover:border-brand-purple/50 transition-colors">
+    <div className="p-8 bg-white dark:bg-brand-surface border border-brand-charcoal/10 dark:border-brand-cream/10 rounded-sm hover:border-brand-purple/50 dark:hover:border-brand-gold/50 transition-colors">
         <div className="flex items-center gap-3 mb-8">
-            <div className="text-brand-navy">
+            <div className="text-brand-navy dark:text-brand-cream">
                 {icon}
             </div>
-            <h3 className="font-semibold text-base text-brand-navy font-display">{title}</h3>
+            <h3 className="font-semibold text-base text-brand-navy dark:text-brand-cream font-display">{title}</h3>
         </div>
         <div className="flex flex-wrap gap-x-2 gap-y-3">
             {skills.map((s, i) => (
                 <span
                     key={i}
-                    className="px-0 py-0 text-brand-charcoal/70 text-sm font-medium hover:text-brand-purple transition-all cursor-default border-b border-transparent hover:border-brand-purple"
+                    className="px-0 py-0 text-brand-charcoal/70 dark:text-brand-cream/70 text-sm font-medium hover:text-brand-purple dark:hover:text-brand-gold transition-all cursor-default border-b border-transparent hover:border-brand-purple dark:hover:border-brand-gold"
                 >
                     {s}{i < skills.length - 1 ? "," : ""}
                 </span>
@@ -47,12 +48,12 @@ export const Skills = () => {
     };
 
     return (
-        <section className="py-20 bg-brand-cream/30">
+        <section id="skills" className="py-20 bg-brand-cream/30 dark:bg-brand-ink">
             <div className="container mx-auto px-6 max-w-5xl">
                 {/* Section Header */}
                 <div className="mb-12">
-                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">Skills</h2>
-                    <div className="w-full h-px bg-brand-charcoal/10" />
+                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display">Skills</h2>
+                    <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10" />
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">
                     <SkillColumn

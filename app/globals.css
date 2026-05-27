@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 @theme {
   --color-brand-navy: #0C2340;
   --color-brand-purple: #6B2C91;
@@ -10,6 +17,10 @@
   --color-brand-cream: #FDF8F0;
   --color-brand-charcoal: #2D3748;
 
+  /* Dark-mode surfaces */
+  --color-brand-ink: #0B1120;
+  --color-brand-surface: #16223A;
+
   --font-display: var(--font-playfair);
   --font-body: var(--font-inter);
 
@@ -19,18 +30,13 @@
 
 :root {
   --background: #FAFAFA;
-  /* Crisp Off-White */
   --foreground: #2D3748;
-  /* Charcoal */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0B1120;
-    /* Darker Navy for contrast */
-    --foreground: #F7FAFC;
-    /* Off-white */
-  }
+.dark {
+  --background: #0B1120;
+  --foreground: #F7FAFC;
+  color-scheme: dark;
 }
 
 body {
@@ -49,13 +55,11 @@ h6 {
   letter-spacing: -0.02em;
 }
 
-/* Body text refinement */
 p,
 li {
   line-height: 1.6;
 }
 
-/* Global transition for interactive elements */
 a,
 button {
   transition: all 0.3s ease-out;

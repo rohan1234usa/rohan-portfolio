@@ -13,7 +13,7 @@ export const Footer = () => (
             {/* Contact CTA */}
             <div className="text-center mb-12">
                 <h3 className="text-2xl font-display text-white mb-4 tracking-tight">
-                    Let's Build Something Together
+                    Let&apos;s Build Something Together
                 </h3>
                 <p className="text-brand-blue-light/60 mb-8 max-w-md mx-auto">
                     Always open to discussing new opportunities, collaborations, or ideas.

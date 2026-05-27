@@ -7,6 +7,9 @@ import { Skills } from "@/components/Skills";
 import { Experience } from "@/components/Experience";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Publications } from "@/components/Publications";
+import { Stats } from "@/components/Stats";
+import { ContactForm } from "@/components/ContactForm";
+import { SectionRail } from "@/components/SectionRail";
 import { Footer } from "@/components/Footer";
 
 const LINKS = {
@@ -23,18 +26,30 @@ const LINKS = {
 const PROJECTS = [
   {
     title: "Behavioural Interview Coach",
-    tech: ["FastAPI", "Python", "Computer Vision", "FFmpeg"],
-    desc: "Real-time interview simulator that quantifies subconscious cues like eye contact, micro-expressions, and vocal pacing to improve delivery.",
+    tech: ["FastAPI", "Python", "Docker", "AWS S3", "Computer Vision"],
+    desc: "Soft-skills-first interview simulator that quantifies subconscious cues like eye contact, micro-expressions, and vocal pacing to improve delivery.",
     link: LINKS.behavioralCoach,
-    image: "/images/behavioral-coach.jpg",
+    image: "",
+    images: [],
+    details: [
+      "Computer-vision pipeline separates semantic content from delivery, scoring each on its own rubric per question.",
+      "FastAPI + Docker backend with AWS S3 storage handles real-time session capture and on-demand replay.",
+      "Generates a post-session report with timestamped clips of the strongest and weakest moments.",
+    ],
     color: "from-brand-purple to-brand-navy",
   },
   {
     title: "SikhAI",
-    tech: ["Next.js", "Firebase", "Vertex AI", "RAG"],
-    desc: "AI-powered spiritual companion featuring a context-aware RAG chatbot, daily Hukamnama integration, and a community event organizer.",
+    tech: ["Next.js", "Firebase", "Vertex AI", "Tailwind", "RAG"],
+    desc: "Full-stack spiritual companion: a RAG chatbot grounded in Sikh scripture, Shabad search, daily Hukamnama, and a community event organizer.",
     link: LINKS.sikhAi,
     image: "/images/sikh-ai.jpg",
+    images: ["/images/sikh-ai.jpg"],
+    details: [
+      "RAG chatbot grounded in a curated corpus of Sikh scripture and historical commentary, served via Vertex AI.",
+      "Shabad search and daily Hukamnama pulled automatically and rendered alongside transliteration and translation.",
+      "Community module lets local sangats post and RSVP to events without a separate account system.",
+    ],
     color: "from-brand-gold to-brand-yellow",
   },
   {
@@ -42,7 +57,13 @@ const PROJECTS = [
     tech: ["Android SDK", "Kotlin", "Philips Hue API"],
     desc: "Mobile application for Philips Hue smart lights, enabling festive light shows and ambient holiday scenes.",
     link: LINKS.hueChristmas,
-    image: "/images/placeholder-hue.jpg",
+    image: "",
+    images: [],
+    details: [
+      "Choreographed multi-bulb light sequences synchronized to a curated playlist of holiday tracks.",
+      "Custom scene editor lets users layer color transitions and brightness curves with a timeline UI.",
+      "Shipped on the Google Play Store with sustained 4-star+ user ratings.",
+    ],
     color: "from-brand-navy to-brand-purple",
   },
   {
@@ -50,24 +71,32 @@ const PROJECTS = [
     tech: ["Android SDK", "Java", "Firebase"],
     desc: "Reconstructed and optimized mobile application with enhanced performance and user experience improvements.",
     link: LINKS.pitchPrime,
-    image: "/images/placeholder-pitch.jpg",
+    image: "",
+    images: [],
+    details: [
+      "Rewrote the UI layer from scratch, cutting cold-start time and removing legacy performance bottlenecks.",
+      "Translated the app from Spanish to English to broaden the addressable user base.",
+      "Hardened Firebase reads/writes with batched queries and proper offline persistence.",
+    ],
     color: "from-brand-charcoal to-brand-navy",
   },
 ];
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-brand-cream selection:bg-brand-purple selection:text-white">
+    <main className="min-h-screen bg-brand-cream dark:bg-brand-ink selection:bg-brand-purple selection:text-white">
       <Navbar />
       <Hero />
 
+      <Stats />
+
       <Experience />
 
-      <section id="projects" className="py-32 bg-white relative">
+      <section id="projects" className="py-32 bg-white dark:bg-brand-ink relative">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy mb-4 font-display">Projects</h2>
-            <div className="w-full h-px bg-brand-charcoal/10"></div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display">Projects</h2>
+            <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"></div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
@@ -83,6 +112,21 @@ export default function Home() {
       <Education />
 
       <Publications />
+
+      <section id="contact" className="py-20 bg-brand-cream dark:bg-brand-ink">
+        <div className="container mx-auto px-6 max-w-3xl">
+          <div className="mb-10">
+            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display">Contact</h2>
+            <div className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"></div>
+            <p className="mt-6 text-brand-charcoal/70 dark:text-brand-cream/70 font-light">
+              Open to internships, collaborations, or just trading notes on CV pipelines and RAG systems.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
+      </section>
+
+      <SectionRail />
 
       <Footer />
     </main>
