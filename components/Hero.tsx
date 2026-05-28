@@ -28,7 +28,7 @@ export const Hero = () => {
     return (
         <section ref={sectionRef} className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
             <div className="container mx-auto px-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
-                <StaggerGroup immediate delayChildren={0.1} stagger={0.09}>
+                <StaggerGroup immediate delayChildren={0.1} stagger={0.13}>
                     <StaggerItem className="flex flex-wrap gap-3 mb-8">
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium tracking-wide text-brand-charcoal/70 dark:text-brand-cream/70 border-b border-brand-charcoal/20 dark:border-brand-cream/20">
                             CS @ UC Irvine
@@ -112,7 +112,7 @@ export const Hero = () => {
                         <TypingCode
                             className="px-4 py-3 whitespace-pre min-h-[7.5rem]"
                             speed={22}
-                            startDelay={400}
+                            startDelay={1100}
                             caret={<span className="ml-0.5 text-brand-purple dark:text-brand-gold">▍</span>}
                             segments={[
                                 { text: "const", className: "text-brand-purple dark:text-brand-gold" },
@@ -132,7 +132,7 @@ export const Hero = () => {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: DURATION.long, delay: 0.2, ease: EASE_OUT_QUAD }}
+                    transition={{ duration: DURATION.long, delay: 0.45, ease: EASE_OUT_QUAD }}
                     style={{ y: photoY }}
                     className="relative flex justify-center lg:justify-end"
                 >

@@ -5,7 +5,7 @@ import { ExternalLink, Briefcase } from "lucide-react";
 import { useRef } from "react";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { Reveal } from "./motion/Reveal";
-import { EASE_OUT_QUAD } from "./motion/tokens";
+import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 
 interface JobProps {
     company: string;
@@ -24,7 +24,7 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
             <motion.div
                 initial={{ scale: reduce ? 1 : 0 }}
                 whileInView={{ scale: 1 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
+                viewport={VIEWPORT}
                 transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
                 className="absolute left-[10px] top-1 w-3 h-3 rounded-full bg-brand-gold border-4 border-white dark:border-brand-ink ring-1 ring-brand-charcoal/15 dark:ring-brand-cream/15 group-hover:bg-brand-purple dark:group-hover:bg-brand-yellow group-hover:scale-110 transition-colors duration-300"
             />
@@ -135,7 +135,7 @@ export const Experience = () => {
                     <motion.div
                         initial={{ scaleX: 0 }}
                         whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true, margin: "-10% 0px" }}
+                        viewport={VIEWPORT}
                         transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
                         style={{ transformOrigin: "0% 50%" }}
                         className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"

@@ -14,7 +14,7 @@ import { SectionRail } from "@/components/SectionRail";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/motion/Reveal";
 import { StaggerGroup } from "@/components/motion/StaggerGroup";
-import { EASE_OUT_QUAD } from "@/components/motion/tokens";
+import { EASE_OUT_QUAD, VIEWPORT } from "@/components/motion/tokens";
 import { FolderGit2, Mail } from "lucide-react";
 
 const LINKS = {
@@ -107,7 +107,7 @@ export default function Home() {
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: "-10% 0px" }}
+              viewport={VIEWPORT}
               transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
               style={{ transformOrigin: "0% 50%" }}
               className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"
@@ -138,7 +138,7 @@ export default function Home() {
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: "-10% 0px" }}
+              viewport={VIEWPORT}
               transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
               style={{ transformOrigin: "0% 50%" }}
               className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"

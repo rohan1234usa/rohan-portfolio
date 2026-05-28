@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { BookOpen, ArrowUpRight } from "lucide-react";
 import { Reveal } from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
-import { EASE_OUT_QUAD } from "./motion/tokens";
+import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 
 export const Publications = () => {
     const PUBLICATIONS = [
@@ -33,7 +33,7 @@ export const Publications = () => {
                     <motion.div
                         initial={{ scaleX: 0 }}
                         whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true, margin: "-10% 0px" }}
+                        viewport={VIEWPORT}
                         transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
                         style={{ transformOrigin: "0% 50%" }}
                         className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"

@@ -11,7 +11,9 @@ export const STAGGER = {
     chips: 0.035,
 } as const;
 
+// Fire as element crosses into the lower 85% of the viewport — animation plays
+// while the user is scrolling toward it, finishing as it reaches reading position.
 export const VIEWPORT = {
     once: true,
-    margin: "-10% 0px",
+    margin: "0px 0px -15% 0px",
 } as const;
