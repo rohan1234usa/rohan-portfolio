@@ -22,6 +22,7 @@ html {
   --color-brand-purple: #5B2C91;        /* Matador purple, mid */
   --color-brand-purple-lifted: #B886E8; /* Matador purple, for dark-mode hover */
   --color-brand-gold: #C8932A;          /* Matador gold, warm/aged */
+  --color-brand-gold-uci: #F0AB00;      /* UCI Secondary Gold, PMS 130 */
 
   --color-brand-cream: #FBF7EF;         /* Warm ivory page bg (light) */
   --color-brand-cream-warm: #F5EDD4;    /* Gold-tinted cream (dark text) */
@@ -59,9 +60,9 @@ html {
 }
 
 :root {
-  /* ── Light mode: UCI-forward editorial ── */
-  --bg: #FBF7EF;
-  --bg-subtle: #F4EEDD;
+  /* ── Light mode: UCI-forward brochure (pure white, navy + UCI blue + UCI gold) ── */
+  --bg: #FFFFFF;
+  --bg-subtle: #F4F7FB;     /* pale UCI-blue-tinted gray for section alternation */
   --surface: #FFFFFF;
   --surface-raised: #FFFFFF;
 
@@ -72,17 +73,17 @@ html {
   --line: rgba(0, 34, 68, 0.10);
   --line-strong: rgba(0, 34, 68, 0.20);
 
-  --accent: #5B2C91;        /* Matador purple — primary clickable */
-  --accent-warm: #C8932A;   /* Matador gold — secondary, dots */
-  --accent-cool: #255799;   /* UCI blue — tertiary, info */
+  --accent: #255799;        /* UCI Primary Blue — primary clickable */
+  --accent-warm: #F0AB00;   /* UCI Secondary Gold (PMS 130) — warm highlight, legible on white */
+  --accent-cool: #1B3D6D;   /* UCI Dark Blue (PMS 654) — tertiary, info */
   --on-accent: #FFFFFF;     /* text color on accent bg */
 
-  --status: #C8932A;        /* "available" — gold pill, replaces emerald */
-  --ring: rgba(91, 44, 145, 0.45);
+  --status: #FECC07;        /* UCI Gold (PMS 116) — bright "available" pop */
+  --ring: rgba(37, 87, 153, 0.45);
 
-  --gradient-hero: linear-gradient(135deg, #5B2C91 0%, #1B3D6D 55%, #002244 100%);
-  --gradient-accent: linear-gradient(90deg, #C8932A 0%, #FECC07 100%);
-  --page-glow: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(91, 44, 145, 0.07), transparent 60%);
+  --gradient-hero: linear-gradient(135deg, #002244 0%, #255799 50%, #FECC07 100%);
+  --gradient-accent: linear-gradient(90deg, #F0AB00 0%, #FECC07 100%);
+  --page-glow: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37, 87, 153, 0.06), transparent 60%);
 
   /* Back-compat with the previous `--background` / `--foreground` aliases */
   --background: var(--bg);
