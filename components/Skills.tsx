@@ -15,12 +15,12 @@ interface SkillOne {
 }
 
 const SkillColumn = ({ title, icon, skills }: SkillOne) => (
-    <StaggerItem className="p-8 bg-white dark:bg-brand-surface border border-brand-charcoal/10 dark:border-brand-cream/10 rounded-sm hover:border-brand-purple/50 dark:hover:border-brand-gold/50 transition-colors">
+    <StaggerItem className="p-8 bg-surface border border-line rounded-sm hover:border-accent/50 transition-colors">
         <div className="flex items-center gap-3 mb-8">
-            <div className="text-brand-navy dark:text-brand-cream">
+            <div className="text-accent">
                 {icon}
             </div>
-            <h3 className="font-semibold text-base text-brand-navy dark:text-brand-cream font-display">{title}</h3>
+            <h3 className="font-semibold text-base text-fg font-display">{title}</h3>
         </div>
         <StaggerGroup className="flex flex-wrap gap-2" stagger={0.035}>
             {skills.map((s, i) => (
@@ -31,7 +31,7 @@ const SkillColumn = ({ title, icon, skills }: SkillOne) => (
                         show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE_OUT_QUAD } },
                     }}
                     whileHover={{ scale: 1.04 }}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-brand-charcoal/5 dark:bg-brand-cream/10 text-brand-charcoal/80 dark:text-brand-cream/80 text-xs font-medium rounded-sm border border-transparent hover:border-brand-purple/30 dark:hover:border-brand-gold/30 transition-colors cursor-default"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-bg-subtle text-fg-soft text-xs font-medium rounded-sm border border-transparent hover:border-accent/30 transition-colors cursor-default"
                 >
                     <TechIcon name={s} />
                     {s}
@@ -59,12 +59,12 @@ export const Skills = () => {
     };
 
     return (
-        <section id="skills" className="py-20 bg-brand-cream/30 dark:bg-brand-ink">
+        <section id="skills" className="py-20 bg-bg-subtle">
             <div className="container mx-auto px-6 max-w-5xl">
                 {/* Section Header */}
                 <Reveal className="mb-12">
-                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
-                        <Wrench className="text-brand-purple dark:text-brand-gold" size={32} />
+                    <h2 className="text-4xl lg:text-5xl font-bold text-fg mb-4 font-display flex items-center gap-3">
+                        <Wrench className="text-accent" size={32} />
                         Skills
                     </h2>
                     <motion.div
@@ -73,7 +73,7 @@ export const Skills = () => {
                         viewport={VIEWPORT}
                         transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
                         style={{ transformOrigin: "0% 50%" }}
-                        className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"
+                        className="w-full h-px bg-line"
                     />
                 </Reveal>
                 <StaggerGroup className="grid md:grid-cols-3 gap-8" stagger={0.12}>

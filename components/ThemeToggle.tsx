@@ -22,7 +22,7 @@ export const ThemeToggle = () => {
             type="button"
             onClick={() => setTheme(isDark ? "light" : "dark")}
             aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            className="p-2 text-brand-charcoal/70 dark:text-brand-cream/70 hover:text-brand-navy dark:hover:text-brand-cream border border-transparent hover:border-brand-charcoal/20 dark:hover:border-brand-cream/20 rounded-sm transition-all duration-300"
+            className="p-2 text-fg-soft hover:text-accent border border-transparent hover:border-line-strong rounded-sm transition-all duration-300"
         >
             {mounted ? (
                 isDark ? <Sun size={20} /> : <Moon size={20} />

@@ -10,7 +10,7 @@ export const ScrollProgress = () => {
         <motion.div
             aria-hidden
             style={{ scaleX, transformOrigin: "0% 50%" }}
-            className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-gold dark:bg-brand-gold pointer-events-none"
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent pointer-events-none"
         />
     );
 };

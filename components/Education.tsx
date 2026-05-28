@@ -20,13 +20,13 @@ const COURSES = [
 ];
 
 export const Education = () => (
-    <section id="education" className="py-16 bg-brand-cream dark:bg-brand-ink relative">
+    <section id="education" className="py-16 bg-bg relative">
         <div className="container mx-auto px-6 max-w-5xl">
 
             {/* Section header */}
             <Reveal className="mb-12">
-                <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
-                    <GraduationCap className="text-brand-purple dark:text-brand-gold" size={32} />
+                <h2 className="text-4xl lg:text-5xl font-bold text-fg mb-4 font-display flex items-center gap-3">
+                    <GraduationCap className="text-accent" size={32} />
                     Education
                 </h2>
                 <motion.div
@@ -35,23 +35,23 @@ export const Education = () => (
                     viewport={VIEWPORT}
                     transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
                     style={{ transformOrigin: "0% 50%" }}
-                    className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"
+                    className="w-full h-px bg-line"
                 />
             </Reveal>
 
             <StaggerGroup stagger={0.15}>
                 {/* University Card */}
-                <StaggerItem className="border border-brand-charcoal/10 dark:border-brand-cream/10 bg-white dark:bg-brand-surface p-8 md:p-10 mb-12">
+                <StaggerItem className="border border-line bg-surface p-8 md:p-10 mb-12">
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                         {/* Left: school info */}
                         <div>
-                            <p className="text-xs font-medium tracking-widest text-brand-purple dark:text-brand-gold uppercase mb-2">
+                            <p className="text-xs font-medium tracking-widest text-accent uppercase mb-2">
                                 University of California, Irvine
                             </p>
-                            <h3 className="text-2xl font-bold text-brand-navy dark:text-brand-cream font-display mb-1">
+                            <h3 className="text-2xl font-bold text-fg font-display mb-1">
                                 B.S. Computer Science
                             </h3>
-                            <p className="text-sm text-brand-charcoal/60 dark:text-brand-cream/70 font-light">
+                            <p className="text-sm text-fg-muted font-light">
                                 Sept 2024 – Jun 2027 (expected)
                             </p>
                         </div>
@@ -59,20 +59,20 @@ export const Education = () => (
                         {/* Right: stats */}
                         <div className="flex flex-wrap gap-3 md:text-right items-start">
                             {/* GPA pill */}
-                            <div className="inline-flex items-center gap-2 px-4 py-2 border border-brand-charcoal/10 dark:border-brand-cream/15 text-sm font-medium text-brand-charcoal/70 dark:text-brand-cream/70 self-start md:self-auto">
-                                <span className="w-1.5 h-1.5 rounded-full bg-brand-gold flex-shrink-0" />
+                            <div className="inline-flex items-center gap-2 px-4 py-2 border border-line text-sm font-medium text-fg-soft self-start md:self-auto">
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent-warm flex-shrink-0" />
                                 GPA 3.92
                             </div>
 
                             {/* Dean's Honor List pill */}
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-navy/5 dark:bg-brand-cream/10 border border-brand-navy/10 dark:border-brand-cream/15 text-sm font-medium text-brand-navy dark:text-brand-cream self-start md:self-auto">
-                                <Award size={14} className="text-brand-gold flex-shrink-0" />
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-bg-subtle border border-line text-sm font-medium text-fg self-start md:self-auto">
+                                <Award size={14} className="text-accent-warm flex-shrink-0" />
                                 Dean&apos;s Honor List — All Quarters
                             </div>
 
                             {/* Certification pill */}
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-navy/5 dark:bg-brand-cream/10 border border-brand-navy/10 dark:border-brand-cream/15 text-sm font-medium text-brand-navy dark:text-brand-cream self-start md:self-auto">
-                                <BadgeCheck size={14} className="text-brand-gold flex-shrink-0" />
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-bg-subtle border border-line text-sm font-medium text-fg self-start md:self-auto">
+                                <BadgeCheck size={14} className="text-accent-warm flex-shrink-0" />
                                 Google Cloud Generative AI Leader
                             </div>
                         </div>
@@ -82,8 +82,8 @@ export const Education = () => (
                 {/* Relevant Coursework */}
                 <StaggerItem>
                     <div className="flex items-center gap-3 mb-6">
-                        <BookOpen size={16} className="text-brand-purple dark:text-brand-gold" />
-                        <span className="text-sm font-medium tracking-widest text-brand-charcoal/50 dark:text-brand-cream/50 uppercase">
+                        <BookOpen size={16} className="text-accent" />
+                        <span className="text-sm font-medium tracking-widest text-fg-muted uppercase">
                             Relevant Coursework
                         </span>
                     </div>
@@ -93,12 +93,12 @@ export const Education = () => (
                             <StaggerItem
                                 key={course.code}
                                 y={8}
-                                className="group flex items-center gap-2 px-4 py-2 border border-brand-charcoal/10 dark:border-brand-cream/10 bg-white dark:bg-brand-surface hover:border-brand-purple/40 dark:hover:border-brand-gold/40 hover:bg-brand-purple/5 dark:hover:bg-brand-gold/5 transition-all duration-300 cursor-default"
+                                className="group flex items-center gap-2 px-4 py-2 border border-line bg-surface hover:border-accent/40 hover:bg-accent/5 transition-all duration-300 cursor-default"
                             >
-                                <span className="text-xs font-bold text-brand-purple/70 dark:text-brand-gold/80 group-hover:text-brand-purple dark:group-hover:text-brand-gold transition-colors">
+                                <span className="text-xs font-bold text-accent/80 group-hover:text-accent transition-colors">
                                     {course.code}
                                 </span>
-                                <span className="text-sm text-brand-charcoal/70 dark:text-brand-cream/70 font-light">
+                                <span className="text-sm text-fg-soft font-light">
                                     {course.name}
                                 </span>
                             </StaggerItem>

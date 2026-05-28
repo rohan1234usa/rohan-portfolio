@@ -69,7 +69,7 @@ const PROJECTS = [
       "Custom scene editor lets users layer color transitions and brightness curves with a timeline UI.",
       "Shipped on the Google Play Store with sustained 4-star+ user ratings.",
     ],
-    color: "from-brand-navy to-brand-purple",
+    color: "from-brand-navy-mid to-brand-purple",
   },
   {
     title: "Pitch Prime",
@@ -89,7 +89,7 @@ const PROJECTS = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-brand-cream dark:bg-brand-ink selection:bg-brand-purple selection:text-white">
+    <main className="min-h-screen bg-bg">
       <Navbar />
       <Hero />
 
@@ -97,11 +97,11 @@ export default function Home() {
 
       <Experience />
 
-      <section id="projects" className="py-32 bg-white dark:bg-brand-ink relative">
+      <section id="projects" className="py-32 bg-bg relative">
         <div className="container mx-auto px-6 max-w-5xl">
           <Reveal className="mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
-              <FolderGit2 className="text-brand-purple dark:text-brand-gold" size={32} />
+            <h2 className="text-4xl lg:text-5xl font-bold text-fg mb-4 font-display flex items-center gap-3">
+              <FolderGit2 className="text-accent" size={32} />
               Projects
             </h2>
             <motion.div
@@ -110,7 +110,7 @@ export default function Home() {
               viewport={VIEWPORT}
               transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
               style={{ transformOrigin: "0% 50%" }}
-              className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"
+              className="w-full h-px bg-line"
             />
           </Reveal>
 
@@ -128,11 +128,11 @@ export default function Home() {
 
       <Publications />
 
-      <section id="contact" className="py-20 bg-brand-cream dark:bg-brand-ink">
+      <section id="contact" className="py-20 bg-bg-subtle">
         <div className="container mx-auto px-6 max-w-3xl">
           <Reveal className="mb-10">
-            <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
-              <Mail className="text-brand-purple dark:text-brand-gold" size={32} />
+            <h2 className="text-4xl lg:text-5xl font-bold text-fg mb-4 font-display flex items-center gap-3">
+              <Mail className="text-accent" size={32} />
               Contact
             </h2>
             <motion.div
@@ -141,9 +141,9 @@ export default function Home() {
               viewport={VIEWPORT}
               transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
               style={{ transformOrigin: "0% 50%" }}
-              className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"
+              className="w-full h-px bg-line"
             />
-            <p className="mt-6 text-brand-charcoal/70 dark:text-brand-cream/70 font-light">
+            <p className="mt-6 text-fg-soft font-light">
               Open to internships, collaborations, or just trading notes on CV pipelines and RAG systems.
             </p>
           </Reveal>

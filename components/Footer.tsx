@@ -8,14 +8,17 @@ const LINKS = {
 };
 
 export const Footer = () => (
-    <footer className="bg-brand-navy py-16 border-t border-white/10">
-        <div className="container mx-auto px-6">
+    <footer className="relative py-16 border-t border-line bg-[image:var(--gradient-hero)]">
+        {/* Tonal wash to keep gradient text legible */}
+        <div aria-hidden className="absolute inset-0 bg-[#0F0A1E]/55 dark:bg-[#0F0A1E]/40 pointer-events-none" />
+
+        <div className="relative container mx-auto px-6">
             {/* Contact CTA */}
             <div className="text-center mb-12">
-                <h3 className="text-2xl font-display text-white mb-4 tracking-tight">
+                <h3 className="text-2xl font-display text-brand-cream-warm mb-4 tracking-tight">
                     Let&apos;s Build Something Together
                 </h3>
-                <p className="text-brand-blue-light/60 mb-8 max-w-md mx-auto">
+                <p className="text-brand-cream-warm/65 mb-8 max-w-md mx-auto">
                     Always open to discussing new opportunities, collaborations, or ideas.
                 </p>
                 <div className="flex justify-center gap-4 flex-wrap">
@@ -23,14 +26,14 @@ export const Footer = () => (
                         href={LINKS.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 bg-brand-purple text-white font-medium rounded-sm hover:bg-white hover:text-brand-navy transition-all duration-300 inline-flex items-center gap-2"
+                        className="px-6 py-3 bg-brand-yellow text-brand-navy font-medium rounded-sm hover:bg-brand-cream-warm transition-all duration-300 inline-flex items-center gap-2"
                     >
                         <Linkedin size={18} />
                         Connect on LinkedIn
                     </a>
                     <a
                         href={LINKS.email}
-                        className="px-6 py-3 border border-white/30 text-white font-medium rounded-sm hover:bg-white hover:text-brand-navy transition-all duration-300 inline-flex items-center gap-2"
+                        className="px-6 py-3 border border-brand-cream-warm/35 text-brand-cream-warm font-medium rounded-sm hover:bg-brand-cream-warm hover:text-brand-navy transition-all duration-300 inline-flex items-center gap-2"
                     >
                         <Mail size={18} />
                         Send Email
@@ -39,11 +42,11 @@ export const Footer = () => (
             </div>
 
             {/* Footer Bottom */}
-            <div className="text-center pt-8 border-t border-white/10">
-                <p className="mb-3 text-white/90 font-display text-lg tracking-tight">
-                    Designed with the <span className="text-brand-gold">Academic Gradient</span>
+            <div className="text-center pt-8 border-t border-brand-cream-warm/15">
+                <p className="mb-3 text-brand-cream-warm/90 font-display text-lg tracking-tight">
+                    Designed with the <span className="text-brand-yellow">Academic Gradient</span>
                 </p>
-                <p className="text-brand-blue-light/50 text-sm">
+                <p className="text-brand-cream-warm/55 text-sm">
                     © {new Date().getFullYear()} Rohan Singh. Built with Next.js, Tailwind v4 & Passion.
                 </p>
             </div>

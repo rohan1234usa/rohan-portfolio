@@ -26,16 +26,16 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
                 whileInView={{ scale: 1 }}
                 viewport={VIEWPORT}
                 transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
-                className="absolute left-[10px] top-1 w-3 h-3 rounded-full bg-brand-gold border-4 border-white dark:border-brand-ink ring-1 ring-brand-charcoal/15 dark:ring-brand-cream/15 group-hover:bg-brand-purple dark:group-hover:bg-brand-yellow group-hover:scale-110 transition-colors duration-300"
+                className="absolute left-[10px] top-1 w-3 h-3 rounded-full bg-accent-warm border-4 border-surface ring-1 ring-line group-hover:bg-accent group-hover:scale-110 transition-colors duration-300"
             />
 
             {/* Date eyebrow */}
-            <div className="text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/75 font-medium mb-2">
+            <div className="text-xs uppercase tracking-wider text-fg-muted font-medium mb-2">
                 {job.date} · {job.location}
             </div>
 
-            <h3 className="font-bold text-xl text-brand-navy dark:text-brand-cream font-display mb-1">{job.role}</h3>
-            <div className="text-brand-purple dark:text-brand-gold font-medium text-sm mb-4 flex items-center gap-2">
+            <h3 className="font-bold text-xl text-fg font-display mb-1">{job.role}</h3>
+            <div className="text-accent font-medium text-sm mb-4 flex items-center gap-2">
                 {job.company}
                 <a
                     href={job.url}
@@ -54,9 +54,9 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
                         as="li"
                         key={i}
                         y={10}
-                        className="flex items-start gap-4 text-brand-charcoal/80 dark:text-brand-cream/80 text-sm leading-relaxed font-light"
+                        className="flex items-start gap-4 text-fg-soft text-sm leading-relaxed font-light"
                     >
-                        <div className="w-1.5 h-1.5 bg-brand-gold rounded-full mt-2 flex-shrink-0"></div>
+                        <div className="w-1.5 h-1.5 bg-accent-warm rounded-full mt-2 flex-shrink-0"></div>
                         <span>{point}</span>
                     </StaggerItem>
                 ))}
@@ -125,11 +125,11 @@ export const Experience = () => {
     ];
 
     return (
-        <section id="experience" className="py-32 bg-white dark:bg-brand-ink relative">
+        <section id="experience" className="py-32 bg-surface relative">
             <div className="container mx-auto px-6 max-w-5xl relative z-10">
                 <Reveal className="mb-20">
-                    <h2 className="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-brand-cream mb-4 font-display flex items-center gap-3">
-                        <Briefcase className="text-brand-purple dark:text-brand-gold" size={32} />
+                    <h2 className="text-4xl lg:text-5xl font-bold text-fg mb-4 font-display flex items-center gap-3">
+                        <Briefcase className="text-accent" size={32} />
                         Experience
                     </h2>
                     <motion.div
@@ -138,7 +138,7 @@ export const Experience = () => {
                         viewport={VIEWPORT}
                         transition={{ duration: 0.7, delay: 0.15, ease: EASE_OUT_QUAD }}
                         style={{ transformOrigin: "0% 50%" }}
-                        className="w-full h-px bg-brand-charcoal/10 dark:bg-brand-cream/10"
+                        className="w-full h-px bg-line"
                     />
                 </Reveal>
 
@@ -147,7 +147,7 @@ export const Experience = () => {
                     <motion.div
                         aria-hidden
                         style={{ scaleY: lineScale, transformOrigin: "0% 0%" }}
-                        className="absolute left-4 top-2 bottom-2 w-px bg-brand-charcoal/15 dark:bg-brand-cream/15"
+                        className="absolute left-4 top-2 bottom-2 w-px bg-line-strong"
                     />
                     <StaggerGroup stagger={0.15}>
                         {EXPERIENCE.map((job, index) => (

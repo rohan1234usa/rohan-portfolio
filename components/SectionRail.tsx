@@ -51,16 +51,16 @@ export const SectionRail = () => {
                         href={`#${s.id}`}
                         aria-label={`Jump to ${s.label}`}
                         aria-current={isActive ? "true" : undefined}
-                        className="group relative flex items-center justify-center w-4 h-4 outline-none focus-visible:ring-2 focus-visible:ring-brand-purple dark:focus-visible:ring-brand-gold rounded-full"
+                        className="group relative flex items-center justify-center w-4 h-4 outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full"
                     >
                         <span
                             className={`block rounded-full transition-all duration-300 ${isActive
-                                ? "w-2.5 h-2.5 bg-brand-purple dark:bg-brand-gold scale-100"
-                                : "w-2 h-2 bg-brand-charcoal/30 dark:bg-brand-cream/30 group-hover:bg-brand-purple/70 dark:group-hover:bg-brand-gold/70 group-hover:scale-125"
+                                ? "w-2.5 h-2.5 bg-accent scale-100"
+                                : "w-2 h-2 bg-fg-muted/60 group-hover:bg-accent/70 group-hover:scale-125"
                                 }`}
                         />
                         <span
-                            className="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap text-[10px] font-medium tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity bg-brand-navy dark:bg-brand-cream text-white dark:text-brand-navy px-2.5 py-1 rounded-sm shadow-sm"
+                            className="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap text-[10px] font-medium tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity bg-fg text-bg px-2.5 py-1 rounded-sm shadow-sm"
                         >
                             {s.label}
                         </span>

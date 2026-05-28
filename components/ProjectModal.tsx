@@ -56,7 +56,7 @@ export const ProjectModal = ({
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                     onClick={onClose}
-                    className="fixed inset-0 z-[100] bg-brand-navy/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+                    className="fixed inset-0 z-[100] bg-bg/85 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
                     role="dialog"
                     aria-modal="true"
                     aria-label={title}
@@ -67,18 +67,18 @@ export const ProjectModal = ({
                         exit={{ opacity: 0, scale: 0.96, y: 12 }}
                         transition={{ duration: 0.25, ease: "easeOut" }}
                         onClick={(e) => e.stopPropagation()}
-                        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-brand-surface rounded-sm shadow-2xl"
+                        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-surface-raised rounded-sm shadow-2xl border border-line"
                     >
                         <button
                             onClick={onClose}
                             aria-label="Close"
-                            className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 dark:bg-brand-ink/80 backdrop-blur text-brand-charcoal/70 dark:text-brand-cream/70 hover:text-brand-purple dark:hover:text-brand-gold hover:bg-white dark:hover:bg-brand-ink transition-colors"
+                            className="absolute top-4 right-4 z-10 p-2 rounded-full bg-surface/80 backdrop-blur text-fg-soft hover:text-accent hover:bg-surface transition-colors"
                         >
                             <X size={18} />
                         </button>
 
                         {/* Image / gradient carousel */}
-                        <div className="relative aspect-video bg-brand-cream dark:bg-brand-ink">
+                        <div className="relative aspect-video bg-bg-subtle">
                             {hasImages ? (
                                 <Image
                                     src={images[index]}
@@ -95,14 +95,14 @@ export const ProjectModal = ({
                                     <button
                                         onClick={() => setIndex((i) => (i - 1 + images.length) % images.length)}
                                         aria-label="Previous image"
-                                        className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-brand-ink/80 backdrop-blur text-brand-navy dark:text-brand-cream hover:bg-white dark:hover:bg-brand-ink transition-colors"
+                                        className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-surface/80 backdrop-blur text-fg hover:bg-surface transition-colors"
                                     >
                                         <ChevronLeft size={18} />
                                     </button>
                                     <button
                                         onClick={() => setIndex((i) => (i + 1) % images.length)}
                                         aria-label="Next image"
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-brand-ink/80 backdrop-blur text-brand-navy dark:text-brand-cream hover:bg-white dark:hover:bg-brand-ink transition-colors"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-surface/80 backdrop-blur text-fg hover:bg-surface transition-colors"
                                     >
                                         <ChevronRight size={18} />
                                     </button>
@@ -123,10 +123,10 @@ export const ProjectModal = ({
 
                         {/* Content */}
                         <div className="p-8">
-                            <h3 className="text-3xl font-bold text-brand-navy dark:text-brand-cream font-display mb-3">
+                            <h3 className="text-3xl font-bold text-fg font-display mb-3">
                                 {title}
                             </h3>
-                            <p className="text-brand-charcoal/80 dark:text-brand-cream/80 leading-relaxed mb-6 font-light">
+                            <p className="text-fg-soft leading-relaxed mb-6 font-light">
                                 {desc}
                             </p>
 
@@ -135,9 +135,9 @@ export const ProjectModal = ({
                                     {details.map((d, i) => (
                                         <li
                                             key={i}
-                                            className="flex items-start gap-4 text-brand-charcoal/80 dark:text-brand-cream/80 text-sm leading-relaxed font-light"
+                                            className="flex items-start gap-4 text-fg-soft text-sm leading-relaxed font-light"
                                         >
-                                            <div className="w-1.5 h-1.5 bg-brand-gold rounded-full mt-2 flex-shrink-0"></div>
+                                            <div className="w-1.5 h-1.5 bg-accent-warm rounded-full mt-2 flex-shrink-0"></div>
                                             <span>{d}</span>
                                         </li>
                                     ))}
@@ -148,7 +148,7 @@ export const ProjectModal = ({
                                 {tech.map((t, i) => (
                                     <span
                                         key={i}
-                                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-charcoal/5 dark:bg-brand-cream/10 text-brand-charcoal/70 dark:text-brand-cream/70 text-xs font-medium tracking-wide rounded-sm"
+                                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-bg-subtle text-fg-soft text-xs font-medium tracking-wide rounded-sm"
                                     >
                                         <TechIcon name={t} />
                                         {t}
@@ -160,7 +160,7 @@ export const ProjectModal = ({
                                 href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-brand-navy dark:bg-brand-cream dark:text-brand-navy text-white font-medium rounded-sm hover:bg-brand-purple dark:hover:bg-brand-gold transition-colors duration-300"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-fg text-bg font-medium rounded-sm hover:bg-accent hover:text-on-accent transition-colors duration-300"
                             >
                                 View Live
                                 <ArrowUpRight size={16} />

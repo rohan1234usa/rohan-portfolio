@@ -16,18 +16,18 @@ const STATS: Stat[] = [
 ];
 
 export const Stats = () => (
-    <section className="bg-brand-cream dark:bg-brand-ink">
+    <section className="bg-bg">
         <div className="container mx-auto px-6 max-w-5xl">
             <StaggerGroup
-                className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-brand-charcoal/10 dark:border-brand-cream/10"
+                className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-line"
                 stagger={0.1}
             >
                 {STATS.map((stat, i) => (
                     <StaggerItem key={i} className="text-center md:text-left">
-                        <div className="text-3xl md:text-4xl font-display font-bold text-brand-navy dark:text-brand-cream tracking-tight">
+                        <div className="text-3xl md:text-4xl font-display font-bold text-fg tracking-tight">
                             <CountUp value={stat.value} />
                         </div>
-                        <div className="mt-2 text-xs uppercase tracking-wider text-brand-charcoal/60 dark:text-brand-cream/75 font-medium">
+                        <div className="mt-2 text-xs uppercase tracking-wider text-fg-muted font-medium">
                             {stat.label}
                         </div>
                     </StaggerItem>
