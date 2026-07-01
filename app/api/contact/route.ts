@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const ipHits = new Map<string, { count: number; reset: number }>();
-
-const TO_EMAIL = "rohans9@uci.edu";
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>";
 
 function rateLimited(ip: string) {
     const now = Date.now();
@@ -57,31 +54,36 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Submission too long." }, { status: 400 });
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-        console.error("Contact form: RESEND_API_KEY not configured");
+    const gmailUser = process.env.GMAIL_USER;
+    const gmailPass = process.env.GMAIL_APP_PASSWORD;
+    if (!gmailUser || !gmailPass) {
+        console.error("Contact form: GMAIL_USER / GMAIL_APP_PASSWORD not configured");
         return NextResponse.json({ error: "Mail service is not configured." }, { status: 500 });
     }
 
-    const resend = new Resend(apiKey);
+    // Where the notification lands. Defaults to the sending Gmail inbox.
+    const toEmail = process.env.CONTACT_TO_EMAIL ?? gmailUser;
+
+    const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: { user: gmailUser, pass: gmailPass },
+    });
 
     try {
-        const { error } = await resend.emails.send({
-            from: FROM_EMAIL,
-            to: TO_EMAIL,
-            replyTo: email,
+        await transporter.sendMail({
+            // Gmail requires the authenticated account as the sender; the visitor is set as reply-to.
+            from: `"Portfolio Contact" <${gmailUser}>`,
+            to: toEmail,
+            replyTo: `"${name}" <${email}>`,
             subject: `Portfolio contact from ${name}`,
             text: `From: ${name} <${email}>\n\n${message}`,
         });
 
-        if (error) {
-            console.error("Resend error:", error);
-            return NextResponse.json({ error: "Failed to send. Please try again." }, { status: 502 });
-        }
-
         return NextResponse.json({ ok: true });
     } catch (err) {
-        console.error("Contact route exception:", err);
-        return NextResponse.json({ error: "Unexpected error. Please try again." }, { status: 500 });
+        console.error("Contact route mail error:", err);
+        return NextResponse.json({ error: "Failed to send. Please try again." }, { status: 502 });
     }
 }

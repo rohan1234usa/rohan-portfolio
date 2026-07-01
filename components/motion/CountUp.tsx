@@ -24,14 +24,11 @@ export const CountUp = ({ value, duration = 1.1, className }: CountUpProps) => {
     const ref = useRef<HTMLSpanElement>(null);
     const inView = useInView(ref, { once: true, margin: VIEWPORT.margin });
     const { target, suffix, decimals } = parse(value);
-    const [display, setDisplay] = useState(reduce ? value : `${(0).toFixed(decimals)}${suffix}`);
+    const [display, setDisplay] = useState(`${(0).toFixed(decimals)}${suffix}`);
 
     useEffect(() => {
-        if (!inView) return;
-        if (reduce) {
-            setDisplay(value);
-            return;
-        }
+        // Reduced motion is handled by rendering `value` directly (below), so skip the animation.
+        if (!inView || reduce) return;
 
         let rafId = 0;
         const start = performance.now();
@@ -46,11 +43,14 @@ export const CountUp = ({ value, duration = 1.1, className }: CountUpProps) => {
         rafId = requestAnimationFrame(tick);
 
         return () => cancelAnimationFrame(rafId);
-    }, [inView, reduce, value, target, suffix, decimals, duration]);
+    }, [inView, reduce, target, suffix, decimals, duration]);
+
+    // Under reduced motion, show the final value immediately without animating.
+    const shown = reduce ? value : display;
 
     return (
         <span ref={ref} className={className}>
-            {display}
+            {shown}
         </span>
     );
 };

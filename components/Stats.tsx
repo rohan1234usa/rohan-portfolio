@@ -12,7 +12,7 @@ const STATS: Stat[] = [
     { value: "3+", label: "Shipped Products" },
     { value: "2", label: "Publications" },
     { value: "3.92", label: "GPA at UCI" },
-    { value: "2+", label: "Years in ML/CV" },
+    { value: "3+", label: "Years in ML/CV" },
 ];
 
 export const Stats = () => (

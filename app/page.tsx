@@ -10,6 +10,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { Publications } from "@/components/Publications";
 import { Stats } from "@/components/Stats";
 import { ContactForm } from "@/components/ContactForm";
+import { ContactChannels } from "@/components/ContactChannels";
 import { SectionRail } from "@/components/SectionRail";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/motion/Reveal";
@@ -147,6 +148,7 @@ export default function Home() {
               Open to internships, collaborations, or just trading notes on CV pipelines and RAG systems.
             </p>
           </Reveal>
+          <ContactChannels />
           <ContactForm />
         </div>
       </section>
