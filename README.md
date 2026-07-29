@@ -2,7 +2,7 @@
 
 [![Live Portfolio](https://img.shields.io/badge/Live_Portfolio-built--by--rohan.vercel.app-blue?style=for-the-badge&logo=vercel)](https://built-by-rohan.vercel.app/)
 
-**Computer Science @ UC Irvine | AI & Machine Learning Engineer**
+**Computer Science @ UC Irvine | Class of 2027 | AI & Machine Learning Engineer**
 
 > *Building intelligent systems that see, understand, and scale.*
 

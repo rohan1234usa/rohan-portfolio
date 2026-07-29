@@ -175,7 +175,7 @@ export const Hero = () => {
                                     </span>
                                     <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.18em] uppercase text-fg-muted whitespace-nowrap">
                                         <span className="w-1 h-1 rounded-full bg-accent-warm" />
-                                        UC Irvine &rsquo;28
+                                        UC Irvine ’27
                                     </span>
                                 </div>
                                 <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-fg-muted leading-none">

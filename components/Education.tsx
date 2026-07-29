@@ -52,7 +52,7 @@ export const Education = () => (
                                 B.S. Computer Science
                             </h3>
                             <p className="text-sm text-fg-muted font-light">
-                                Sept 2024 – Jun 2027 (expected)
+                                Sept 2024 – Jun 2027 (expected) · Class of 2027
                             </p>
                         </div>
 
