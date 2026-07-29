@@ -41,7 +41,7 @@ export const Hero = () => {
                                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-status"></span>
                             </span>
                             <Briefcase size={12} className="text-fg" />
-                            Open to SWE/ML internships — Summer 2026
+                            Open to SWE/ML internships — Summer 2027
                         </div>
                     </StaggerItem>
 
