@@ -24,6 +24,7 @@ import {
     SiAndroid,
     SiUnrealengine,
     SiPhilipshue,
+    SiJetpackcompose,
 } from "react-icons/si";
 import {
     ScanEye,
@@ -60,6 +61,7 @@ const TECH: Record<string, Entry> = {
     "AWS S3": { Icon: HardDrive, color: "#E25444", darkColor: "#FCA5A5" },
     "GCP": { Icon: SiGooglecloud, color: "#4285F4" },
     "Gemini Pro": { Icon: SiGooglegemini, color: "#8E75B2" },
+    "Gemini": { Icon: SiGooglegemini, color: "#8E75B2", darkColor: "#B9A6DA" },
     "Kotlin": { Icon: SiKotlin, color: "#7F52FF", darkColor: "#A78BFA" },
     "Java": { Icon: SiOpenjdk, color: "#0C2340", darkColor: "#FDF8F0" },
     "TypeScript": { Icon: SiTypescript, color: "#3178C6" },
@@ -68,6 +70,7 @@ const TECH: Record<string, Entry> = {
     "C#": { Icon: SiSharp, color: "#239120" },
     "SQL": { Icon: SiMysql, color: "#4479A1", darkColor: "#7DD3FC" },
     "Android SDK": { Icon: SiAndroid, color: "#3DDC84" },
+    "Jetpack Compose": { Icon: SiJetpackcompose, color: "#4285F4", darkColor: "#7DA2F0" },
     "Unreal Engine": { Icon: SiUnrealengine, color: "#0C2340", darkColor: "#FDF8F0" },
     "Philips Hue API": { Icon: SiPhilipshue, color: "#0067B2", darkColor: "#7DD3FC" },
 

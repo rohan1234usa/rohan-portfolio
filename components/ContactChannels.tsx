@@ -1,26 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Linkedin, Github, FileText, Copy, Check } from "lucide-react";
+import { ArrowUpRight, Check, Copy, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
-
-const EMAIL = "rohans9@uci.edu";
+import { LINKS } from "@/lib/links";
 
 const CHANNELS = [
-    { label: "LinkedIn", href: "https://linkedin.com/in/rohan123", Icon: Linkedin, external: true },
-    { label: "GitHub", href: "https://github.com/rohan1234usa", Icon: Github, external: true },
-    { label: "Resume", href: "/resume.pdf", Icon: FileText, external: true },
+    { label: "LinkedIn", value: "/in/rohan123", href: LINKS.linkedin, Icon: Linkedin },
+    { label: "GitHub", value: "@rohan1234usa", href: LINKS.github, Icon: Github },
+    { label: "Resume", value: "View PDF", href: LINKS.resume, Icon: FileText },
 ] as const;
 
-const pill =
-    "inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium tracking-wide text-fg-soft border-b border-line-strong hover:text-accent hover:border-accent transition-colors focus:outline-none focus:shadow-[0_0_0_3px_var(--ring)] rounded-sm";
+const row = "flex items-center gap-4 py-3.5 border-b border-line";
+const label =
+    "inline-flex items-center gap-2 w-28 shrink-0 font-mono text-[11px] tracking-[0.16em] uppercase text-fg-muted";
+const focusRing = "outline-none focus-visible:shadow-[0_0_0_3px_var(--ring)]";
 
 export const ContactChannels = () => {
     const [copied, setCopied] = useState(false);
 
     const copyEmail = async () => {
         try {
-            await navigator.clipboard.writeText(EMAIL);
+            await navigator.clipboard.writeText(LINKS.email);
             setCopied(true);
             setTimeout(() => setCopied(false), 1600);
         } catch {
@@ -29,31 +30,43 @@ export const ContactChannels = () => {
     };
 
     return (
-        <StaggerGroup as="ul" stagger={0.05} className="flex flex-wrap items-center gap-3 mb-8">
-            <StaggerItem as="li" className="inline-flex items-center gap-1">
-                <a href={`mailto:${EMAIL}`} className={pill}>
-                    <Mail size={14} />
-                    {EMAIL}
+        <StaggerGroup as="ul" stagger={0.05} className="border-t border-line">
+            <StaggerItem as="li" className={row}>
+                <span className={label}>
+                    <Mail aria-hidden size={13} />
+                    Email
+                </span>
+                <a
+                    href={`mailto:${LINKS.email}`}
+                    className={`min-w-0 flex-1 truncate text-sm font-medium text-fg hover:text-accent transition-colors ${focusRing}`}
+                >
+                    {LINKS.email}
                 </a>
                 <button
                     type="button"
                     onClick={copyEmail}
                     aria-label={copied ? "Email copied" : "Copy email address"}
-                    className="inline-flex items-center justify-center p-1.5 text-fg-muted hover:text-accent transition-colors focus:outline-none focus:shadow-[0_0_0_3px_var(--ring)] rounded-sm"
+                    className={`p-1.5 -m-1.5 text-fg-muted hover:text-accent transition-colors rounded-sm ${focusRing}`}
                 >
                     {copied ? <Check size={14} className="text-status" /> : <Copy size={14} />}
                 </button>
             </StaggerItem>
 
-            {CHANNELS.map(({ label, href, Icon, external }) => (
-                <StaggerItem as="li" key={label} className="inline-flex">
-                    <a
-                        href={href}
-                        className={pill}
-                        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    >
-                        <Icon size={14} />
-                        {label}
+            {CHANNELS.map(({ label: name, value, href, Icon }) => (
+                <StaggerItem as="li" key={name}>
+                    <a href={href} target="_blank" rel="noopener noreferrer" className={`group ${row} ${focusRing}`}>
+                        <span className={label}>
+                            <Icon aria-hidden size={13} />
+                            {name}
+                        </span>
+                        <span className="flex-1 text-sm font-medium text-fg group-hover:text-accent transition-colors">
+                            {value}
+                        </span>
+                        <ArrowUpRight
+                            aria-hidden
+                            size={14}
+                            className="text-fg-muted group-hover:text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
                     </a>
                 </StaggerItem>
             ))}

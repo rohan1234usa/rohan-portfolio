@@ -15,14 +15,24 @@ export const SectionRail = () => {
     const [activeId, setActiveId] = useState<string | null>(null);
 
     useEffect(() => {
+        // Callbacks only report sections whose state changed, so keep the full picture here —
+        // otherwise the last-seen section stays lit after scrolling back up into the hero.
+        const ratios = new Map<string, number>();
         const observer = new IntersectionObserver(
             (entries) => {
-                const visible = entries
-                    .filter((e) => e.isIntersecting)
-                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-                if (visible[0]) {
-                    setActiveId(visible[0].target.id);
-                }
+                entries.forEach((e) => {
+                    if (e.isIntersecting) ratios.set(e.target.id, e.intersectionRatio);
+                    else ratios.delete(e.target.id);
+                });
+                let best: string | null = null;
+                let bestRatio = -1;
+                ratios.forEach((ratio, id) => {
+                    if (ratio > bestRatio) {
+                        best = id;
+                        bestRatio = ratio;
+                    }
+                });
+                setActiveId(best);
             },
             {
                 rootMargin: "-40% 0px -55% 0px",

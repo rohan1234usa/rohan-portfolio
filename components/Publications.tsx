@@ -44,6 +44,8 @@ export const Publications = () => {
                         <StaggerItem key={i}>
                             <a
                                 href={pub.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group block bg-surface p-6 rounded-sm border border-line hover:border-accent/50 transition-all duration-300"
                             >
                                 <div className="flex justify-between items-start">

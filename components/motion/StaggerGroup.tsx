@@ -9,7 +9,7 @@ interface StaggerGroupProps {
     stagger?: number;
     delayChildren?: number;
     className?: string;
-    as?: "div" | "section" | "ul" | "ol" | "header";
+    as?: "div" | "section" | "ul" | "ol" | "header" | "article";
     /** Disable the whileInView viewport guard — useful when group lives inside another Reveal. */
     immediate?: boolean;
 }

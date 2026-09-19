@@ -51,8 +51,9 @@ html {
   --color-on-accent: var(--on-accent);
   --color-status: var(--status);
 
-  --font-display: var(--font-playfair);
-  --font-body: var(--font-inter);
+  /* System UI stack (SF Pro on Apple, Segoe UI on Windows, Roboto on Android) — no web fonts */
+  --font-display: var(--font-sans);
+  --font-body: var(--font-sans);
 
   /* Gradients — mode-aware via custom-property indirection */
   --background-image-gradient-hero: var(--gradient-hero);
@@ -165,7 +166,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-display), serif;
+  font-family: var(--font-display), sans-serif;
   letter-spacing: -0.02em;
 }
 
