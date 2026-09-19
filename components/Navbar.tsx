@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotionSafe } from "./motion/useReducedMotionSafe";
 import { FileText, Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
@@ -30,7 +31,7 @@ const iconLink =
     "p-2 text-fg-soft hover:text-fg border border-transparent hover:border-line-strong rounded-sm transition-all duration-300";
 
 export const Navbar = () => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const headerRef = useRef<HTMLElement>(null);

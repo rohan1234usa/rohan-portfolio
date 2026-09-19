@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { useReducedMotionSafe } from "./useReducedMotionSafe";
 import { ReactNode } from "react";
 import { DURATION, EASE_OUT_QUAD, VIEWPORT } from "./tokens";
 
@@ -23,7 +24,7 @@ export const Reveal = ({
     className,
     as = "div",
 }: RevealProps) => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
 
     const offset = reduce
         ? { x: 0, y: 0 }

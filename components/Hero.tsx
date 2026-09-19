@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useReducedMotionSafe } from "./motion/useReducedMotionSafe";
 import { Linkedin } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -14,7 +15,7 @@ import { AvailabilityBadge } from "./Availability";
 import { LINKS } from "@/lib/links";
 
 export const Hero = () => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
     const sectionRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,

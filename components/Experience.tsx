@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useReducedMotionSafe } from "./motion/useReducedMotionSafe";
 import { ExternalLink, Briefcase } from "lucide-react";
 import { useRef } from "react";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
@@ -17,7 +18,7 @@ interface JobProps {
 }
 
 const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
     return (
         <StaggerItem className={`relative pl-12 group ${isLast ? "" : "pb-12"}`}>
             {/* Dot */}

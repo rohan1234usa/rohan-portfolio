@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { useReducedMotionSafe } from "./useReducedMotionSafe";
 import { ReactNode } from "react";
 import { DURATION, EASE_OUT_QUAD, STAGGER, VIEWPORT } from "./tokens";
 
@@ -22,7 +23,7 @@ export const StaggerGroup = ({
     as = "div",
     immediate = false,
 }: StaggerGroupProps) => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
 
     const variants: Variants = {
         hidden: {},
@@ -65,7 +66,7 @@ export const StaggerItem = ({
     className,
     as = "div",
 }: StaggerItemProps) => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
 
     const variants: Variants = {
         hidden: { opacity: 0, y: reduce ? 0 : y },

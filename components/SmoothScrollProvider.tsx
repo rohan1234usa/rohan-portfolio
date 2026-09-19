@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { MotionConfig } from "framer-motion";
 import Lenis from "lenis";
 
 // The page's single Lenis instance, owned by the provider below. Stays null under
@@ -52,5 +53,7 @@ export const SmoothScrollProvider = ({ children }: { children: React.ReactNode }
         };
     }, []);
 
-    return <>{children}</>;
+    // Entrance animations that start before hydration settles still honor reduced motion:
+    // framer skips transform animations for those users at animation time, so markup is unchanged.
+    return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 };
