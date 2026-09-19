@@ -5,6 +5,8 @@
 
 html {
   scroll-padding-top: 80px;
+  /* Keep the gutter when the mobile menu locks scroll, so fixed elements don't shift sideways */
+  scrollbar-gutter: stable;
 }
 
 @theme {
