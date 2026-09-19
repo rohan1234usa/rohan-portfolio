@@ -1,6 +1,7 @@
 "use client";
 
-import { useInView, useReducedMotion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useReducedMotionSafe } from "./useReducedMotionSafe";
 import { useEffect, useRef, useState } from "react";
 import { VIEWPORT } from "./tokens";
 
@@ -20,7 +21,7 @@ const parse = (raw: string): { target: number; suffix: string; decimals: number 
 };
 
 export const CountUp = ({ value, duration = 1.1, className }: CountUpProps) => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
     const ref = useRef<HTMLSpanElement>(null);
     const inView = useInView(ref, { once: true, margin: VIEWPORT.margin });
     const { target, suffix, decimals } = parse(value);

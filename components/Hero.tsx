@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { Linkedin, Briefcase } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useReducedMotionSafe } from "./motion/useReducedMotionSafe";
+import { Linkedin } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 import { WordReveal } from "./motion/WordReveal";
@@ -10,14 +11,11 @@ import { Magnetic } from "./motion/Magnetic";
 import { TypingCode } from "./motion/TypingCode";
 import { Reveal } from "./motion/Reveal";
 import { DURATION, EASE_OUT_QUAD } from "./motion/tokens";
-
-const LINKS = {
-    email: "mailto:rohans9@uci.edu",
-    linkedin: "https://linkedin.com/in/rohan123",
-};
+import { AvailabilityBadge } from "./Availability";
+import { LINKS } from "@/lib/links";
 
 export const Hero = () => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
     const sectionRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -35,14 +33,7 @@ export const Hero = () => {
                             <span className="w-1.5 h-1.5 rounded-full bg-accent-warm"></span>
                             GPA 3.92
                         </div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium tracking-wide text-fg-soft border-b border-status/60">
-                            <span className="relative flex h-1.5 w-1.5">
-                                <span className="absolute inline-flex h-full w-full rounded-full bg-status opacity-75 animate-ping"></span>
-                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-status"></span>
-                            </span>
-                            <Briefcase size={12} className="text-fg" />
-                            Open to SWE/ML internships — Summer 2027
-                        </div>
+                        <AvailabilityBadge />
                     </StaggerItem>
 
                     <StaggerItem>
@@ -91,7 +82,7 @@ export const Hero = () => {
                             </a>
                         </Magnetic>
                         <a
-                            href="/resume.pdf"
+                            href={LINKS.resume}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-8 py-4 border border-line-strong text-fg-soft font-medium rounded-sm hover:border-accent hover:text-accent transition-all duration-300"

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { useReducedMotionSafe } from "./useReducedMotionSafe";
 import { ReactNode } from "react";
 import { EASE_OUT_QUAD, VIEWPORT } from "./tokens";
 
@@ -35,7 +36,7 @@ export const WordReveal = ({
     className,
     lineClassName,
 }: WordRevealProps) => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
     const variants = reduce ? WORD_VARIANTS_REDUCED : WORD_VARIANTS;
 
     // Flat index so cross-line stagger is continuous.

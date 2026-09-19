@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useReducedMotionSafe } from "./useReducedMotionSafe";
 import { ReactNode, useRef, MouseEvent } from "react";
 
 interface MagneticProps {
@@ -10,7 +11,7 @@ interface MagneticProps {
 }
 
 export const Magnetic = ({ children, strength = 0.25, className }: MagneticProps) => {
-    const reduce = useReducedMotion();
+    const reduce = useReducedMotionSafe();
     const ref = useRef<HTMLSpanElement>(null);
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -31,8 +32,8 @@ export const Magnetic = ({ children, strength = 0.25, className }: MagneticProps
         y.set(0);
     };
 
-    if (reduce) return <span className={className}>{children}</span>;
-
+    // Always the same element — swapping it under reduced motion would remount the children
+    // right after hydration. onMove is already inert when motion is reduced.
     return (
         <motion.span
             ref={ref}
