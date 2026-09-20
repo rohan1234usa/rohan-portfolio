@@ -25,6 +25,9 @@ import {
     SiUnrealengine,
     SiPhilipshue,
     SiJetpackcompose,
+    SiFlutter,
+    SiDart,
+    SiGooglemaps,
 } from "react-icons/si";
 import {
     ScanEye,
@@ -36,6 +39,7 @@ import {
     Move3d,
     Cpu,
     Cloud,
+    CloudCog,
     HardDrive,
 } from "lucide-react";
 
@@ -73,10 +77,14 @@ const TECH: Record<string, Entry> = {
     "Jetpack Compose": { Icon: SiJetpackcompose, color: "#4285F4", darkColor: "#7DA2F0" },
     "Unreal Engine": { Icon: SiUnrealengine, color: "#0C2340", darkColor: "#FDF8F0" },
     "Philips Hue API": { Icon: SiPhilipshue, color: "#0067B2", darkColor: "#7DD3FC" },
+    "Flutter": { Icon: SiFlutter, color: "#02569B", darkColor: "#54C5F8" },
+    "Dart": { Icon: SiDart, color: "#0175C2", darkColor: "#7DD3FC" },
+    "Google Maps": { Icon: SiGooglemaps, color: "#4285F4", darkColor: "#7DD3FC" },
 
     "Computer Vision": { Icon: ScanEye, color: "#6B2C91", darkColor: "#F4B942" },
     "RAG": { Icon: Database, color: "#6B2C91", darkColor: "#F4B942" },
     "Vertex AI": { Icon: Sparkles, color: "#4285F4", darkColor: "#7DD3FC" },
+    "Cloud Functions": { Icon: CloudCog, color: "#FFA000", darkColor: "#FCD34D" },
     "YOLOv8": { Icon: Crosshair, color: "#6B2C91", darkColor: "#F4B942" },
     "DINOv2": { Icon: Layers, color: "#6B2C91", darkColor: "#F4B942" },
     "Faiss": { Icon: Search, color: "#6B2C91", darkColor: "#F4B942" },

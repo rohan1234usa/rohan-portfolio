@@ -4,9 +4,9 @@ import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import "./globals.css";
 
 const SITE_URL = "https://built-by-rohan.vercel.app";
-const TITLE = "Rohan Singh — AI/ML & Full-Stack Engineer";
+const TITLE = "Rohan Singh — Full-Stack Engineer & Product Designer";
 const DESCRIPTION =
-  "CS @ UC Irvine ’27 building computer vision pipelines, generative AI products, and full-stack apps. Two-time ML intern at Imentiv AI.";
+  "CS @ UC Irvine ’27. Founding designer and full-stack engineer on Merge, a social platform for real-life plans. Computer vision research, two publications.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

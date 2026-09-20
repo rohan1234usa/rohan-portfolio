@@ -39,7 +39,7 @@ export const Hero = () => {
                     <StaggerItem>
                         <h1 className="text-5xl lg:text-7xl font-bold text-fg leading-[1.1] mb-8 font-display tracking-tight">
                             <WordReveal
-                                lines={["Building the Future of"]}
+                                lines={["Products people use,"]}
                                 lineClassName="block"
                                 delay={0.05}
                             />
@@ -49,15 +49,16 @@ export const Hero = () => {
                                 y={32}
                                 className="block pb-[0.2em] text-transparent bg-clip-text bg-gradient-hero"
                             >
-                                Intelligent Systems
+                                and the AI inside them
                             </Reveal>
                         </h1>
                     </StaggerItem>
 
                     <StaggerItem>
                         <p className="text-xl text-fg-soft mb-10 max-w-lg leading-relaxed font-light">
-                            Engineering intelligent systems that <span className="font-medium text-fg">see, understand, and scale</span>.
-                            Specializing in Computer Vision, Generative AI, and High-Performance Pipelines.
+                            Full-stack engineer and product designer — I <span className="font-medium text-fg">own products end to end</span>,
+                            from personas and prototypes to the iOS and Android client, the backend, and the models inside it.
+                            Plus three years of computer vision and generative AI research, and two publications.
                         </p>
                     </StaggerItem>
 
@@ -109,11 +110,11 @@ export const Hero = () => {
                                 { text: "const", className: "text-accent" },
                                 { text: " focus", className: "text-fg" },
                                 { text: " = [\n  " },
-                                { text: "\"Multimodal RAG\"", className: "text-fg-soft" },
+                                { text: "\"Campus social app @ Merge\"", className: "text-fg-soft" },
+                                { text: ",\n  " },
+                                { text: "\"Grounded LLM features\"", className: "text-fg-soft" },
                                 { text: ",\n  " },
                                 { text: "\"CV pipelines @ scale\"", className: "text-fg-soft" },
-                                { text: ",\n  " },
-                                { text: "\"Real-time inference\"", className: "text-fg-soft" },
                                 { text: ",\n];" },
                             ]}
                         />

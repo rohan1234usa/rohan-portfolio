@@ -13,7 +13,7 @@ interface JobProps {
     role: string;
     date: string;
     location: string;
-    url: string;
+    url?: string;
     points: string[];
 }
 
@@ -38,15 +38,17 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
             <h3 className="font-bold text-xl text-fg font-display mb-1">{job.role}</h3>
             <div className="text-accent font-medium text-sm mb-4 flex items-center gap-2">
                 {job.company}
-                <a
-                    href={job.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${job.company} website`}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                    <ExternalLink size={12} />
-                </a>
+                {job.url && (
+                    <a
+                        href={job.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${job.company} website`}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                        <ExternalLink size={12} />
+                    </a>
+                )}
             </div>
 
             <StaggerGroup as="ul" className="space-y-3" stagger={0.06}>
@@ -74,7 +76,21 @@ export const Experience = () => {
     });
     const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-    const EXPERIENCE = [
+    const EXPERIENCE: JobProps[] = [
+        {
+            // No `url`: mergecampus.com is deliberately withheld until it's polished.
+            // Add it here (and the store link on the Projects card) on launch day.
+            company: "Merge",
+            role: "Founding Designer & Full-Stack Engineer",
+            date: "March 2026 – Present",
+            location: "Irvine, CA",
+            points: [
+                "Originated Merge, a social platform for making real-life plans with friends. Developed UC Irvine student personas, feature specs, and a clickable prototype, then built the first working iOS app in SwiftUI and wrote the migration plan the production Flutter codebase was built from.",
+                "Own the plan board, calendar, chat, AI suggester, and expense surfaces as one of two engineers, with 440+ of the team’s 1,100+ merged PRs across a Flutter client and 107 TypeScript Cloud Functions.",
+                "Designed the “What’s the Move?” AI planner so that Gemini plans the Places searches while the server owns every fact on a card, making a fabricated address or opening time impossible by construction.",
+                "Led a privacy overhaul spanning ~70 audit findings, each backed by a red-first test and a mutation probe; wrote 59 of the 79 Firestore security-rules suites ever added to the repo."
+            ]
+        },
         {
             company: "Imentiv AI",
             role: "AI/Machine Learning Intern",

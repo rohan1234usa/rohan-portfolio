@@ -3,14 +3,14 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { BRAND, loadGoogleFont, usableFonts } from "@/lib/og";
 
-export const alt = "Rohan Singh — AI/ML & Full-Stack Engineer, CS @ UC Irvine";
+export const alt = "Rohan Singh — Full-Stack Engineer & Product Designer, CS @ UC Irvine";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const NAME = "Rohan Singh";
 const EYEBROW = "CS @ UC Irvine · Class of 2027";
-const TAGLINE = "Building intelligent systems that see, understand, and scale.";
-const FOCUS = "Computer Vision · Generative AI · Full-Stack";
+const TAGLINE = "Products people use, and the AI inside them.";
+const FOCUS = "Full-Stack · Product · AI & Vision";
 const DOMAIN = "built-by-rohan.vercel.app";
 const PLACARD = "UC Irvine ’27";
 

@@ -1,27 +1,37 @@
 "use client";
 
-import { ComponentType } from "react";
+import { ComponentType, ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, AudioWaveform, Download, FolderGit2, Github, Lightbulb, Lock } from "lucide-react";
-import { SiGoogleplay } from "react-icons/si";
+import { SiAppstore, SiGoogleplay } from "react-icons/si";
 import { TechIcon } from "./TechIcon";
 import { Reveal } from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 import { LINKS } from "@/lib/links";
 
+/** A proof point. The object form renders `lead` in a heavier weight — for a card whose
+ *  highlights walk a sequence (Merge's Decide → Plan → Get there → Settle up). */
+type Highlight = string | { lead: string; text: string };
+
 interface FeaturedProject {
     title: string;
     kind: string;
+    /** Pre-launch marker, e.g. "Pre-launch". Lights up a pulsing dot in the eyebrow
+     *  and a non-interactive store pill in the CTA row. Delete it on launch day. */
+    status?: string;
     summary: string;
-    highlights: string[];
+    highlights: Highlight[];
     tech: string[];
-    live: string;
+    /** Absent = nothing public to link to yet; the card renders with no outbound link. */
+    live?: string;
     source?: string;
-    /** Real capture of the live site, 16:9 (1440×810 viewport at 2x, downscaled). */
-    shot: string;
-    /** Accent wash behind the browser frame — any CSS color. */
+    /** Real capture of the live site, 16:9 (1440×810 viewport at 2x, downscaled). Pairs with `live`. */
+    shot?: string;
+    /** Square app icon, centred — for mobile products with no public URL to frame. */
+    mark?: string;
+    /** Accent wash behind the frame — any CSS color. */
     glow: string;
 }
 
@@ -41,6 +51,40 @@ interface ShippedApp {
 // possible). Every claim traces to the project's code, README, or store listing — interviewers
 // will ask about each one.
 const FEATURED: FeaturedProject[] = [
+    {
+        // Pre-launch: no `live` (mergecampus.com is withheld until it's polished), no
+        // `source` (private repo). On launch day add `live`/`shot` or a store link and
+        // delete `status` — that one field drives both the eyebrow dot and the CTA pill.
+        title: "Merge",
+        kind: "iOS & Android · Social + AI",
+        status: "Pre-launch",
+        summary:
+            "Where plans with friends come together. Merge is a social platform built around real life — find something fun to do, see who’s in, get there together, and split the cost. Launching at UC Irvine.",
+        // The loop a hangout actually follows. Each claim maps to shipped code: the grounded
+        // suggester, Find a time + RSVP, the timeline solver re-anchored on stamped arrivals
+        // (an offline drive-time model — deliberately not "live traffic"), and the expenses hub.
+        highlights: [
+            {
+                lead: "Decide",
+                text: "“What’s the Move?” finds something fun nearby — real places that fit the group’s budget and are open when everyone arrives. The AI plans the search, but the server owns every fact, so nothing on the card can be invented.",
+            },
+            {
+                lead: "Plan",
+                text: "A shared calendar finds a time that works for everyone. Planners map out the night stop by stop, while go-alongs see the plan first and join when it suits them.",
+            },
+            {
+                lead: "Get there",
+                text: "Merge pairs carpools, optimizes routes, and solves a timeline that tells each person when to leave and when they’ll be home. As real arrivals come in, it re-solves the rest of the night.",
+            },
+            {
+                lead: "Settle up",
+                text: "A scanned receipt becomes an itemized split, a running tab between friends carries over from one plan to the next, and everyone gets a private view of their own spending.",
+            },
+        ],
+        tech: ["Flutter", "Dart", "Firebase", "Cloud Functions", "Gemini", "Google Maps"],
+        mark: "/images/projects/merge-icon.png",
+        glow: "#2DD4BF",
+    },
     {
         title: "Behavioral Interview Coach",
         kind: "Full-stack · Multimodal AI",
@@ -138,20 +182,43 @@ const BrowserFrame = ({ url, src, alt }: { url: string; src: string; alt: string
     </div>
 );
 
+/** Centred app icon, for a mobile product with no site to put in a browser frame.
+ *  Mirrors BrowserFrame's shadow and hover lift so both frames feel like one system. */
+const AppMark = ({ src, alt }: { src: string; alt: string }) => (
+    <div className="relative w-[46%] max-w-[240px] aspect-square rounded-[22%] overflow-hidden ring-1 ring-black/5 dark:ring-white/10 shadow-[0_28px_56px_-24px_rgba(0,34,68,0.55)] dark:shadow-[0_28px_64px_-24px_rgba(0,0,0,0.85)] transition-transform duration-500 ease-out group-hover/shot:-translate-y-1.5 motion-reduce:transition-none">
+        <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 240px, 40vw" className="object-cover" />
+    </div>
+);
+
+/** Wraps the frame in a link when there's somewhere to go, a plain div when there isn't.
+ *  Keeps the group/shot hook in both cases so the hover lift still runs. */
+const ShotLink = ({ project, children }: { project: FeaturedProject; children: ReactNode }) =>
+    project.live ? (
+        <a
+            href={project.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open the ${project.title} live site`}
+            className="group/shot block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+        >
+            {children}
+        </a>
+    ) : (
+        <div className="group/shot block rounded-sm">{children}</div>
+    );
+
 const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: number }) => {
     const flip = index % 2 === 1;
     return (
         // grid-cols-1 (minmax(0,1fr)) lets the frame's nowrap URL truncate instead of widening the column
         <StaggerGroup as="article" className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center" stagger={0.12}>
             <StaggerItem className={`lg:col-span-7 ${flip ? "lg:order-last" : ""}`}>
-                <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open the ${project.title} live site`}
-                    className="group/shot block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-                >
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line bg-bg-subtle flex items-center px-[7%]">
+                <ShotLink project={project}>
+                    <div
+                        className={`relative aspect-[4/3] overflow-hidden rounded-sm border border-line bg-bg-subtle flex items-center px-[7%] ${
+                            project.mark ? "justify-center" : ""
+                        }`}
+                    >
                         {/* Dot grid, faded toward the edges */}
                         <div
                             aria-hidden
@@ -165,24 +232,41 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                                 backgroundImage: `radial-gradient(65% 60% at ${flip ? "22%" : "78%"} 12%, ${project.glow}, transparent 70%)`,
                             }}
                         />
-                        <BrowserFrame
-                            url={project.live}
-                            src={project.shot}
-                            alt={`${project.title} landing page`}
-                        />
-                        <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur text-[11px] font-medium text-fg shadow-sm opacity-0 translate-y-1 group-hover/shot:opacity-100 group-hover/shot:translate-y-0 group-focus-visible/shot:opacity-100 group-focus-visible/shot:translate-y-0 transition-all duration-300">
-                            Visit site
-                            <ArrowUpRight aria-hidden size={12} />
-                        </span>
+                        {project.mark ? (
+                            <AppMark src={project.mark} alt={`${project.title} app icon`} />
+                        ) : project.live && project.shot ? (
+                            <BrowserFrame
+                                url={project.live}
+                                src={project.shot}
+                                alt={`${project.title} landing page`}
+                            />
+                        ) : null}
+                        {project.live && (
+                            <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur text-[11px] font-medium text-fg shadow-sm opacity-0 translate-y-1 group-hover/shot:opacity-100 group-hover/shot:translate-y-0 group-focus-visible/shot:opacity-100 group-focus-visible/shot:translate-y-0 transition-all duration-300">
+                                Visit site
+                                <ArrowUpRight aria-hidden size={12} />
+                            </span>
+                        )}
                     </div>
-                </a>
+                </ShotLink>
             </StaggerItem>
 
             <StaggerItem className="lg:col-span-5">
-                <div className="flex items-center gap-2 mb-4 font-mono text-[11px] tracking-[0.18em] uppercase text-fg-muted">
+                <div className="flex flex-wrap items-center gap-2 gap-y-1.5 mb-4 font-mono text-[11px] tracking-[0.18em] uppercase text-fg-muted">
                     <span className="text-accent font-semibold">{String(index + 1).padStart(2, "0")}</span>
                     <span aria-hidden className="w-6 h-px bg-line-strong" />
                     {project.kind}
+                    {project.status && (
+                        <span className="inline-flex items-center gap-1.5 tracking-[0.14em] text-fg-soft">
+                            {/* Same dot geometry as AvailabilityBadge, deliberately a different colour:
+                                --status gold means "open to internships" everywhere else on this page. */}
+                            <span aria-hidden className="relative flex h-1.5 w-1.5">
+                                <span className="absolute inline-flex h-full w-full rounded-full bg-accent-warm opacity-75 animate-ping motion-reduce:animate-none" />
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-warm" />
+                            </span>
+                            {project.status}
+                        </span>
+                    )}
                 </div>
                 <h3 className="font-display font-bold text-3xl lg:text-[2.125rem] leading-tight text-balance text-fg mb-4">
                     {project.title}
@@ -190,12 +274,19 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                 <p className="text-fg-soft text-base leading-relaxed font-light mb-6">{project.summary}</p>
 
                 <ul className="space-y-2.5 mb-7">
-                    {project.highlights.map((h) => (
-                        <li key={h} className="flex items-start gap-3 text-sm text-fg-soft font-light">
-                            <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
-                            <span>{h}</span>
-                        </li>
-                    ))}
+                    {project.highlights.map((h) => {
+                        const lead = typeof h === "string" ? null : h.lead;
+                        const text = typeof h === "string" ? h : h.text;
+                        return (
+                            <li key={text} className="flex items-start gap-3 text-sm text-fg-soft font-light">
+                                <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
+                                <span>
+                                    {lead && <span className="font-medium text-fg">{lead}: </span>}
+                                    {text}
+                                </span>
+                            </li>
+                        );
+                    })}
                 </ul>
 
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -205,16 +296,18 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                 </div>
 
                 <div className="flex flex-wrap items-center gap-3">
-                    <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-fg text-bg text-sm font-medium rounded-sm hover:bg-accent hover:text-on-accent"
-                    >
-                        Live site
-                        <span className="sr-only">: {project.title}</span>
-                        <ArrowUpRight aria-hidden size={16} />
-                    </a>
+                    {project.live && (
+                        <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-fg text-bg text-sm font-medium rounded-sm hover:bg-accent hover:text-on-accent"
+                        >
+                            Live site
+                            <span className="sr-only">: {project.title}</span>
+                            <ArrowUpRight aria-hidden size={16} />
+                        </a>
+                    )}
                     {project.source && (
                         <a
                             href={project.source}
@@ -226,6 +319,15 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                             Source
                             <span className="sr-only"> code: {project.title}</span>
                         </a>
+                    )}
+                    {project.status && (
+                        // A status, not a control: a plain non-focusable span, so screen readers
+                        // don't announce a button for an action that doesn't exist yet.
+                        <span className="inline-flex items-center gap-2 px-5 py-2.5 border border-dashed border-line-strong text-fg-muted text-sm font-medium rounded-sm cursor-default">
+                            <SiAppstore aria-hidden size={14} />
+                            <SiGoogleplay aria-hidden size={14} />
+                            iOS &amp; Android &middot; coming soon
+                        </span>
                     )}
                 </div>
             </StaggerItem>
