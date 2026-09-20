@@ -13,7 +13,8 @@ import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 import { LINKS } from "@/lib/links";
 
 /** A proof point. The object form renders `lead` in a heavier weight — for a card whose
- *  highlights walk a sequence (Merge's Decide → Plan → Get there → Settle up). */
+ *  highlights name the surfaces they describe (Merge's Timeline, Expenses, Move
+ *  Suggestions, Getting there). */
 type Highlight = string | { lead: string; text: string };
 
 /** What fills the 4:3 frame. `site` gets browser chrome and makes the card a link;
@@ -91,40 +92,6 @@ interface ShippedApp {
 // will ask about each one.
 const FEATURED: FeaturedProject[] = [
     {
-        // Pre-launch: mergecampus.com is withheld until it's polished, and the repo is
-        // private, so there is no `source`. On launch day swap `frame` to
-        // { kind: "site", url, shot } (or add a store link) and delete `prelaunch`.
-        title: "Merge",
-        kind: "iOS & Android · Social + AI",
-        prelaunch: { label: "Pre-launch", pill: "iOS & Android · coming soon" },
-        summary:
-            "Where plans with friends come together. Merge is a social platform built around real life — find something fun to do, see who’s in, get there together, and split the cost. Launching at UC Irvine.",
-        // The loop a hangout actually follows. Each claim maps to shipped code: the grounded
-        // suggester, Find a time + RSVP, the timeline solver re-anchored on stamped arrivals
-        // (an offline drive-time model — deliberately not "live traffic"), and the expenses hub.
-        highlights: [
-            {
-                lead: "Decide",
-                text: "“What’s the Move?” finds something fun nearby — real places that fit the group’s budget and are open when everyone arrives. The AI plans the search, but the server owns every fact, so nothing on the card can be invented.",
-            },
-            {
-                lead: "Plan",
-                text: "A shared calendar finds a time that works for everyone. Planners map out the night stop by stop, while go-alongs see the plan first and join when it suits them.",
-            },
-            {
-                lead: "Get there",
-                text: "Merge pairs carpools, optimizes routes, and solves a timeline that tells each person when to leave and when they’ll be home. As real arrivals come in, it re-solves the rest of the night.",
-            },
-            {
-                lead: "Settle up",
-                text: "A scanned receipt becomes an itemized split, a running tab between friends carries over from one plan to the next, and everyone gets a private view of their own spending.",
-            },
-        ],
-        tech: ["Flutter", "Dart", "Firebase", "Cloud Functions", "Gemini", "Google Maps"],
-        frame: { kind: "mark", src: "/images/projects/merge-icon.png" },
-        glow: "#2DD4BF",
-    },
-    {
         title: "Behavioral Interview Coach",
         kind: "Full-stack · Multimodal AI",
         summary:
@@ -159,6 +126,49 @@ const FEATURED: FeaturedProject[] = [
         glow: "#F59E0B",
     },
 ];
+
+/** Merge leads the "Now building" band at featured scale: it is the furthest along of the
+ *  in-development products and the only one with real art rather than schematic signal art.
+ *  Deliberately a FeaturedProject, not a BuildingProject — that keeps the app icon and the
+ *  store pill, and makes launch day a move into FEATURED rather than a retype.
+ *  Pre-launch: mergecampus.com is withheld until it's polished and the repo is private, so
+ *  there is no `source`. On launch day swap `frame` to { kind: "site", url, shot }, delete
+ *  `prelaunch`, and move this object into FEATURED — emptying this array drops the lead.
+ *  A 0-or-1 array rather than a nullable const on purpose: TypeScript narrows a `const` to
+ *  its initializer, so `: FeaturedProject | null = {…}` makes the no-lead branch `never`
+ *  and uncompilable the day you actually use it. Hold at most one entry. */
+const BUILDING_LEAD: FeaturedProject[] = [{
+    title: "Merge",
+    kind: "iOS & Android · Social + AI",
+    prelaunch: { label: "Pre-launch", pill: "iOS & Android · coming soon" },
+    summary:
+        "Where plans with friends come together. Merge is a social platform built around doing things in real life — exploring your college campus, managing plan logistics and feasibility, both timewise and carpool wise, coordinating a bring list between group members and the correlated expenses, along with many other quality of life features meant to support users in making their ambitious outings come to life.",
+    // The surfaces a plan actually passes through, each mapping to shipped code: the plan
+    // timeline, the expenses hub with its split modes, the grounded suggester and its
+    // at-home mode, and carpool grouping with route optimization. Copy is Rohan's own —
+    // keep any future edit to what the app does, and never claim live traffic data.
+    highlights: [
+        {
+            lead: "The Timeline",
+            text: "A shared calendar finds timings that work for everyone involved. Planners can map out their outing stop by stop, while other members can see the plan first and join if it suits them. Makes it possible to view how adjusting the plan impacts the rest.",
+        },
+        {
+            lead: "Expenses",
+            text: "Merge turns a scanned receipt into an itemized split, and offers running tabs between friends. There are options to divide a split by item, by serving, equally, by percent, etc.",
+        },
+        {
+            lead: "Move Suggestions",
+            text: "Merge answers the classic “What’s the Move?” by suggesting locations in the area catered to the group’s interests, among several other adjustable parameters. It also suggests activities that can be done at home for fun, outlining any materials/items required to do an activity.",
+        },
+        {
+            lead: "Getting there",
+            text: "Merge groups carpools, optimizes routes, and solves the carpooling concerns to minimize time spent driving unnecessarily.",
+        },
+    ],
+    tech: ["Flutter", "Dart", "Firebase", "Cloud Functions", "Gemini", "Google Maps"],
+    frame: { kind: "mark", src: "/images/projects/merge-icon.png" },
+    glow: "#2DD4BF",
+}];
 
 // ── Launching a "Now building" project ──────────────────────────────────────────────────────
 // 1. Capture the live hero at 1920×1080 → public/images/projects/<slug>.webp. Check the file
@@ -228,12 +238,30 @@ const BUILDING: BuildingProject[] = [
 
 const COUNT_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six"];
 
-// Built from BUILDING so the count and the rooms cannot drift from the rows beneath it.
-const BUILDING_INTRO = `${COUNT_WORDS[BUILDING.length] ?? BUILDING.length} product${
-    BUILDING.length === 1 ? "" : "s"
-} on one thesis — delivery is a signal you can measure — each pointed at a different room: ${BUILDING.map(
-    (p) => p.room,
-).join(", ")}.`;
+// Built from the rows beneath it so the count and the rooms cannot drift. The lead is
+// introduced separately: "delivery is a signal you can measure" is the thesis the other
+// three share, and it is not true of Merge, so it is not claimed over it.
+const countWord = (n: number) => COUNT_WORDS[n] ?? String(n);
+const HAS_LEAD = BUILDING_LEAD.length > 0;
+const LEAD_TITLE = BUILDING_LEAD[0]?.title ?? "";
+const BUILDING_TOTAL = BUILDING.length + (HAS_LEAD ? 1 : 0);
+const ROOMS = BUILDING.map((p) => p.room).join(", ");
+const THESIS = "delivery is a signal you can measure";
+
+// Two shapes rather than one string with holes, so each reads as written prose. With a
+// lead, it is named first and the thesis is scoped to the rows it actually describes;
+// without one, this falls back to the original single sentence.
+const BUILDING_INTRO = HAS_LEAD
+    ? `${countWord(BUILDING_TOTAL)} product${BUILDING_TOTAL === 1 ? "" : "s"} in the works. ${LEAD_TITLE} is a campus social platform launching at UC Irvine${
+          BUILDING.length === 0
+              ? "."
+              : ` — and ${countWord(BUILDING.length).toLowerCase()} ${
+                    BUILDING.length === 1 ? "sits" : "sit"
+                } on one thesis, ${THESIS}, each pointed at a different room: ${ROOMS}.`
+      }`
+    : `${countWord(BUILDING.length)} product${
+          BUILDING.length === 1 ? "" : "s"
+      } on one thesis — ${THESIS} — each pointed at a different room: ${ROOMS}.`;
 
 const SHIPPED: ShippedApp[] = [
     {
@@ -427,13 +455,43 @@ const ProjectMeta = ({ context, collaborators, className = "" }: { context?: str
     );
 };
 
-const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: number }) => {
-    const flip = index % 2 === 1;
+/** "featured" is a standalone row in the live grid. "band-lead" is the same card leading the
+ *  "Now building" band: it borrows BuildingRow's column geometry and breakpoint so the two
+ *  line up, and drops a heading level so the rows beneath stay nested under the band label
+ *  rather than under this project. `flip` is passed rather than derived, because the lead's
+ *  index depends on FEATURED.length and would silently flip if a live project were added. */
+const FeaturedRow = ({
+    project,
+    index,
+    variant = "featured",
+    flip = false,
+}: {
+    project: FeaturedProject;
+    index: number;
+    variant?: "featured" | "band-lead";
+    flip?: boolean;
+}) => {
+    const lead = variant === "band-lead";
+    const Heading = lead ? "h4" : "h3";
     const frame = project.frame;
     return (
         // grid-cols-1 (minmax(0,1fr)) lets the frame's nowrap URL truncate instead of widening the column
-        <StaggerGroup as="article" className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center" stagger={0.12}>
-            <StaggerItem className={`lg:col-span-7 ${flip ? "lg:order-last" : ""}`}>
+        <StaggerGroup
+            as="article"
+            className={
+                lead
+                    ? "grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-start"
+                    : "grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
+            }
+            stagger={0.12}
+        >
+            <StaggerItem
+                className={
+                    lead
+                        ? "md:col-span-6 lg:col-span-5"
+                        : `lg:col-span-7 ${flip ? "lg:order-last" : ""}`
+                }
+            >
                 <ShotLink project={project}>
                     <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line bg-bg-subtle flex items-center justify-center px-[7%]">
                         <DotGrid />
@@ -464,18 +522,19 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                 </ShotLink>
             </StaggerItem>
 
-            <StaggerItem className="lg:col-span-5">
+            <StaggerItem className={lead ? "md:col-span-6 lg:col-span-7" : "lg:col-span-5"}>
                 <div className="flex flex-wrap items-center gap-2 gap-y-1.5 mb-4 font-mono text-[11px] tracking-[0.18em] uppercase text-fg-muted">
                     <span aria-hidden className="text-accent font-semibold">
                         {String(index + 1).padStart(2, "0")}
                     </span>
                     <span aria-hidden className="w-6 h-px bg-line-strong" />
                     {project.kind}
-                    {project.prelaunch && (
+                    {project.prelaunch && !lead && (
                         <span className="inline-flex items-center gap-1.5 tracking-[0.14em] text-fg-soft">
                             {/* Same dot geometry as AvailabilityBadge, but --accent-warm rather than
-                                --status: gold there means "open to internships". The two read alike in
-                                light mode (both UCI golds) and differ in dark; they are never co-visible. */}
+                                --status: gold there means "open to internships". Both read as UCI gold
+                                in light mode, so this is suppressed on the band lead, where the band's
+                                own PingDot is already a few rows above it. */}
                             <span aria-hidden className="relative flex h-1.5 w-1.5">
                                 <span className="absolute inline-flex h-full w-full rounded-full bg-accent-warm opacity-75 animate-ping motion-reduce:animate-none" />
                                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-warm" />
@@ -484,9 +543,13 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                         </span>
                     )}
                 </div>
-                <h3 className="font-display font-bold text-3xl lg:text-[2.125rem] leading-tight text-balance text-fg mb-4">
+                <Heading
+                    className={`font-display font-bold leading-tight text-balance text-fg mb-4 ${
+                        lead ? "text-[1.75rem] lg:text-3xl" : "text-3xl lg:text-[2.125rem]"
+                    }`}
+                >
                     {project.title}
-                </h3>
+                </Heading>
                 <ProjectMeta context={project.context} collaborators={project.collaborators} className="-mt-2 mb-4" />
                 <p className="text-fg-soft text-base leading-relaxed font-light mb-6">{project.summary}</p>
 
@@ -713,7 +776,7 @@ export const Projects = () => (
                 ))}
             </div>
 
-            {BUILDING.length > 0 && (
+            {(HAS_LEAD || BUILDING.length > 0) && (
                 <>
                     <Reveal className="mt-24 lg:mt-32 mb-12 lg:mb-14">
                         <div className="flex items-center gap-4 mb-5">
@@ -729,9 +792,19 @@ export const Projects = () => (
                         <p className="max-w-2xl text-fg-soft text-base font-light">{BUILDING_INTRO}</p>
                     </Reveal>
 
-                    <div className="space-y-14 lg:space-y-16">
+                    {/* The lead shares the rows' column geometry so the two line up, and sits a
+                        tier above them: a wider gap beneath it than the 56/64px between rows. */}
+                    {BUILDING_LEAD.map((p) => (
+                        <FeaturedRow key={p.title} project={p} index={FEATURED.length} variant="band-lead" />
+                    ))}
+
+                    <div className={`${HAS_LEAD ? "mt-20 lg:mt-24 " : ""}space-y-14 lg:space-y-16`}>
                         {BUILDING.map((p, i) => (
-                            <BuildingRow key={p.title} project={p} index={FEATURED.length + i} />
+                            <BuildingRow
+                                key={p.title}
+                                project={p}
+                                index={FEATURED.length + (HAS_LEAD ? 1 : 0) + i}
+                            />
                         ))}
                     </div>
                 </>

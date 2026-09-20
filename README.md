@@ -24,10 +24,6 @@ I own products end to end — from personas and prototypes to the mobile client,
 
 ## 🏆 Featured Projects
 
-### Merge — *pre-launch*
-*(Flutter, Dart, Firebase, Cloud Functions, Gemini, Google Maps)*  
-Where plans with friends come together: a social platform built around real life — find something fun to do, see who’s in, get there together, and split the cost. Launching at UC Irvine. I originated the product and build it as one of two engineers, owning the plan board, calendar, chat, AI suggester, and expense surfaces. *Links will land here once the app is public.*
-
 ### [Behavioral Interview Coach](https://behavioral-interview-coach.vercel.app/) · [source](https://github.com/rohan1234usa/behavioral-coach)
 *(Python, FastAPI, Next.js, Docker, AWS S3, Gemini)*  
 Soft-skills-first interview simulator that quantifies subconscious cues like facial expression, vocal tone, and pacing to improve delivery. A multimodal pipeline fuses face, voice, and transcript signals into confidence, clarity, resilience, and engagement scores; Gemini streams résumé-tailored questions and builds a coaching plan from past sessions.
@@ -37,6 +33,7 @@ Soft-skills-first interview simulator that quantifies subconscious cues like fac
 Full-stack spiritual companion: a scripture-grounded AI chatbot (ten Guru lenses × five response styles × three languages), a Punjabi ↔ English translator, Shabad search across all 1,430 Angs, the daily Hukamnama, and a community seva board.
 
 ### Now building
+- **Merge** *(Flutter, Dart, Firebase, Cloud Functions, Gemini, Google Maps)* — where plans with friends come together: a social platform built around doing things in real life, covering the logistics that usually stall an outing — timings, carpools, bring lists, and the expenses that come with them. I originated the product and build it as one of two engineers, owning the plan board, calendar, chat, AI suggester, and expense surfaces. Launching at UC Irvine; pre-launch, so links land here once it's public.
 - **SceneSense** *(Python, Imentiv API, Speech-to-Text, Embeddings)* — an AI scene partner for actors: it scores a take against the script's own emotional arc and separates an improvised line from a forgotten one. Imentiv AI · 2026 internship, in design.
 - **Pitch Coach** *(Python, FastAPI, Next.js, PostgreSQL, AWS S3, Gemini, Imentiv API)* — delivery coach for sales reps, built measurement-first: the pipeline computes the evidence and the AI only explains it. One FastAPI pipeline serves three products. Imentiv AI · 2026 internship, pre-launch.
 - **Clarity** *(Python, FastAPI, Next.js, LangGraph, Gemma, ElevenLabs, MongoDB, Imentiv API)* — a live AI conversation partner that reads face, voice, and words together, with a streamed peer voice over WebSocket. LA Hacks 2026 team build; I led architecture and the analysis pipelines. Hardening for launch.
@@ -67,14 +64,15 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 
 | To change… | Edit |
 |---|---|
-| Project copy, links, and tech chips | `FEATURED` / `BUILDING` / `SHIPPED` in `components/Projects.tsx` |
+| Project copy, links, and tech chips | `FEATURED` / `BUILDING_LEAD` / `BUILDING` / `SHIPPED` in `components/Projects.tsx` |
 | A project still being built | Add it to `BUILDING` with a `stage` and a `visual` — it renders in the "Now building" band with signal art instead of a screenshot. Launching it means moving it into `FEATURED` with a `frame`; the full checklist is the comment above `BUILDING` |
+| The project leading the "Now building" band | `BUILDING_LEAD` — a 0-or-1 array of `FeaturedProject`, so it renders with real art and keeps `prelaunch` while sharing the band rows' column grid. Empty the array to drop the lead; the band self-removes once `BUILDING` is also empty |
 | "Now building" signal art | `components/BuildingVisuals.tsx` — one motif per project, shown until there's a real capture |
 | Work history | `EXPERIENCE` in `components/Experience.tsx` — array order is display order; `url` is optional |
 | Degree, GPA, honors, and coursework | `components/Education.tsx` — the university card holds the school, dates, GPA and honor pills; `COURSES` is the coursework list (array order is display order, so keep it grouped by department rather than sorted by number) |
 | Project screenshots | `public/images/projects/*.webp` — 1920×1080 captures of each live site's hero |
-| What fills a project's frame | `frame` on a `FEATURED` entry — `{ kind: "site", url, shot }` for a browser-framed capture, `{ kind: "mark", src }` for a square app icon (`public/images/projects/*.png`) |
-| "Coming soon" state on a project | `prelaunch: { label, pill }` on a `FEATURED` entry — drives the eyebrow dot and the store pill. On launch day swap `frame` to `kind: "site"` and delete `prelaunch` |
+| What fills a project's frame | `frame` on a `FEATURED` or `BUILDING_LEAD` entry — `{ kind: "site", url, shot }` for a browser-framed capture, `{ kind: "mark", src }` for a square app icon (`public/images/projects/*.png`) |
+| "Coming soon" state on a project | `prelaunch: { label, pill }` on a `FEATURED` or `BUILDING_LEAD` entry — drives the eyebrow dot and the store pill. On launch day swap `frame` to `kind: "site"`, delete `prelaunch`, and move the object into `FEATURED` |
 | A new tech chip's logo | `TECH` in `components/TechIcon.tsx` — unlisted names fall back to a generic glyph |
 | "Open to internships" status (hero, mobile menu, contact) | `AVAILABILITY` in `components/Availability.tsx` |
 | GitHub, LinkedIn, email, and résumé links | `lib/links.ts` |
