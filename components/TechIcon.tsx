@@ -28,6 +28,10 @@ import {
     SiFlutter,
     SiDart,
     SiGooglemaps,
+    SiPostgresql,
+    SiMongodb,
+    SiElevenlabs,
+    SiLanggraph,
 } from "react-icons/si";
 import {
     ScanEye,
@@ -41,6 +45,10 @@ import {
     Cloud,
     CloudCog,
     HardDrive,
+    Gem,
+    ScanFace,
+    Captions,
+    Waypoints,
 } from "lucide-react";
 
 type IconComp = ComponentType<{ size?: number; className?: string; color?: string }>;
@@ -80,6 +88,12 @@ const TECH: Record<string, Entry> = {
     "Flutter": { Icon: SiFlutter, color: "#02569B", darkColor: "#54C5F8" },
     "Dart": { Icon: SiDart, color: "#0175C2", darkColor: "#7DD3FC" },
     "Google Maps": { Icon: SiGooglemaps, color: "#4285F4", darkColor: "#7DD3FC" },
+    "PostgreSQL": { Icon: SiPostgresql, color: "#4169E1", darkColor: "#7DA2F0" },
+    "MongoDB": { Icon: SiMongodb, color: "#47A248" },
+    "ElevenLabs": { Icon: SiElevenlabs, color: "#0C2340", darkColor: "#FDF8F0" },
+    "LangGraph": { Icon: SiLanggraph, color: "#1C3C3C", darkColor: "#5EEAD4" },
+    // Gemma has no brand mark in Simple Icons — a generic glyph beats borrowing Gemini's.
+    "Gemma": { Icon: Gem, color: "#4285F4", darkColor: "#7DA2F0" },
 
     "Computer Vision": { Icon: ScanEye, color: "#6B2C91", darkColor: "#F4B942" },
     "RAG": { Icon: Database, color: "#6B2C91", darkColor: "#F4B942" },
@@ -89,6 +103,9 @@ const TECH: Record<string, Entry> = {
     "DINOv2": { Icon: Layers, color: "#6B2C91", darkColor: "#F4B942" },
     "Faiss": { Icon: Search, color: "#6B2C91", darkColor: "#F4B942" },
     "ByteTrack": { Icon: Move3d, color: "#6B2C91", darkColor: "#F4B942" },
+    "Imentiv API": { Icon: ScanFace, color: "#6B2C91", darkColor: "#F4B942" },
+    "Speech-to-Text": { Icon: Captions, color: "#6B2C91", darkColor: "#F4B942" },
+    "Embeddings": { Icon: Waypoints, color: "#6B2C91", darkColor: "#F4B942" },
 };
 
 const FALLBACK: Entry = { Icon: Cpu, color: "#6B2C91", darkColor: "#F4B942" };

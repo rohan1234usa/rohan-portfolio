@@ -85,6 +85,18 @@ const EXPERIENCE: JobProps[] = [
     },
     {
         company: "Imentiv AI",
+        role: "Software Engineer Intern",
+        date: "June 2026 – Sept 2026",
+        location: "Cupertino, CA",
+        url: "https://www.imentiv.ai",
+        points: [
+            "Architected PitchSense's analysis pipeline: one FastAPI service, three products, with Postgres and S3 call history.",
+            "Grounded every AI answer in a real measurement: baseline-normalized scores and transcript-derived delivery mechanics.",
+            "Scoped SceneSense, a 0→1 AI acting coach that grades a take against the script's emotional arc."
+        ]
+    },
+    {
+        company: "Imentiv AI",
         role: "AI/Machine Learning Intern",
         date: "June 2025 – Sept 2025",
         location: "Cupertino, CA",

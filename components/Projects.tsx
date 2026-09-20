@@ -3,8 +3,9 @@
 import { ComponentType, ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, AudioWaveform, Download, FolderGit2, Github, Lightbulb, Lock } from "lucide-react";
+import { ArrowRight, ArrowUpRight, AudioWaveform, Download, FolderGit2, Github, Lightbulb, Lock, Users } from "lucide-react";
 import { SiAppstore, SiGoogleplay } from "react-icons/si";
+import { BuildingVisual, type BuildingVisualKind } from "./BuildingVisuals";
 import { TechIcon } from "./TechIcon";
 import { Reveal } from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
@@ -30,17 +31,43 @@ interface Prelaunch {
     pill: string;
 }
 
-interface FeaturedProject {
+interface Collaborator {
+    name: string;
+    url?: string;
+}
+
+interface ProjectBase {
     title: string;
     kind: string;
-    prelaunch?: Prelaunch;
+    /** Provenance line under the title, e.g. "Imentiv AI · 2026 internship". */
+    context?: string;
+    /** Teammates — renders a "With …" credit line. Lives on the base so the credit
+     *  survives a move from BUILDING to FEATURED on launch day. */
+    collaborators?: Collaborator[];
     summary: string;
     highlights: Highlight[];
     tech: string[];
-    frame: Frame;
     source?: string;
     /** Accent wash behind the frame — any CSS color. */
     glow: string;
+}
+
+interface FeaturedProject extends ProjectBase {
+    prelaunch?: Prelaunch;
+    frame: Frame;
+}
+
+/** A product with nothing to screenshot yet — no site, no store listing, no app icon.
+ *  Renders as a compact row in the "Now building" band, with schematic signal art in the
+ *  frame where the real capture will go. Launching one means moving it into FEATURED with
+ *  a `frame`, which TypeScript will not let you do while `stage`/`visual` are still set. */
+interface BuildingProject extends ProjectBase {
+    /** Honest build stage, e.g. "In design". Also fills the frame pill where a URL would
+     *  go, so keep it under ~20 characters or it truncates there. */
+    stage: string;
+    /** Optional and best left unset: a date that slips reads worse than no date at all. */
+    eta?: string;
+    visual: BuildingVisualKind;
 }
 
 interface ShippedApp {
@@ -129,6 +156,74 @@ const FEATURED: FeaturedProject[] = [
     },
 ];
 
+// ── Launching a "Now building" project ──────────────────────────────────────────────────────
+// 1. Capture the live hero at 1920×1080 → public/images/projects/<slug>.webp. Check the file
+//    lands: a wrong path is a runtime 404, not a build error.
+// 2. Move the entry into FEATURED above, add `frame: { kind: "site", url, shot }` (or
+//    `{ kind: "mark", src }` for a store-only app), and delete `stage`/`eta`/`visual`.
+//    Keep `context` and `collaborators` — featured rows render them too.
+// 3. Re-tighten the bullets to what shipped, and credit collaborators before it goes public.
+// 4. `npx tsc --noEmit` — a FEATURED entry without a `frame`, or one still carrying
+//    building-only fields, does not compile. Mirror the change in README.md.
+// 5. Re-read BUILDING_INTRO below. It names how many projects are in the band and which
+//    rooms they cover, and no compiler can catch that going stale.
+const BUILDING: BuildingProject[] = [
+    {
+        title: "SceneSense",
+        kind: "0→1 Product · Multimodal AI",
+        context: "Imentiv AI · 2026 internship",
+        stage: "In design",
+        visual: "scene",
+        summary:
+            "An AI scene partner for actors: it checks a take against what the script actually calls for — face, voice, and words — and knows an improvised line from a forgotten one.",
+        highlights: [
+            "Greenfield at Imentiv AI, from problem framing to scoring model: on-book mode coaches line by line, off-book returns a full post-take report.",
+            "The script becomes the rubric: a sentence-level map of up to 32 emotions, valence, and arousal, with every miss timestamped.",
+            "Separates improv from a dropped line: words and emotion still have to match, while a tempo drop or flash of confusion exposes a blank.",
+        ],
+        tech: ["Python", "Imentiv API", "Speech-to-Text", "Embeddings"],
+        glow: "#EC5F8A",
+    },
+    {
+        title: "Pitch Coach",
+        kind: "Full-stack · Emotion AI",
+        context: "Imentiv AI · 2026 internship",
+        stage: "Pre-launch",
+        visual: "pitch",
+        summary:
+            "Delivery coach for sales reps, designed measurement-first: the pipeline computes the evidence, and the AI is only allowed to explain it.",
+        highlights: [
+            "Grounded by design: every risk cites a number counted from the transcript, and the coach answers only from the computed timeline.",
+            "Six delivery constructs are normalized against the speaker's own resting baseline, so a reserved rep is never graded on a showman's scale.",
+            "One FastAPI pipeline serves three products: a scope flag turns the same analysis into Pitch Coach, Reaction, or Full Call.",
+        ],
+        tech: ["Python", "FastAPI", "Next.js", "PostgreSQL", "AWS S3", "Gemini", "Imentiv API"],
+        glow: "#2DD4BF",
+    },
+    {
+        title: "Clarity",
+        kind: "Real-time · Multimodal AI",
+        context: "LA Hacks 2026 · team build · architecture & pipeline design",
+        // TODO(before release): name the LA Hacks teammates here — Rohan asked to be reminded.
+        collaborators: [],
+        stage: "Hardening for launch",
+        visual: "clarity",
+        summary:
+            "A live AI conversation partner that listens the way people do — face, voice, and words together — because a text-only LLM misses most of what human communication actually carries.",
+        highlights: [
+            "LangGraph runs the turn loop, Gemma plays the other side of the table, and ElevenLabs streams that voice over WebSocket as it renders.",
+            "Catches what a text-only model cannot: each turn is read across face, voice, and language, so feedback covers tone and expression, not just wording.",
+            "Designed, built, and demoed in one weekend at LA Hacks 2026, then hardened ever since with correctness fixes and an offline test suite.",
+        ],
+        tech: ["Python", "FastAPI", "Next.js", "LangGraph", "Gemma", "ElevenLabs", "MongoDB", "Imentiv API"],
+        glow: "#A78BFA",
+    },
+];
+
+// Counts the band and names its three rooms — update it alongside BUILDING (checklist step 5).
+const BUILDING_INTRO =
+    "Three products on one thesis — delivery is a signal you can measure — each pointed at a different room: the stage, the sales call, the hard conversation.";
+
 const SHIPPED: ShippedApp[] = [
     {
         title: "Hue Christmas",
@@ -169,23 +264,33 @@ const TechChip = ({ name }: { name: string }) => (
 const FRAME_CHROME =
     "ring-1 ring-black/10 dark:ring-white/10 shadow-[0_28px_56px_-24px_rgba(0,34,68,0.55)] dark:shadow-[0_28px_64px_-24px_rgba(0,0,0,0.85)] transition-transform duration-500 ease-out group-hover/shot:-translate-y-1.5 motion-reduce:transition-none";
 
+/** The window bar both framed views share — three dots, a centred pill, a balancing spacer. */
+const ChromeBar = ({ pill }: { pill: ReactNode }) => (
+    <div className="flex items-center gap-3 h-6 sm:h-7 px-3 bg-[#17171C] border-b border-white/[0.06]">
+        <div aria-hidden className="flex gap-1.5 w-10 sm:w-12">
+            <span className="w-2 h-2 rounded-full bg-white/20" />
+            <span className="w-2 h-2 rounded-full bg-white/20" />
+            <span className="w-2 h-2 rounded-full bg-white/20" />
+        </div>
+        <div className="flex-1 min-w-0 flex justify-center">
+            <span className="inline-flex items-center gap-1.5 max-w-full h-4 sm:h-[18px] px-2.5 rounded bg-white/[0.06] font-mono text-[9px] sm:text-[10px] text-white/55">
+                {pill}
+            </span>
+        </div>
+        <div aria-hidden className="w-10 sm:w-12" />
+    </div>
+);
+
 const BrowserFrame = ({ url, src, alt }: { url: string; src: string; alt: string }) => (
     <div className={`relative w-full overflow-hidden rounded-md bg-[#0B0B0F] ${FRAME_CHROME}`}>
-        {/* Window chrome */}
-        <div className="flex items-center gap-3 h-6 sm:h-7 px-3 bg-[#17171C] border-b border-white/[0.06]">
-            <div aria-hidden className="flex gap-1.5 w-10 sm:w-12">
-                <span className="w-2 h-2 rounded-full bg-white/20" />
-                <span className="w-2 h-2 rounded-full bg-white/20" />
-                <span className="w-2 h-2 rounded-full bg-white/20" />
-            </div>
-            <div className="flex-1 min-w-0 flex justify-center">
-                <span className="inline-flex items-center gap-1.5 max-w-full h-4 sm:h-[18px] px-2.5 rounded bg-white/[0.06] font-mono text-[9px] sm:text-[10px] text-white/55">
+        <ChromeBar
+            pill={
+                <>
                     <Lock aria-hidden size={8} className="flex-shrink-0" />
                     <span className="truncate">{new URL(url).host}</span>
-                </span>
-            </div>
-            <div aria-hidden className="w-10 sm:w-12" />
-        </div>
+                </>
+            }
+        />
         <div className="relative aspect-video">
             <Image
                 src={src}
@@ -194,6 +299,29 @@ const BrowserFrame = ({ url, src, alt }: { url: string; src: string; alt: string
                 sizes="(min-width: 1024px) 480px, 90vw"
                 className="object-cover object-top"
             />
+        </div>
+    </div>
+);
+
+/** The same window, with a build stage where the URL will go once there is one, and
+ *  schematic signal art in place of a capture that doesn't exist yet. */
+const PreviewFrame = ({ label, glow, visual }: { label: string; glow: string; visual: BuildingVisualKind }) => (
+    <div className={`relative w-full overflow-hidden rounded-md bg-[#0B0B0F] ${FRAME_CHROME}`}>
+        <ChromeBar
+            pill={
+                <>
+                    <span aria-hidden className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: glow }} />
+                    <span className="truncate">{label}</span>
+                </>
+            }
+        />
+        <div className="relative aspect-video">
+            <div
+                aria-hidden
+                className="absolute inset-0"
+                style={{ backgroundImage: `radial-gradient(70% 90% at 85% 0%, color-mix(in srgb, ${glow} 16%, transparent), transparent 70%)` }}
+            />
+            <BuildingVisual kind={visual} glow={glow} />
         </div>
     </div>
 );
@@ -229,6 +357,55 @@ const ShotLink = ({ project, children }: { project: FeaturedProject; children: R
     ) : (
         <div>{children}</div>
     );
+
+/** Same dot geometry as the prelaunch eyebrow above, on --status: this one sits in the
+ *  "Now building" band, never beside a prelaunch dot, so the two are not co-visible. */
+const PingDot = () => (
+    <span aria-hidden className="relative flex h-1.5 w-1.5">
+        <span className="absolute inline-flex h-full w-full rounded-full bg-status opacity-75 animate-ping motion-reduce:animate-none" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-status" />
+    </span>
+);
+
+/** Provenance and team credit. Renders nothing when a project has neither, so it stays
+ *  invisible on the existing rows — and keeps the credit when a build ships. */
+const ProjectMeta = ({ context, collaborators, className = "" }: { context?: string; collaborators?: Collaborator[]; className?: string }) => {
+    const credited = collaborators && collaborators.length > 0 ? collaborators : null;
+    if (!context && !credited) return null;
+    return (
+        // A div, not a p: the global p/li line-height rule is unlayered and would win.
+        <div className={className}>
+            {context && (
+                <div className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-fg-muted">{context}</div>
+            )}
+            {credited && (
+                <div className="mt-1.5 flex items-center gap-1.5 text-xs text-fg-muted">
+                    <Users aria-hidden size={12} className="flex-shrink-0" />
+                    <span>
+                        With{" "}
+                        {credited.map((c, i) => (
+                            <span key={c.name}>
+                                {i > 0 && ", "}
+                                {c.url ? (
+                                    <a
+                                        href={c.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-fg-soft underline decoration-line-strong underline-offset-2 hover:text-accent rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                                    >
+                                        {c.name}
+                                    </a>
+                                ) : (
+                                    <span className="text-fg-soft">{c.name}</span>
+                                )}
+                            </span>
+                        ))}
+                    </span>
+                </div>
+            )}
+        </div>
+    );
+};
 
 const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: number }) => {
     const flip = index % 2 === 1;
@@ -294,6 +471,7 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                 <h3 className="font-display font-bold text-3xl lg:text-[2.125rem] leading-tight text-balance text-fg mb-4">
                     {project.title}
                 </h3>
+                <ProjectMeta context={project.context} collaborators={project.collaborators} className="-mt-2 mb-4" />
                 <p className="text-fg-soft text-base leading-relaxed font-light mb-6">{project.summary}</p>
 
                 <ul className="space-y-2.5 mb-7">
@@ -359,6 +537,94 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
         </StaggerGroup>
     );
 };
+
+/** Same grammar as a featured row, scaled down — the frame is already in place, waiting
+ *  for the screenshot that replaces the signal art on launch day. */
+const BuildingRow = ({ project, index }: { project: BuildingProject; index: number }) => (
+    <StaggerGroup as="article" className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-start" stagger={0.12}>
+        <StaggerItem className="max-w-sm md:max-w-none md:col-span-6 lg:col-span-5">
+            {/* Decorative throughout: the stage and title are read out in the copy column. */}
+            <div aria-hidden className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line bg-bg-subtle flex items-center px-[7%]">
+                <div
+                    className="absolute inset-0 [background-image:radial-gradient(var(--line-strong)_1px,transparent_1.5px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]"
+                />
+                <div
+                    className="absolute inset-0 opacity-45 dark:opacity-40"
+                    style={{ backgroundImage: `radial-gradient(65% 60% at 78% 12%, ${project.glow}, transparent 70%)` }}
+                />
+                <PreviewFrame label={project.stage.toLowerCase()} glow={project.glow} visual={project.visual} />
+            </div>
+        </StaggerItem>
+
+        <StaggerItem className="md:col-span-6 lg:col-span-7">
+            <div className="flex items-center gap-2 mb-3 font-mono text-[11px] tracking-[0.18em] uppercase text-fg-muted">
+                <span aria-hidden className="text-accent font-semibold">{String(index + 1).padStart(2, "0")}</span>
+                <span aria-hidden className="w-6 h-px bg-line-strong" />
+                {project.kind}
+            </div>
+            <h4 className="font-display font-bold text-2xl leading-tight text-balance text-fg mb-2">{project.title}</h4>
+            <ProjectMeta context={project.context} collaborators={project.collaborators} className="mb-4" />
+            <p className="text-fg-soft text-[15px] leading-relaxed font-light mb-5">{project.summary}</p>
+
+            <ul className="space-y-2 mb-6">
+                {project.highlights.map((h) => {
+                    const lead = typeof h === "string" ? null : h.lead;
+                    const text = typeof h === "string" ? h : h.text;
+                    return (
+                        <li key={lead ? `${lead}:${text}` : text} className="flex items-start gap-3 text-sm text-fg-soft font-light">
+                            <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
+                            <span>
+                                {lead && <span className="font-medium text-fg">{lead}: </span>}
+                                {text}
+                            </span>
+                        </li>
+                    );
+                })}
+            </ul>
+
+            <div className="flex flex-wrap gap-2 mb-6">
+                {project.tech.map((t) => (
+                    <TechChip key={t} name={t} />
+                ))}
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pt-4 border-t border-line">
+                <span className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.14em] uppercase text-fg-soft">
+                    <PingDot />
+                    {project.stage}
+                    {project.eta && <span className="text-fg-muted">· target {project.eta}</span>}
+                </span>
+                <span className="inline-flex items-center gap-5">
+                    {project.source && (
+                        <a
+                            href={project.source}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-soft hover:text-accent rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                        >
+                            <Github aria-hidden size={14} />
+                            Source
+                            <span className="sr-only"> code: {project.title}</span>
+                        </a>
+                    )}
+                    {/* A real destination, not a disabled button for a site that doesn't exist yet. */}
+                    <a
+                        href="#contact"
+                        className="group inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-fg rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    >
+                        Ask me about it
+                        <span className="sr-only">: {project.title}</span>
+                        <ArrowRight
+                            aria-hidden
+                            size={15}
+                            className="transition-transform duration-300 group-hover:translate-x-0.5"
+                        />
+                    </a>
+                </span>
+            </div>
+        </StaggerItem>
+    </StaggerGroup>
+);
 
 const AppCard = ({ app }: { app: ShippedApp }) => (
     <StaggerItem className="h-full">
@@ -433,6 +699,30 @@ export const Projects = () => (
                     <FeaturedRow key={p.title} project={p} index={i} />
                 ))}
             </div>
+
+            {BUILDING.length > 0 && (
+                <>
+                    <Reveal className="mt-24 lg:mt-32 mb-12 lg:mb-14">
+                        <div className="flex items-center gap-4 mb-5">
+                            {/* Global h1–h6 rules are unlayered, so style the inner span rather than the heading */}
+                            <h3 id="now-building" className="shrink-0 inline-flex items-center gap-2.5">
+                                <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-fg-muted font-medium">
+                                    Now building
+                                </span>
+                                <PingDot />
+                            </h3>
+                            <span aria-hidden className="h-px flex-1 bg-line" />
+                        </div>
+                        <p className="max-w-2xl text-fg-soft text-base font-light">{BUILDING_INTRO}</p>
+                    </Reveal>
+
+                    <div className="space-y-14 lg:space-y-16">
+                        {BUILDING.map((p, i) => (
+                            <BuildingRow key={p.title} project={p} index={FEATURED.length + i} />
+                        ))}
+                    </div>
+                </>
+            )}
 
             <Reveal className="mt-24 lg:mt-32 mb-8 flex items-center gap-4">
                 {/* Global h1–h6 rules are unlayered, so style the inner span rather than the heading */}
