@@ -90,7 +90,7 @@ const EXPERIENCE: JobProps[] = [
         location: "Cupertino, CA",
         url: "https://www.imentiv.ai",
         points: [
-            "Architected PitchSense's analysis pipeline: one FastAPI service, three products, with Postgres and S3 call history.",
+            "Architected the PitchSense pipeline behind Pitch Coach: one FastAPI service, three products, with Postgres and S3 call history.",
             "Grounded every AI answer in a real measurement: baseline-normalized scores and transcript-derived delivery mechanics.",
             "Scoped SceneSense, a 0→1 AI acting coach that grades a take against the script's emotional arc."
         ]

@@ -20,7 +20,9 @@ type Highlight = string | { lead: string; text: string };
  *  `mark` shows an app icon and links nowhere — for a product with no public URL.
  *  A union rather than loose optionals so "url without shot" cannot be written. */
 type Frame =
-    | { kind: "site"; url: string; shot: string }
+    // `url` is scheme-qualified by type: BrowserFrame calls new URL(url), which throws at
+    // prerender — not at tsc — on a bare "example.com".
+    | { kind: "site"; url: `https://${string}`; shot: string }
     | { kind: "mark"; src: string };
 
 /** An unreleased product. `label` marks the eyebrow; `pill` is the CTA-row text beside
@@ -42,7 +44,8 @@ interface ProjectBase {
     /** Provenance line under the title, e.g. "Imentiv AI · 2026 internship". */
     context?: string;
     /** Teammates — renders a "With …" credit line. Lives on the base so the credit
-     *  survives a move from BUILDING to FEATURED on launch day. */
+     *  survives a move from BUILDING to FEATURED on launch day. Omit it rather than
+     *  passing [], which renders identically to having no team at all. */
     collaborators?: Collaborator[];
     summary: string;
     highlights: Highlight[];
@@ -65,8 +68,9 @@ interface BuildingProject extends ProjectBase {
     /** Honest build stage, e.g. "In design". Also fills the frame pill where a URL would
      *  go, so keep it under ~20 characters or it truncates there. */
     stage: string;
-    /** Optional and best left unset: a date that slips reads worse than no date at all. */
-    eta?: string;
+    /** The room this product is pointed at, e.g. "the stage". BUILDING_INTRO lists these,
+     *  so the intro sentence stays true as the band gains or loses a project. */
+    room: string;
     visual: BuildingVisualKind;
 }
 
@@ -165,14 +169,14 @@ const FEATURED: FeaturedProject[] = [
 // 3. Re-tighten the bullets to what shipped, and credit collaborators before it goes public.
 // 4. `npx tsc --noEmit` — a FEATURED entry without a `frame`, or one still carrying
 //    building-only fields, does not compile. Mirror the change in README.md.
-// 5. Re-read BUILDING_INTRO below. It names how many projects are in the band and which
-//    rooms they cover, and no compiler can catch that going stale.
+// The intro sentence counts the band and lists each `room`, so it re-words itself.
 const BUILDING: BuildingProject[] = [
     {
         title: "SceneSense",
         kind: "0→1 Product · Multimodal AI",
         context: "Imentiv AI · 2026 internship",
         stage: "In design",
+        room: "the stage",
         visual: "scene",
         summary:
             "An AI scene partner for actors: it checks a take against what the script actually calls for — face, voice, and words — and knows an improvised line from a forgotten one.",
@@ -189,6 +193,7 @@ const BUILDING: BuildingProject[] = [
         kind: "Full-stack · Emotion AI",
         context: "Imentiv AI · 2026 internship",
         stage: "Pre-launch",
+        room: "the sales call",
         visual: "pitch",
         summary:
             "Delivery coach for sales reps, designed measurement-first: the pipeline computes the evidence, and the AI is only allowed to explain it.",
@@ -203,10 +208,11 @@ const BUILDING: BuildingProject[] = [
     {
         title: "Clarity",
         kind: "Real-time · Multimodal AI",
+        // The context line claims a team build, so this row owes its teammates a credit:
+        // add `collaborators: [{ name, url }]` before it goes public.
         context: "LA Hacks 2026 · team build · architecture & pipeline design",
-        // TODO(before release): name the LA Hacks teammates here — Rohan asked to be reminded.
-        collaborators: [],
         stage: "Hardening for launch",
+        room: "the hard conversation",
         visual: "clarity",
         summary:
             "A live AI conversation partner that listens the way people do — face, voice, and words together — because a text-only LLM misses most of what human communication actually carries.",
@@ -220,9 +226,14 @@ const BUILDING: BuildingProject[] = [
     },
 ];
 
-// Counts the band and names its three rooms — update it alongside BUILDING (checklist step 5).
-const BUILDING_INTRO =
-    "Three products on one thesis — delivery is a signal you can measure — each pointed at a different room: the stage, the sales call, the hard conversation.";
+const COUNT_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six"];
+
+// Built from BUILDING so the count and the rooms cannot drift from the rows beneath it.
+const BUILDING_INTRO = `${COUNT_WORDS[BUILDING.length] ?? BUILDING.length} product${
+    BUILDING.length === 1 ? "" : "s"
+} on one thesis — delivery is a signal you can measure — each pointed at a different room: ${BUILDING.map(
+    (p) => p.room,
+).join(", ")}.`;
 
 const SHIPPED: ShippedApp[] = [
     {
@@ -263,6 +274,15 @@ const TechChip = ({ name }: { name: string }) => (
  *  deliberately gets no hover feedback. */
 const FRAME_CHROME =
     "ring-1 ring-black/10 dark:ring-white/10 shadow-[0_28px_56px_-24px_rgba(0,34,68,0.55)] dark:shadow-[0_28px_64px_-24px_rgba(0,0,0,0.85)] transition-transform duration-500 ease-out group-hover/shot:-translate-y-1.5 motion-reduce:transition-none";
+
+/** Dot grid behind a tile, faded toward the edges. Shared so the pitch and mask can't
+ *  drift between the featured and building tiles. */
+const DotGrid = () => (
+    <div
+        aria-hidden
+        className="absolute inset-0 [background-image:radial-gradient(var(--line-strong)_1px,transparent_1.5px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]"
+    />
+);
 
 /** The window bar both framed views share — three dots, a centred pill, a balancing spacer. */
 const ChromeBar = ({ pill }: { pill: ReactNode }) => (
@@ -376,7 +396,7 @@ const ProjectMeta = ({ context, collaborators, className = "" }: { context?: str
         // A div, not a p: the global p/li line-height rule is unlayered and would win.
         <div className={className}>
             {context && (
-                <div className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-fg-muted">{context}</div>
+                <div className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-fg-soft">{context}</div>
             )}
             {credited && (
                 <div className="mt-1.5 flex items-center gap-1.5 text-xs text-fg-muted">
@@ -416,11 +436,7 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
             <StaggerItem className={`lg:col-span-7 ${flip ? "lg:order-last" : ""}`}>
                 <ShotLink project={project}>
                     <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line bg-bg-subtle flex items-center justify-center px-[7%]">
-                        {/* Dot grid, faded toward the edges */}
-                        <div
-                            aria-hidden
-                            className="absolute inset-0 [background-image:radial-gradient(var(--line-strong)_1px,transparent_1.5px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]"
-                        />
+                        <DotGrid />
                         {/* Per-project accent wash */}
                         <div
                             aria-hidden
@@ -545,9 +561,7 @@ const BuildingRow = ({ project, index }: { project: BuildingProject; index: numb
         <StaggerItem className="max-w-sm md:max-w-none md:col-span-6 lg:col-span-5">
             {/* Decorative throughout: the stage and title are read out in the copy column. */}
             <div aria-hidden className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line bg-bg-subtle flex items-center px-[7%]">
-                <div
-                    className="absolute inset-0 [background-image:radial-gradient(var(--line-strong)_1px,transparent_1.5px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]"
-                />
+                <DotGrid />
                 <div
                     className="absolute inset-0 opacity-45 dark:opacity-40"
                     style={{ backgroundImage: `radial-gradient(65% 60% at 78% 12%, ${project.glow}, transparent 70%)` }}
@@ -592,7 +606,6 @@ const BuildingRow = ({ project, index }: { project: BuildingProject; index: numb
                 <span className="inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.14em] uppercase text-fg-soft">
                     <PingDot />
                     {project.stage}
-                    {project.eta && <span className="text-fg-muted">· target {project.eta}</span>}
                 </span>
                 <span className="inline-flex items-center gap-5">
                     {project.source && (
@@ -617,7 +630,7 @@ const BuildingRow = ({ project, index }: { project: BuildingProject; index: numb
                         <ArrowRight
                             aria-hidden
                             size={15}
-                            className="transition-transform duration-300 group-hover:translate-x-0.5"
+                            className="transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none"
                         />
                     </a>
                 </span>

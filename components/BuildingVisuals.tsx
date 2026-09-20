@@ -8,9 +8,14 @@ import { DURATION, EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
  * Signal art for the "Now building" rows — a schematic of what each product measures,
  * drawn on the always-dark frame body in place of a screenshot that doesn't exist yet.
  *
- * Deliberately illustrative, never a fake dashboard: no numbers, no percentages, no
- * invented metrics. Each motif shows the *idea* a recruiter should take away, and is
- * replaced by a real capture the day the project launches.
+ * Deliberately illustrative, never a fake dashboard. The shapes are drawn to explain a
+ * mechanism, not to report a measurement: no numbers, no percentages, no units, and no
+ * axis a reader could take a value off. Each motif shows the *idea* a recruiter should
+ * take away, and is replaced by a real capture the day the project launches.
+ *
+ * `pathLength` normalizes over a path's TOTAL length, while `stroke-dasharray` restarts at
+ * every subpath — so a multi-subpath path "draws" all its pieces at once and finishes in a
+ * fraction of the duration. Those marks use `fade`; only single-subpath strokes use `draw`.
  */
 export type BuildingVisualKind = "scene" | "pitch" | "clarity";
 
@@ -169,16 +174,20 @@ const PitchVisual = ({ glow, reduce }: { glow: string; reduce: boolean }) => {
                             variants={drawBar}
                             custom={0.35 + 0.07 * i}
                         />
-                        {/* Distance from this speaker's own normal — the reading that matters */}
-                        <motion.path
-                            d={`M${Math.min(vx, bx)} ${y}H${Math.max(vx, bx)}`}
-                            stroke={above ? glow : HI}
-                            strokeOpacity={above ? 1 : 0.4}
-                            strokeWidth={above ? 6 : 2}
-                            strokeLinecap="round"
-                            variants={drawDelta}
-                            custom={0.95 + 0.07 * i}
-                        />
+                        {/* Distance from this speaker's own normal — the reading that matters.
+                            Skipped when the two coincide: a zero-length path with a round cap
+                            paints a dot, which is the one case that should show nothing. */}
+                        {vx !== bx && (
+                            <motion.path
+                                d={`M${Math.min(vx, bx)} ${y}H${Math.max(vx, bx)}`}
+                                stroke={above ? glow : HI}
+                                strokeOpacity={above ? 1 : 0.4}
+                                strokeWidth={above ? 6 : 2}
+                                strokeLinecap="round"
+                                variants={drawDelta}
+                                custom={0.95 + 0.07 * i}
+                            />
+                        )}
                         <motion.path
                             d={`M${bx} ${y - 7}V${y + 7}`}
                             stroke={HI}
@@ -217,14 +226,15 @@ const ClarityVisual = ({ glow, reduce }: { glow: string; reduce: boolean }) => {
                 variants={drawLane}
                 custom={0.1}
             />
-            <motion.path d={voice} stroke="rgba(255,255,255,0.7)" strokeWidth={2.5} strokeLinecap="round" variants={drawLane} custom={0.15} />
+            {/* Both are multi-subpath, so they fade rather than draw — see the file header. */}
+            <motion.path d={voice} stroke="rgba(255,255,255,0.7)" strokeWidth={2.5} strokeLinecap="round" variants={f} custom={0.25} />
             <motion.path
                 d="M56 120H72M76 120H100M104 120H116M120 120H146M150 120H162M166 120H176"
                 stroke="rgba(255,255,255,0.7)"
                 strokeWidth={3}
                 strokeLinecap="round"
-                variants={drawLane}
-                custom={0.2}
+                variants={f}
+                custom={0.45}
             />
 
             {/* Connectors → fusion → one grounded read */}
@@ -258,9 +268,11 @@ export const BuildingVisual = ({ kind, glow }: { kind: BuildingVisualKind; glow:
         case "clarity":
             return <ClarityVisual glow={glow} reduce={reduce} />;
         default: {
-            // A new kind without a case fails the build rather than rendering nothing.
+            // A new kind without a case fails the build. At runtime — data cast through
+            // `as`, a rename — render nothing rather than the raw string as a text node.
             const exhaustive: never = kind;
-            return exhaustive;
+            void exhaustive;
+            return null;
         }
     }
 };

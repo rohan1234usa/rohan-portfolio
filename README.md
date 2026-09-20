@@ -19,7 +19,7 @@ I own products end to end — from personas and prototypes to the mobile client,
 | Category | Skills |
 |----------|--------|
 | **Languages** | Python, Dart, TypeScript, C++, Java, Kotlin, SQL, C# |
-| **AI & Vision** | PyTorch, YOLOv8, OpenCV, RAG, Gemini, Gemma, LangGraph, DINOv2, Faiss, ElevenLabs |
+| **AI & Vision** | PyTorch, YOLOv8, OpenCV, RAG, Embeddings, Gemini, Gemma, LangGraph, DINOv2, Faiss, ElevenLabs, Speech-to-Text |
 | **Engineering** | Flutter, Next.js, Firebase, Cloud Functions, Docker, AWS, GCP, FastAPI, PostgreSQL, MongoDB |
 
 ## 🏆 Featured Projects
@@ -38,8 +38,8 @@ Full-stack spiritual companion: a scripture-grounded AI chatbot (ten Guru lenses
 
 ### Now building
 - **SceneSense** *(Python, Imentiv API, Speech-to-Text, Embeddings)* — an AI scene partner for actors: it scores a take against the script's own emotional arc and separates an improvised line from a forgotten one. Imentiv AI · 2026 internship, in design.
-- **Pitch Coach** *(Python, FastAPI, Next.js, PostgreSQL, AWS S3, Gemini)* — delivery coach for sales reps, built measurement-first: the pipeline computes the evidence and the AI only explains it. One FastAPI pipeline serves three products. Imentiv AI · 2026 internship, pre-launch.
-- **Clarity** *(Python, FastAPI, Next.js, LangGraph, Gemma, ElevenLabs, MongoDB)* — a live AI conversation partner that reads face, voice, and words together, with a streamed peer voice over WebSocket. LA Hacks 2026 team build; I led architecture and the analysis pipelines. Hardening for launch.
+- **Pitch Coach** *(Python, FastAPI, Next.js, PostgreSQL, AWS S3, Gemini, Imentiv API)* — delivery coach for sales reps, built measurement-first: the pipeline computes the evidence and the AI only explains it. One FastAPI pipeline serves three products. Imentiv AI · 2026 internship, pre-launch.
+- **Clarity** *(Python, FastAPI, Next.js, LangGraph, Gemma, ElevenLabs, MongoDB, Imentiv API)* — a live AI conversation partner that reads face, voice, and words together, with a streamed peer voice over WebSocket. LA Hacks 2026 team build; I led architecture and the analysis pipelines. Hardening for launch.
 
 ### Android Development
 - **[Hue Christmas](https://play.google.com/store/apps/details?id=com.asterbyte.huelightshow&hl=en)** *(Kotlin, Jetpack Compose)* — turns Philips Hue lights into holiday light shows. 1K+ downloads on Google Play.
