@@ -2,27 +2,31 @@
 
 [![Live Portfolio](https://img.shields.io/badge/Live_Portfolio-built--by--rohan.vercel.app-blue?style=for-the-badge&logo=vercel)](https://built-by-rohan.vercel.app/)
 
-**Computer Science @ UC Irvine | Class of 2027 | AI & Machine Learning Engineer**
+**Computer Science @ UC Irvine | Class of 2027 | Full-Stack Engineer & Product Designer**
 
-> *Building intelligent systems that see, understand, and scale.*
+> *Products people use, and the AI inside them.*
 
 ---
 
 ## 🚀 About Me
-I specialize in **Computer Vision**, **Generative AI**, and **High-Performance Pipelines**. My work bridges the gap between academic research and scalable, production-ready applications.
+I own products end to end — from personas and prototypes to the mobile client, the backend, and the models inside it. Alongside that, three years of **Computer Vision** and **Generative AI** research, with two publications.
 
 - **GPA**: 3.92
-- **Focus**: RAG Systems, Real-time Analysis, Full-Stack AI Applications.
+- **Focus**: Mobile & full-stack product, grounded LLM features, real-time CV pipelines.
 
 ## 🛠️ Technical Arsenal
 
 | Category | Skills |
 |----------|--------|
-| **Languages** | Python, C++, Java, Kotlin, TypeScript, SQL, C# |
+| **Languages** | Python, Dart, TypeScript, C++, Java, Kotlin, SQL, C# |
 | **AI & Vision** | PyTorch, YOLOv8, OpenCV, RAG, Gemini Pro, DINOv2, Faiss |
-| **Engineering** | Docker, AWS, GCP, Next.js, FastAPI, Firebase |
+| **Engineering** | Flutter, Next.js, Firebase, Cloud Functions, Docker, AWS, GCP, FastAPI |
 
 ## 🏆 Featured Projects
+
+### Merge — *pre-launch*
+*(Flutter, Dart, Firebase, Cloud Functions, Gemini, Google Maps)*  
+Where plans with friends come together: a social platform built around real life — find something fun to do, see who’s in, get there together, and split the cost. Launching at UC Irvine. I originated the product and build it as one of two engineers, owning the plan board, calendar, chat, AI suggester, and expense surfaces. *Links will land here once the app is public.*
 
 ### [Behavioral Interview Coach](https://behavioral-interview-coach.vercel.app/) · [source](https://github.com/rohan1234usa/behavioral-coach)
 *(Python, FastAPI, Next.js, Docker, AWS S3, Gemini)*  
@@ -59,7 +63,11 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 | To change… | Edit |
 |---|---|
 | Project copy, links, and tech chips | `FEATURED` / `SHIPPED` in `components/Projects.tsx` |
+| Work history | `EXPERIENCE` in `components/Experience.tsx` — array order is display order; `url` is optional |
 | Project screenshots | `public/images/projects/*.webp` — 1920×1080 captures of each live site's hero |
+| What fills a project's frame | `frame` on a `FEATURED` entry — `{ kind: "site", url, shot }` for a browser-framed capture, `{ kind: "mark", src }` for a square app icon (`public/images/projects/*.png`) |
+| "Coming soon" state on a project | `prelaunch: { label, pill }` on a `FEATURED` entry — drives the eyebrow dot and the store pill. On launch day swap `frame` to `kind: "site"` and delete `prelaunch` |
+| A new tech chip's logo | `TECH` in `components/TechIcon.tsx` — unlisted names fall back to a generic glyph |
 | "Open to internships" status (hero, mobile menu, contact) | `AVAILABILITY` in `components/Availability.tsx` |
 | GitHub, LinkedIn, email, and résumé links | `lib/links.ts` |
 | Link-preview image and favicon | `app/opengraph-image.tsx`, `app/icon.tsx`, `app/apple-icon.tsx` |

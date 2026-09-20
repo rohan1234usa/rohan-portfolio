@@ -1,27 +1,45 @@
 "use client";
 
-import { ComponentType } from "react";
+import { ComponentType, ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, AudioWaveform, Download, FolderGit2, Github, Lightbulb, Lock } from "lucide-react";
-import { SiGoogleplay } from "react-icons/si";
+import { SiAppstore, SiGoogleplay } from "react-icons/si";
 import { TechIcon } from "./TechIcon";
 import { Reveal } from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 import { LINKS } from "@/lib/links";
 
+/** A proof point. The object form renders `lead` in a heavier weight — for a card whose
+ *  highlights walk a sequence (Merge's Decide → Plan → Get there → Settle up). */
+type Highlight = string | { lead: string; text: string };
+
+/** What fills the 4:3 frame. `site` gets browser chrome and makes the card a link;
+ *  `mark` shows an app icon and links nowhere — for a product with no public URL.
+ *  A union rather than loose optionals so "url without shot" cannot be written. */
+type Frame =
+    | { kind: "site"; url: string; shot: string }
+    | { kind: "mark"; src: string };
+
+/** An unreleased product. `label` marks the eyebrow; `pill` is the CTA-row text beside
+ *  the store glyphs, so it states its own platforms rather than assuming iOS/Android.
+ *  Delete the whole field on launch day. */
+interface Prelaunch {
+    label: string;
+    pill: string;
+}
+
 interface FeaturedProject {
     title: string;
     kind: string;
+    prelaunch?: Prelaunch;
     summary: string;
-    highlights: string[];
+    highlights: Highlight[];
     tech: string[];
-    live: string;
+    frame: Frame;
     source?: string;
-    /** Real capture of the live site, 16:9 (1440×810 viewport at 2x, downscaled). */
-    shot: string;
-    /** Accent wash behind the browser frame — any CSS color. */
+    /** Accent wash behind the frame — any CSS color. */
     glow: string;
 }
 
@@ -42,6 +60,40 @@ interface ShippedApp {
 // will ask about each one.
 const FEATURED: FeaturedProject[] = [
     {
+        // Pre-launch: mergecampus.com is withheld until it's polished, and the repo is
+        // private, so there is no `source`. On launch day swap `frame` to
+        // { kind: "site", url, shot } (or add a store link) and delete `prelaunch`.
+        title: "Merge",
+        kind: "iOS & Android · Social + AI",
+        prelaunch: { label: "Pre-launch", pill: "iOS & Android · coming soon" },
+        summary:
+            "Where plans with friends come together. Merge is a social platform built around real life — find something fun to do, see who’s in, get there together, and split the cost. Launching at UC Irvine.",
+        // The loop a hangout actually follows. Each claim maps to shipped code: the grounded
+        // suggester, Find a time + RSVP, the timeline solver re-anchored on stamped arrivals
+        // (an offline drive-time model — deliberately not "live traffic"), and the expenses hub.
+        highlights: [
+            {
+                lead: "Decide",
+                text: "“What’s the Move?” finds something fun nearby — real places that fit the group’s budget and are open when everyone arrives. The AI plans the search, but the server owns every fact, so nothing on the card can be invented.",
+            },
+            {
+                lead: "Plan",
+                text: "A shared calendar finds a time that works for everyone. Planners map out the night stop by stop, while go-alongs see the plan first and join when it suits them.",
+            },
+            {
+                lead: "Get there",
+                text: "Merge pairs carpools, optimizes routes, and solves a timeline that tells each person when to leave and when they’ll be home. As real arrivals come in, it re-solves the rest of the night.",
+            },
+            {
+                lead: "Settle up",
+                text: "A scanned receipt becomes an itemized split, a running tab between friends carries over from one plan to the next, and everyone gets a private view of their own spending.",
+            },
+        ],
+        tech: ["Flutter", "Dart", "Firebase", "Cloud Functions", "Gemini", "Google Maps"],
+        frame: { kind: "mark", src: "/images/projects/merge-icon.png" },
+        glow: "#2DD4BF",
+    },
+    {
         title: "Behavioral Interview Coach",
         kind: "Full-stack · Multimodal AI",
         summary:
@@ -52,9 +104,12 @@ const FEATURED: FeaturedProject[] = [
             "Post-session reports pin your strongest and weakest moments to a clickable emotional timeline, with video replay and one-click PDF export.",
         ],
         tech: ["Python", "FastAPI", "Next.js", "Docker", "AWS S3", "Gemini", "Computer Vision"],
-        live: "https://behavioral-interview-coach.vercel.app/",
+        frame: {
+            kind: "site",
+            url: "https://behavioral-interview-coach.vercel.app/",
+            shot: "/images/projects/behavioral-coach.webp",
+        },
         source: "https://github.com/rohan1234usa/behavioral-coach",
-        shot: "/images/projects/behavioral-coach.webp",
         glow: "#4F8FE0",
     },
     {
@@ -68,9 +123,8 @@ const FEATURED: FeaturedProject[] = [
             "Production-grade GenAI: schema-constrained JSON for the translator, graceful Cloud Translation fallback, and nonce-fenced prompts that block injection.",
         ],
         tech: ["Next.js", "TypeScript", "Gemini", "Firebase", "Tailwind"],
-        live: "https://sikhai.vercel.app/",
+        frame: { kind: "site", url: "https://sikhai.vercel.app/", shot: "/images/projects/sikhai.webp" },
         source: "https://github.com/rohan1234usa/sikh-ai",
-        shot: "/images/projects/sikhai.webp",
         glow: "#F59E0B",
     },
 ];
@@ -109,8 +163,14 @@ const TechChip = ({ name }: { name: string }) => (
     </span>
 );
 
+/** Shared by both frames so the lift and shadow can't drift apart. `group-hover/shot`
+ *  only fires when ShotLink renders the linked branch — a card that goes nowhere
+ *  deliberately gets no hover feedback. */
+const FRAME_CHROME =
+    "ring-1 ring-black/10 dark:ring-white/10 shadow-[0_28px_56px_-24px_rgba(0,34,68,0.55)] dark:shadow-[0_28px_64px_-24px_rgba(0,0,0,0.85)] transition-transform duration-500 ease-out group-hover/shot:-translate-y-1.5 motion-reduce:transition-none";
+
 const BrowserFrame = ({ url, src, alt }: { url: string; src: string; alt: string }) => (
-    <div className="relative w-full overflow-hidden rounded-md bg-[#0B0B0F] ring-1 ring-black/10 dark:ring-white/10 shadow-[0_28px_56px_-24px_rgba(0,34,68,0.55)] dark:shadow-[0_28px_64px_-24px_rgba(0,0,0,0.85)] transition-transform duration-500 ease-out group-hover/shot:-translate-y-1.5 motion-reduce:transition-none">
+    <div className={`relative w-full overflow-hidden rounded-md bg-[#0B0B0F] ${FRAME_CHROME}`}>
         {/* Window chrome */}
         <div className="flex items-center gap-3 h-6 sm:h-7 px-3 bg-[#17171C] border-b border-white/[0.06]">
             <div aria-hidden className="flex gap-1.5 w-10 sm:w-12">
@@ -138,20 +198,47 @@ const BrowserFrame = ({ url, src, alt }: { url: string; src: string; alt: string
     </div>
 );
 
+/** Centred app icon, for a product with no site to put in a browser frame. Decorative:
+ *  the title is read out beside it, so the image carries no alt text.
+ *  `max-w` binds between ~655px and lg, where the single-column layout widens the frame. */
+const AppMark = ({ src }: { src: string }) => (
+    <div className={`relative w-[46%] max-w-[240px] aspect-square rounded-[22%] overflow-hidden ${FRAME_CHROME}`}>
+        <Image
+            src={src}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 216px, (min-width: 768px) 240px, 40vw"
+            className="object-cover"
+        />
+    </div>
+);
+
+/** Wraps the frame in a link when there's somewhere to go, a plain div when there isn't.
+ *  Keeps the group/shot hook in both cases so the hover lift still runs. */
+const ShotLink = ({ project, children }: { project: FeaturedProject; children: ReactNode }) =>
+    project.frame.kind === "site" ? (
+        <a
+            href={project.frame.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open the ${project.title} live site`}
+            className="group/shot block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+        >
+            {children}
+        </a>
+    ) : (
+        <div>{children}</div>
+    );
+
 const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: number }) => {
     const flip = index % 2 === 1;
+    const frame = project.frame;
     return (
         // grid-cols-1 (minmax(0,1fr)) lets the frame's nowrap URL truncate instead of widening the column
         <StaggerGroup as="article" className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center" stagger={0.12}>
             <StaggerItem className={`lg:col-span-7 ${flip ? "lg:order-last" : ""}`}>
-                <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open the ${project.title} live site`}
-                    className="group/shot block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-                >
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line bg-bg-subtle flex items-center px-[7%]">
+                <ShotLink project={project}>
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-line bg-bg-subtle flex items-center justify-center px-[7%]">
                         {/* Dot grid, faded toward the edges */}
                         <div
                             aria-hidden
@@ -165,24 +252,44 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                                 backgroundImage: `radial-gradient(65% 60% at ${flip ? "22%" : "78%"} 12%, ${project.glow}, transparent 70%)`,
                             }}
                         />
-                        <BrowserFrame
-                            url={project.live}
-                            src={project.shot}
-                            alt={`${project.title} landing page`}
-                        />
-                        <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur text-[11px] font-medium text-fg shadow-sm opacity-0 translate-y-1 group-hover/shot:opacity-100 group-hover/shot:translate-y-0 group-focus-visible/shot:opacity-100 group-focus-visible/shot:translate-y-0 transition-all duration-300">
-                            Visit site
-                            <ArrowUpRight aria-hidden size={12} />
-                        </span>
+                        {frame.kind === "mark" ? (
+                            <AppMark src={frame.src} />
+                        ) : (
+                            <BrowserFrame
+                                url={frame.url}
+                                src={frame.shot}
+                                alt={`${project.title} landing page`}
+                            />
+                        )}
+                        {frame.kind === "site" && (
+                            <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur text-[11px] font-medium text-fg shadow-sm opacity-0 translate-y-1 group-hover/shot:opacity-100 group-hover/shot:translate-y-0 group-focus-visible/shot:opacity-100 group-focus-visible/shot:translate-y-0 transition-all duration-300">
+                                Visit site
+                                <ArrowUpRight aria-hidden size={12} />
+                            </span>
+                        )}
                     </div>
-                </a>
+                </ShotLink>
             </StaggerItem>
 
             <StaggerItem className="lg:col-span-5">
-                <div className="flex items-center gap-2 mb-4 font-mono text-[11px] tracking-[0.18em] uppercase text-fg-muted">
-                    <span className="text-accent font-semibold">{String(index + 1).padStart(2, "0")}</span>
+                <div className="flex flex-wrap items-center gap-2 gap-y-1.5 mb-4 font-mono text-[11px] tracking-[0.18em] uppercase text-fg-muted">
+                    <span aria-hidden className="text-accent font-semibold">
+                        {String(index + 1).padStart(2, "0")}
+                    </span>
                     <span aria-hidden className="w-6 h-px bg-line-strong" />
                     {project.kind}
+                    {project.prelaunch && (
+                        <span className="inline-flex items-center gap-1.5 tracking-[0.14em] text-fg-soft">
+                            {/* Same dot geometry as AvailabilityBadge, but --accent-warm rather than
+                                --status: gold there means "open to internships". The two read alike in
+                                light mode (both UCI golds) and differ in dark; they are never co-visible. */}
+                            <span aria-hidden className="relative flex h-1.5 w-1.5">
+                                <span className="absolute inline-flex h-full w-full rounded-full bg-accent-warm opacity-75 animate-ping motion-reduce:animate-none" />
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-warm" />
+                            </span>
+                            {project.prelaunch.label}
+                        </span>
+                    )}
                 </div>
                 <h3 className="font-display font-bold text-3xl lg:text-[2.125rem] leading-tight text-balance text-fg mb-4">
                     {project.title}
@@ -190,12 +297,19 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                 <p className="text-fg-soft text-base leading-relaxed font-light mb-6">{project.summary}</p>
 
                 <ul className="space-y-2.5 mb-7">
-                    {project.highlights.map((h) => (
-                        <li key={h} className="flex items-start gap-3 text-sm text-fg-soft font-light">
-                            <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
-                            <span>{h}</span>
-                        </li>
-                    ))}
+                    {project.highlights.map((h) => {
+                        const lead = typeof h === "string" ? null : h.lead;
+                        const text = typeof h === "string" ? h : h.text;
+                        return (
+                            <li key={lead ? `${lead}:${text}` : text} className="flex items-start gap-3 text-sm text-fg-soft font-light">
+                                <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
+                                <span>
+                                    {lead && <span className="font-medium text-fg">{lead}: </span>}
+                                    {text}
+                                </span>
+                            </li>
+                        );
+                    })}
                 </ul>
 
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -205,16 +319,18 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                 </div>
 
                 <div className="flex flex-wrap items-center gap-3">
-                    <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-fg text-bg text-sm font-medium rounded-sm hover:bg-accent hover:text-on-accent"
-                    >
-                        Live site
-                        <span className="sr-only">: {project.title}</span>
-                        <ArrowUpRight aria-hidden size={16} />
-                    </a>
+                    {frame.kind === "site" && (
+                        <a
+                            href={frame.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-fg text-bg text-sm font-medium rounded-sm hover:bg-accent hover:text-on-accent"
+                        >
+                            Live site
+                            <span className="sr-only">: {project.title}</span>
+                            <ArrowUpRight aria-hidden size={16} />
+                        </a>
+                    )}
                     {project.source && (
                         <a
                             href={project.source}
@@ -226,6 +342,17 @@ const FeaturedRow = ({ project, index }: { project: FeaturedProject; index: numb
                             Source
                             <span className="sr-only"> code: {project.title}</span>
                         </a>
+                    )}
+                    {project.prelaunch && (
+                        // A status, not a control: a plain non-focusable span, so screen readers
+                        // don't announce a button for an action that doesn't exist yet.
+                        // text-fg-soft, not fg-muted: muted is 3.01:1 on white, under the 4.5:1
+                        // AA floor, and this is the only text saying the app hasn't shipped.
+                        <span className="inline-flex items-center gap-2 px-5 py-2.5 border border-dashed border-line-strong text-fg-soft text-sm font-medium rounded-sm cursor-default">
+                            <SiAppstore aria-hidden size={14} />
+                            <SiGoogleplay aria-hidden size={14} />
+                            {project.prelaunch.pill}
+                        </span>
                     )}
                 </div>
             </StaggerItem>
