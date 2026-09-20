@@ -49,13 +49,16 @@ export const Skills = () => {
             "YOLOv8",
             "OpenCV",
             "RAG",
-            "Gemini Pro",
+            "Gemini",
+            "Gemma",
+            "LangGraph",
+            "ElevenLabs",
             "DINOv2",
             "Faiss",
             "ByteTrack",
             "TensorFlow",
         ],
-        tools: ["Flutter", "Next.js", "Firebase", "Cloud Functions", "Docker", "AWS", "GCP", "FastAPI", "Vertex AI", "Unreal Engine"],
+        tools: ["Flutter", "Next.js", "Firebase", "Cloud Functions", "Docker", "AWS", "GCP", "FastAPI", "PostgreSQL", "MongoDB", "Vertex AI", "Unreal Engine"],
     };
 
     return (

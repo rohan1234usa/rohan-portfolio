@@ -19,8 +19,8 @@ I own products end to end — from personas and prototypes to the mobile client,
 | Category | Skills |
 |----------|--------|
 | **Languages** | Python, Dart, TypeScript, C++, Java, Kotlin, SQL, C# |
-| **AI & Vision** | PyTorch, YOLOv8, OpenCV, RAG, Gemini Pro, DINOv2, Faiss |
-| **Engineering** | Flutter, Next.js, Firebase, Cloud Functions, Docker, AWS, GCP, FastAPI |
+| **AI & Vision** | PyTorch, YOLOv8, OpenCV, RAG, Embeddings, Gemini, Gemma, LangGraph, DINOv2, Faiss, ElevenLabs, Speech-to-Text |
+| **Engineering** | Flutter, Next.js, Firebase, Cloud Functions, Docker, AWS, GCP, FastAPI, PostgreSQL, MongoDB |
 
 ## 🏆 Featured Projects
 
@@ -35,6 +35,11 @@ Soft-skills-first interview simulator that quantifies subconscious cues like fac
 ### [SikhAI](https://sikhai.vercel.app/) · [source](https://github.com/rohan1234usa/sikh-ai)
 *(Next.js, TypeScript, Gemini, Firebase)*  
 Full-stack spiritual companion: a scripture-grounded AI chatbot (ten Guru lenses × five response styles × three languages), a Punjabi ↔ English translator, Shabad search across all 1,430 Angs, the daily Hukamnama, and a community seva board.
+
+### Now building
+- **SceneSense** *(Python, Imentiv API, Speech-to-Text, Embeddings)* — an AI scene partner for actors: it scores a take against the script's own emotional arc and separates an improvised line from a forgotten one. Imentiv AI · 2026 internship, in design.
+- **Pitch Coach** *(Python, FastAPI, Next.js, PostgreSQL, AWS S3, Gemini, Imentiv API)* — delivery coach for sales reps, built measurement-first: the pipeline computes the evidence and the AI only explains it. One FastAPI pipeline serves three products. Imentiv AI · 2026 internship, pre-launch.
+- **Clarity** *(Python, FastAPI, Next.js, LangGraph, Gemma, ElevenLabs, MongoDB, Imentiv API)* — a live AI conversation partner that reads face, voice, and words together, with a streamed peer voice over WebSocket. LA Hacks 2026 team build; I led architecture and the analysis pipelines. Hardening for launch.
 
 ### Android Development
 - **[Hue Christmas](https://play.google.com/store/apps/details?id=com.asterbyte.huelightshow&hl=en)** *(Kotlin, Jetpack Compose)* — turns Philips Hue lights into holiday light shows. 1K+ downloads on Google Play.
@@ -62,7 +67,9 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 
 | To change… | Edit |
 |---|---|
-| Project copy, links, and tech chips | `FEATURED` / `SHIPPED` in `components/Projects.tsx` |
+| Project copy, links, and tech chips | `FEATURED` / `BUILDING` / `SHIPPED` in `components/Projects.tsx` |
+| A project still being built | Add it to `BUILDING` with a `stage` and a `visual` — it renders in the "Now building" band with signal art instead of a screenshot. Launching it means moving it into `FEATURED` with a `frame`; the full checklist is the comment above `BUILDING` |
+| "Now building" signal art | `components/BuildingVisuals.tsx` — one motif per project, shown until there's a real capture |
 | Work history | `EXPERIENCE` in `components/Experience.tsx` — array order is display order; `url` is optional |
 | Project screenshots | `public/images/projects/*.webp` — 1920×1080 captures of each live site's hero |
 | What fills a project's frame | `frame` on a `FEATURED` entry — `{ kind: "site", url, shot }` for a browser-framed capture, `{ kind: "mark", src }` for a square app icon (`public/images/projects/*.png`) |
