@@ -65,8 +65,8 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 | Project copy, links, and tech chips | `FEATURED` / `SHIPPED` in `components/Projects.tsx` |
 | Work history | `EXPERIENCE` in `components/Experience.tsx` — array order is display order; `url` is optional |
 | Project screenshots | `public/images/projects/*.webp` — 1920×1080 captures of each live site's hero |
-| A pre-launch project's app icon | `public/images/projects/*.png` — square, referenced by a project's `mark` |
-| "Coming soon" state on a project | `status` on a `FEATURED` entry — drives both the eyebrow dot and the store pill; delete it on launch day |
+| What fills a project's frame | `frame` on a `FEATURED` entry — `{ kind: "site", url, shot }` for a browser-framed capture, `{ kind: "mark", src }` for a square app icon (`public/images/projects/*.png`) |
+| "Coming soon" state on a project | `prelaunch: { label, pill }` on a `FEATURED` entry — drives the eyebrow dot and the store pill. On launch day swap `frame` to `kind: "site"` and delete `prelaunch` |
 | A new tech chip's logo | `TECH` in `components/TechIcon.tsx` — unlisted names fall back to a generic glyph |
 | "Open to internships" status (hero, mobile menu, contact) | `AVAILABILITY` in `components/Availability.tsx` |
 | GitHub, LinkedIn, email, and résumé links | `lib/links.ts` |

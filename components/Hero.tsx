@@ -47,7 +47,7 @@ export const Hero = () => {
                                 as="span"
                                 delay={0.55}
                                 y={32}
-                                className="block pb-[0.2em] text-transparent bg-clip-text bg-gradient-hero"
+                                className="block pb-[0.2em] text-balance text-transparent bg-clip-text bg-gradient-hero"
                             >
                                 and the AI inside them
                             </Reveal>

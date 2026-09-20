@@ -43,7 +43,7 @@ const SkillColumn = ({ title, icon, skills }: SkillOne) => (
 
 export const Skills = () => {
     const SKILLS = {
-        languages: ["Python", "C++", "Java", "Kotlin", "SQL", "TypeScript", "JavaScript", "C#"],
+        languages: ["Python", "Dart", "TypeScript", "C++", "Java", "Kotlin", "SQL", "JavaScript", "C#"],
         ai_cv: [
             "PyTorch",
             "YOLOv8",
@@ -55,7 +55,7 @@ export const Skills = () => {
             "ByteTrack",
             "TensorFlow",
         ],
-        tools: ["Docker", "AWS", "GCP", "Next.js", "Firebase", "FastAPI", "Vertex AI", "Unreal Engine"],
+        tools: ["Flutter", "Next.js", "Firebase", "Cloud Functions", "Docker", "AWS", "GCP", "FastAPI", "Vertex AI", "Unreal Engine"],
     };
 
     return (

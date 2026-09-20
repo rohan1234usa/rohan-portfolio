@@ -44,7 +44,7 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${job.company} website`}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                     >
                         <ExternalLink size={12} />
                     </a>
@@ -68,6 +68,71 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
     );
 };
 
+const EXPERIENCE: JobProps[] = [
+    {
+        // No `url`: mergecampus.com is deliberately withheld until it's polished.
+        // Add it here (and the store link on the Projects card) on launch day.
+        company: "Merge",
+        role: "Founding Designer & Full-Stack Engineer",
+        date: "March 2026 – Present",
+        location: "Irvine, CA",
+        points: [
+            "Originated Merge, a social platform for making real-life plans with friends. Developed UC Irvine student personas, feature specs, and a clickable prototype, then built the first working iOS app in SwiftUI and wrote the migration plan the production Flutter codebase was built from.",
+            "Own the plan board, calendar, chat, AI suggester, and expense surfaces as one of two engineers, with 440+ of the team’s 1,100+ merged PRs across a Flutter client and 110+ TypeScript Cloud Functions.",
+            "Designed the “What’s the Move?” AI planner so that Gemini plans the Places searches while the server owns every fact on a card, making a fabricated address or opening time impossible by construction.",
+            "Led a privacy overhaul spanning ~70 audit findings, each backed by a red-first test and a mutation probe; wrote 62 of the 82 security-rules suites ever added to the repo."
+        ]
+    },
+    {
+        company: "Imentiv AI",
+        role: "AI/Machine Learning Intern",
+        date: "June 2025 – Sept 2025",
+        location: "Cupertino, CA",
+        url: "https://www.imentiv.ai",
+        points: [
+            "Boosted face detection accuracy by 6% via automated ground-truth validation pipelines, eliminating false positives.",
+            "Implemented face re-identification tracking using dynamic placeholders, validated against ByteTrack and BoT-FaceSORT.",
+            "Led comparative evaluations that drove the migration from legacy models to optimized YOLO architectures."
+        ]
+    },
+    {
+        company: "Imentiv AI",
+        role: "AI/Machine Learning Intern",
+        date: "June 2024 – Sept 2024",
+        location: "Cupertino, CA",
+        url: "https://www.imentiv.ai",
+        points: [
+            "Engineered an image deduplication tool using DINOv2 and Faiss, removing 95% of redundancies to refine ML datasets.",
+            "Developed algorithms to extract unique video frames, creating diverse datasets for model training.",
+            "Built a facial analysis tool using YOLOv8 to automate emotion labeling across large video datasets."
+        ]
+    },
+    {
+        company: "Asterbyte Software Systems",
+        role: "Software Engineer Intern",
+        date: "June 2023 – Aug 2023",
+        location: "Remote",
+        url: "https://asterbyte.com/",
+        points: [
+            "Designed ML solutions for emotion detection on human faces in videos.",
+            "Generated synthetic training data using Unreal Engine MetaHumans to improve model robustness.",
+            "Published research on facial emotion recognition at WCSET 2023."
+        ]
+    },
+    {
+        company: "Asterbyte Software Systems",
+        role: "Android Developer Intern",
+        date: "June 2022 – Aug 2022",
+        location: "Remote",
+        url: "https://asterbyte.com/",
+        points: [
+            "Developed Hue Christmas, a Philips Hue app that plays festive Christmas light shows.",
+            "Reconstructed the Android app Pitch Prime from the ground up, revamping the GUI and optimizing performance.",
+            "Translated the app from Spanish to English, expanding accessibility to a wider audience."
+        ]
+    }
+];
+
 export const Experience = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -76,70 +141,6 @@ export const Experience = () => {
     });
     const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-    const EXPERIENCE: JobProps[] = [
-        {
-            // No `url`: mergecampus.com is deliberately withheld until it's polished.
-            // Add it here (and the store link on the Projects card) on launch day.
-            company: "Merge",
-            role: "Founding Designer & Full-Stack Engineer",
-            date: "March 2026 – Present",
-            location: "Irvine, CA",
-            points: [
-                "Originated Merge, a social platform for making real-life plans with friends. Developed UC Irvine student personas, feature specs, and a clickable prototype, then built the first working iOS app in SwiftUI and wrote the migration plan the production Flutter codebase was built from.",
-                "Own the plan board, calendar, chat, AI suggester, and expense surfaces as one of two engineers, with 440+ of the team’s 1,100+ merged PRs across a Flutter client and 107 TypeScript Cloud Functions.",
-                "Designed the “What’s the Move?” AI planner so that Gemini plans the Places searches while the server owns every fact on a card, making a fabricated address or opening time impossible by construction.",
-                "Led a privacy overhaul spanning ~70 audit findings, each backed by a red-first test and a mutation probe; wrote 59 of the 79 Firestore security-rules suites ever added to the repo."
-            ]
-        },
-        {
-            company: "Imentiv AI",
-            role: "AI/Machine Learning Intern",
-            date: "June 2025 – Sept 2025",
-            location: "Cupertino, CA",
-            url: "https://www.imentiv.ai",
-            points: [
-                "Boosted face detection accuracy by 6% via automated ground-truth validation pipelines, eliminating false positives.",
-                "Implemented face re-identification tracking using dynamic placeholders, validated against ByteTrack and BoT-FaceSORT.",
-                "Led comparative evaluations that drove the migration from legacy models to optimized YOLO architectures."
-            ]
-        },
-        {
-            company: "Imentiv AI",
-            role: "AI/Machine Learning Intern",
-            date: "June 2024 – Sept 2024",
-            location: "Cupertino, CA",
-            url: "https://www.imentiv.ai",
-            points: [
-                "Engineered an image deduplication tool using DINOv2 and Faiss, removing 95% of redundancies to refine ML datasets.",
-                "Developed algorithms to extract unique video frames, creating diverse datasets for model training.",
-                "Built a facial analysis tool using YOLOv8 to automate emotion labeling across large video datasets."
-            ]
-        },
-        {
-            company: "Asterbyte Software Systems",
-            role: "Software Engineer Intern",
-            date: "June 2023 – Aug 2023",
-            location: "Remote",
-            url: "https://asterbyte.com/",
-            points: [
-                "Designed ML solutions for emotion detection on human faces in videos.",
-                "Generated synthetic training data using Unreal Engine MetaHumans to improve model robustness.",
-                "Published research on facial emotion recognition at WCSET 2023."
-            ]
-        },
-        {
-            company: "Asterbyte Software Systems",
-            role: "Android Developer Intern",
-            date: "June 2022 – Aug 2022",
-            location: "Remote",
-            url: "https://asterbyte.com/",
-            points: [
-                "Developed Hue Christmas, a Philips Hue app that plays festive Christmas light shows.",
-                "Reconstructed the Android app Pitch Prime from the ground up, revamping the GUI and optimizing performance.",
-                "Translated the app from Spanish to English, expanding accessibility to a wider audience."
-            ]
-        }
-    ];
 
     return (
         <section id="experience" className="py-32 bg-surface relative">
