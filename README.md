@@ -71,6 +71,7 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 | A project still being built | Add it to `BUILDING` with a `stage` and a `visual` — it renders in the "Now building" band with signal art instead of a screenshot. Launching it means moving it into `FEATURED` with a `frame`; the full checklist is the comment above `BUILDING` |
 | "Now building" signal art | `components/BuildingVisuals.tsx` — one motif per project, shown until there's a real capture |
 | Work history | `EXPERIENCE` in `components/Experience.tsx` — array order is display order; `url` is optional |
+| Degree, GPA, honors, and coursework | `components/Education.tsx` — the university card holds the school, dates, GPA and honor pills; `COURSES` is the coursework list (array order is display order, so keep it grouped by department rather than sorted by number) |
 | Project screenshots | `public/images/projects/*.webp` — 1920×1080 captures of each live site's hero |
 | What fills a project's frame | `frame` on a `FEATURED` entry — `{ kind: "site", url, shot }` for a browser-framed capture, `{ kind: "mark", src }` for a square app icon (`public/images/projects/*.png`) |
 | "Coming soon" state on a project | `prelaunch: { label, pill }` on a `FEATURED` entry — drives the eyebrow dot and the store pill. On launch day swap `frame` to `kind: "site"` and delete `prelaunch` |

@@ -11,6 +11,8 @@ const COURSES = [
     { code: "CS 178", name: "Machine/Data Mining" },
     { code: "CS 177", name: "Probability in CS" },
     { code: "CS 121", name: "Information Retrieval" },
+    { code: "CS 161", name: "Algorithm Design & Analysis" },
+    { code: "CS 122A", name: "Data Management" },
     { code: "CS 143A", name: "Operating Systems" },
     { code: "ICS 46", name: "Data Structures & Analysis" },
     { code: "ICS 45C", name: "Programming in C/C++" },
