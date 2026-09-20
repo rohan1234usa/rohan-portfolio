@@ -13,7 +13,8 @@ import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 import { LINKS } from "@/lib/links";
 
 /** A proof point. The object form renders `lead` in a heavier weight — for a card whose
- *  highlights walk a sequence (Merge's Decide → Plan → Get there → Settle up). */
+ *  highlights name the surfaces they describe (Merge's Timeline, Expenses, Move
+ *  Suggestions, Getting there). */
 type Highlight = string | { lead: string; text: string };
 
 /** What fills the 4:3 frame. `site` gets browser chrome and makes the card a link;
@@ -91,40 +92,6 @@ interface ShippedApp {
 // will ask about each one.
 const FEATURED: FeaturedProject[] = [
     {
-        // Pre-launch: mergecampus.com is withheld until it's polished, and the repo is
-        // private, so there is no `source`. On launch day swap `frame` to
-        // { kind: "site", url, shot } (or add a store link) and delete `prelaunch`.
-        title: "Merge",
-        kind: "iOS & Android · Social + AI",
-        prelaunch: { label: "Pre-launch", pill: "iOS & Android · coming soon" },
-        summary:
-            "Where plans with friends come together. Merge is a social platform built around real life — find something fun to do, see who’s in, get there together, and split the cost. Launching at UC Irvine.",
-        // The loop a hangout actually follows. Each claim maps to shipped code: the grounded
-        // suggester, Find a time + RSVP, the timeline solver re-anchored on stamped arrivals
-        // (an offline drive-time model — deliberately not "live traffic"), and the expenses hub.
-        highlights: [
-            {
-                lead: "Decide",
-                text: "“What’s the Move?” finds something fun nearby — real places that fit the group’s budget and are open when everyone arrives. The AI plans the search, but the server owns every fact, so nothing on the card can be invented.",
-            },
-            {
-                lead: "Plan",
-                text: "A shared calendar finds a time that works for everyone. Planners map out the night stop by stop, while go-alongs see the plan first and join when it suits them.",
-            },
-            {
-                lead: "Get there",
-                text: "Merge pairs carpools, optimizes routes, and solves a timeline that tells each person when to leave and when they’ll be home. As real arrivals come in, it re-solves the rest of the night.",
-            },
-            {
-                lead: "Settle up",
-                text: "A scanned receipt becomes an itemized split, a running tab between friends carries over from one plan to the next, and everyone gets a private view of their own spending.",
-            },
-        ],
-        tech: ["Flutter", "Dart", "Firebase", "Cloud Functions", "Gemini", "Google Maps"],
-        frame: { kind: "mark", src: "/images/projects/merge-icon.png" },
-        glow: "#2DD4BF",
-    },
-    {
         title: "Behavioral Interview Coach",
         kind: "Full-stack · Multimodal AI",
         summary:
@@ -170,6 +137,45 @@ const FEATURED: FeaturedProject[] = [
 // 4. `npx tsc --noEmit` — a FEATURED entry without a `frame`, or one still carrying
 //    building-only fields, does not compile. Mirror the change in README.md.
 // The intro sentence counts the band and lists each `room`, so it re-words itself.
+/** Merge leads the "Now building" band at featured scale: it is the furthest along of the
+ *  in-development products and the only one with real art rather than schematic signal art.
+ *  Deliberately a FeaturedProject, not a BuildingProject — that keeps the app icon and the
+ *  store pill, and makes launch day a move into FEATURED rather than a retype.
+ *  Pre-launch: mergecampus.com is withheld until it's polished and the repo is private, so
+ *  there is no `source`. On launch day swap `frame` to { kind: "site", url, shot }, delete
+ *  `prelaunch`, and move this object into FEATURED. */
+const BUILDING_LEAD: FeaturedProject | null = {
+    title: "Merge",
+    kind: "iOS & Android · Social + AI",
+    prelaunch: { label: "Pre-launch", pill: "iOS & Android · coming soon" },
+    summary:
+        "Where plans with friends come together. Merge is a social platform built around doing things in real life — exploring your college campus, managing plan logistics and feasibility, both timewise and carpool wise, coordinating a bring list between group members and the correlated expenses, along with many other quality of life features meant to support users in making their ambitious outings come to life.",
+    // The surfaces a plan actually passes through. Each maps to shipped code: the solved
+    // per-person timeline, the expenses hub, the grounded suggester (and its at-home mode),
+    // and carpool pairing over an offline drive-time model — deliberately not "live traffic".
+    highlights: [
+        {
+            lead: "The Timeline",
+            text: "A shared calendar finds timings that work for everyone involved. Planners can map out their outing stop by stop, while other members can see the plan first and join if it suits them. Makes it possible to view how adjusting the plan impacts the rest.",
+        },
+        {
+            lead: "Expenses",
+            text: "Merge turns a scanned receipt into an itemized split, and offers running tabs between friends. There are options to divide a split by item, by serving, equally, by percent, etc.",
+        },
+        {
+            lead: "Move Suggestions",
+            text: "Merge answers the classic “What’s the Move?” by suggesting locations in the area catered to the group’s interests, among several other adjustable parameters. It also suggests activities that can be done at home for fun, outlining any materials/items required to do an activity.",
+        },
+        {
+            lead: "Getting there",
+            text: "Merge groups carpools, optimizes routes, and solves the carpooling concerns to minimize time spent driving unnecessarily.",
+        },
+    ],
+    tech: ["Flutter", "Dart", "Firebase", "Cloud Functions", "Gemini", "Google Maps"],
+    frame: { kind: "mark", src: "/images/projects/merge-icon.png" },
+    glow: "#2DD4BF",
+};
+
 const BUILDING: BuildingProject[] = [
     {
         title: "SceneSense",
@@ -228,12 +234,28 @@ const BUILDING: BuildingProject[] = [
 
 const COUNT_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six"];
 
-// Built from BUILDING so the count and the rooms cannot drift from the rows beneath it.
-const BUILDING_INTRO = `${COUNT_WORDS[BUILDING.length] ?? BUILDING.length} product${
-    BUILDING.length === 1 ? "" : "s"
-} on one thesis — delivery is a signal you can measure — each pointed at a different room: ${BUILDING.map(
-    (p) => p.room,
-).join(", ")}.`;
+// Built from the rows beneath it so the count and the rooms cannot drift. The lead is
+// introduced separately: "delivery is a signal you can measure" is the thesis the other
+// three share, and it is not true of Merge, so it is not claimed over it.
+const countWord = (n: number) => COUNT_WORDS[n] ?? String(n);
+const BUILDING_TOTAL = BUILDING.length + (BUILDING_LEAD ? 1 : 0);
+const ROOMS = BUILDING.map((p) => p.room).join(", ");
+const THESIS = "delivery is a signal you can measure";
+
+// Two shapes rather than one string with holes, so each reads as written prose. With a
+// lead, it is named first and the thesis is scoped to the rows it actually describes;
+// without one, this falls back to the original single sentence.
+const BUILDING_INTRO = BUILDING_LEAD
+    ? `${countWord(BUILDING_TOTAL)} product${BUILDING_TOTAL === 1 ? "" : "s"} in the works. ${
+          BUILDING_LEAD.title
+      } is a campus social platform launching at UC Irvine${
+          BUILDING.length === 0
+              ? "."
+              : ` — and ${countWord(BUILDING.length).toLowerCase()} sit on one thesis, ${THESIS}, each pointed at a different room: ${ROOMS}.`
+      }`
+    : `${countWord(BUILDING.length)} product${
+          BUILDING.length === 1 ? "" : "s"
+      } on one thesis — ${THESIS} — each pointed at a different room: ${ROOMS}.`;
 
 const SHIPPED: ShippedApp[] = [
     {
@@ -713,7 +735,7 @@ export const Projects = () => (
                 ))}
             </div>
 
-            {BUILDING.length > 0 && (
+            {(BUILDING_LEAD || BUILDING.length > 0) && (
                 <>
                     <Reveal className="mt-24 lg:mt-32 mb-12 lg:mb-14">
                         <div className="flex items-center gap-4 mb-5">
@@ -729,9 +751,17 @@ export const Projects = () => (
                         <p className="max-w-2xl text-fg-soft text-base font-light">{BUILDING_INTRO}</p>
                     </Reveal>
 
-                    <div className="space-y-14 lg:space-y-16">
+                    {/* The lead renders at featured scale, so it gets the featured row
+                        rhythm; the schematic rows keep their tighter one beneath it. */}
+                    {BUILDING_LEAD && <FeaturedRow project={BUILDING_LEAD} index={FEATURED.length} />}
+
+                    <div className={`${BUILDING_LEAD ? "mt-14 lg:mt-16 " : ""}space-y-14 lg:space-y-16`}>
                         {BUILDING.map((p, i) => (
-                            <BuildingRow key={p.title} project={p} index={FEATURED.length + i} />
+                            <BuildingRow
+                                key={p.title}
+                                project={p}
+                                index={FEATURED.length + (BUILDING_LEAD ? 1 : 0) + i}
+                            />
                         ))}
                     </div>
                 </>
