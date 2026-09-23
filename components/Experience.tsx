@@ -78,7 +78,7 @@ const EXPERIENCE: JobProps[] = [
         location: "Irvine, CA",
         points: [
             "Originated Merge, a social platform for making real-life plans with friends. Developed UC Irvine student personas, feature specs, and a clickable prototype, then built the first working iOS app in SwiftUI and wrote the migration plan the production Flutter codebase was built from.",
-            "Own the plan board, calendar, chat, AI suggester, and expense surfaces as one of two engineers, with 440+ of the team’s 1,100+ merged PRs across a Flutter client and 110+ TypeScript Cloud Functions.",
+            "Own the plan board, calendar, chat, AI suggester, peer-to-peer rides, and expense surfaces as one of two engineers, with 440+ of the team’s 1,100+ merged PRs across a Flutter client and 110+ TypeScript Cloud Functions.",
             "Designed the “What’s the Move?” AI planner so that Gemini plans the Places searches while the server owns every fact on a card, making a fabricated address or opening time impossible by construction.",
             "Led a privacy overhaul spanning ~70 audit findings, each backed by a red-first test and a mutation probe; wrote 62 of the 82 security-rules suites ever added to the repo."
         ]

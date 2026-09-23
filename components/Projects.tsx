@@ -13,8 +13,7 @@ import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 import { LINKS } from "@/lib/links";
 
 /** A proof point. The object form renders `lead` in a heavier weight — for a card whose
- *  highlights name the surfaces they describe (Merge's Timeline, Expenses, Move
- *  Suggestions, Getting there). */
+ *  highlights name the surfaces they describe, like Merge's. */
 type Highlight = string | { lead: string; text: string };
 
 /** What fills the 4:3 frame. `site` gets browser chrome and makes the card a link;
@@ -26,9 +25,9 @@ type Frame =
     | { kind: "site"; url: `https://${string}`; shot: string }
     | { kind: "mark"; src: string };
 
-/** An unreleased product. `label` marks the eyebrow; `pill` is the CTA-row text beside
- *  the store glyphs, so it states its own platforms rather than assuming iOS/Android.
- *  Delete the whole field on launch day. */
+/** An unreleased product. `label` marks the eyebrow on FEATURED rows (the band lead hides
+ *  it); `pill` is the CTA-row text beside the store glyphs, so it states its own platforms
+ *  rather than assuming iOS/Android. Delete the whole field on launch day. */
 interface Prelaunch {
     label: string;
     pill: string;
@@ -64,7 +63,7 @@ interface FeaturedProject extends ProjectBase {
 /** A product with nothing to screenshot yet — no site, no store listing, no app icon.
  *  Renders as a compact row in the "Now building" band, with schematic signal art in the
  *  frame where the real capture will go. Launching one means moving it into FEATURED with
- *  a `frame`, which TypeScript will not let you do while `stage`/`visual` are still set. */
+ *  a `frame`, which TypeScript will not let you do while any field below is still set. */
 interface BuildingProject extends ProjectBase {
     /** Honest build stage, e.g. "In design". Also fills the frame pill where a URL would
      *  go, so keep it under ~20 characters or it truncates there. */
@@ -134,6 +133,8 @@ const FEATURED: FeaturedProject[] = [
  *  Pre-launch: mergecampus.com is withheld until it's polished and the repo is private, so
  *  there is no `source`. On launch day swap `frame` to { kind: "site", url, shot }, delete
  *  `prelaunch`, and move this object into FEATURED — emptying this array drops the lead.
+ *  Then finish with steps 3–4 of the checklist above BUILDING: re-tighten the bullets to
+ *  what shipped, and mirror the change in README.md.
  *  A 0-or-1 array rather than a nullable const on purpose: TypeScript narrows a `const` to
  *  its initializer, so `: FeaturedProject | null = {…}` makes the no-lead branch `never`
  *  and uncompilable the day you actually use it. Hold at most one entry. */
@@ -145,8 +146,9 @@ const BUILDING_LEAD: FeaturedProject[] = [{
         "Where plans with friends come together. Merge is a social platform built around doing things in real life — exploring your college campus, managing plan logistics and feasibility, both timewise and carpool wise, coordinating a bring list between group members and the correlated expenses, along with many other quality of life features meant to support users in making their ambitious outings come to life.",
     // The surfaces a plan actually passes through, each mapping to shipped code: the plan
     // timeline, the expenses hub with its split modes, the grounded suggester and its
-    // at-home mode, and carpool grouping with route optimization. Copy is Rohan's own —
-    // keep any future edit to what the app does, and never claim live traffic data.
+    // at-home mode, carpool grouping with route optimization, and ride asks matched by
+    // route fit and the detour each rider adds. Copy is Rohan's own — keep any future
+    // edit to what the app does, and never claim live traffic data.
     highlights: [
         {
             lead: "The Timeline",
@@ -164,6 +166,10 @@ const BUILDING_LEAD: FeaturedProject[] = [{
             lead: "Getting there",
             text: "Merge groups carpools, optimizes routes, and solves the carpooling concerns to minimize time spent driving unnecessarily.",
         },
+        {
+            lead: "Peer-to-peer ridesharing",
+            text: "Merge generates the detour distance and converts it into the added fuel cost, matches people based on route similarities, and provides them a platform to negotiate and decide what will work for their carpool purposes.",
+        },
     ],
     tech: ["Flutter", "Dart", "Firebase", "Cloud Functions", "Gemini", "Google Maps"],
     frame: { kind: "mark", src: "/images/projects/merge-icon.png" },
@@ -174,7 +180,8 @@ const BUILDING_LEAD: FeaturedProject[] = [{
 // 1. Capture the live hero at 1920×1080 → public/images/projects/<slug>.webp. Check the file
 //    lands: a wrong path is a runtime 404, not a build error.
 // 2. Move the entry into FEATURED above, add `frame: { kind: "site", url, shot }` (or
-//    `{ kind: "mark", src }` for a store-only app), and delete `stage`/`eta`/`visual`.
+//    `{ kind: "mark", src }` for a store-only app), and delete every field `BuildingProject`
+//    adds — read them off the interface, since tsc names only one leftover per compile.
 //    Keep `context` and `collaborators` — featured rows render them too.
 // 3. Re-tighten the bullets to what shipped, and credit collaborators before it goes public.
 // 4. `npx tsc --noEmit` — a FEATURED entry without a `frame`, or one still carrying
