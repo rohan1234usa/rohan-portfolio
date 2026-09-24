@@ -39,7 +39,7 @@ export const Hero = () => {
                     <StaggerItem>
                         <h1 className="text-5xl lg:text-7xl font-bold text-fg leading-[1.1] mb-8 font-display tracking-tight">
                             <WordReveal
-                                lines={["Products people use,"]}
+                                lines={["From product vision"]}
                                 lineClassName="block"
                                 delay={0.05}
                             />
@@ -49,16 +49,16 @@ export const Hero = () => {
                                 y={32}
                                 className="block pb-[0.2em] text-balance text-transparent bg-clip-text bg-gradient-hero"
                             >
-                                and the AI inside them
+                                to computer vision
                             </Reveal>
                         </h1>
                     </StaggerItem>
 
                     <StaggerItem>
                         <p className="text-xl text-fg-soft mb-10 max-w-lg leading-relaxed font-light">
-                            Full-stack engineer and product designer — I <span className="font-medium text-fg">own products end to end</span>,
-                            from personas and prototypes to the iOS and Android client, the backend, and the models inside it.
-                            Plus three years of computer vision and generative AI research, and two publications.
+                            Full-stack engineer and product designer. I <span className="font-medium text-fg">own products end to end</span>,
+                            from personas and prototypes to the iOS and Android apps, the backend, and the models that power them,
+                            drawing on three years of computer vision and generative AI research and two publications.
                         </p>
                     </StaggerItem>
 

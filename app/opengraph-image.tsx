@@ -9,7 +9,7 @@ export const contentType = "image/png";
 
 const NAME = "Rohan Singh";
 const EYEBROW = "CS @ UC Irvine · Class of 2027";
-const TAGLINE = "Products people use, and the AI inside them.";
+const TAGLINE = "From product vision to computer vision.";
 const FOCUS = "Full-Stack · Product · AI & Vision";
 const DOMAIN = "built-by-rohan.vercel.app";
 const PLACARD = "UC Irvine ’27";
