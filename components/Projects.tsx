@@ -6,15 +6,12 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, AudioWaveform, Download, FolderGit2, Github, Lightbulb, Lock, Users } from "lucide-react";
 import { SiAppstore, SiGoogleplay } from "react-icons/si";
 import { BuildingVisual, type BuildingVisualKind } from "./BuildingVisuals";
+import { HighlightText, highlightKey, type Highlight } from "./Highlight";
 import { TechIcon } from "./TechIcon";
 import { Reveal } from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 import { LINKS } from "@/lib/links";
-
-/** A proof point. The object form renders `lead` in a heavier weight — for a card whose
- *  highlights name the surfaces they describe, like Merge's. */
-type Highlight = string | { lead: string; text: string };
 
 /** What fills the 4:3 frame. `site` gets browser chrome and makes the card a link;
  *  `mark` shows an app icon and links nowhere — for a product with no public URL.
@@ -561,19 +558,14 @@ const FeaturedRow = ({
                 <p className="text-fg-soft text-base leading-relaxed font-light mb-6">{project.summary}</p>
 
                 <ul className="space-y-2.5 mb-7">
-                    {project.highlights.map((h) => {
-                        const lead = typeof h === "string" ? null : h.lead;
-                        const text = typeof h === "string" ? h : h.text;
-                        return (
-                            <li key={lead ? `${lead}:${text}` : text} className="flex items-start gap-3 text-sm text-fg-soft font-light">
-                                <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
-                                <span>
-                                    {lead && <span className="font-medium text-fg">{lead}: </span>}
-                                    {text}
-                                </span>
-                            </li>
-                        );
-                    })}
+                    {project.highlights.map((h) => (
+                        <li key={highlightKey(h)} className="flex items-start gap-3 text-sm text-fg-soft font-light">
+                            <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
+                            <span>
+                                <HighlightText highlight={h} />
+                            </span>
+                        </li>
+                    ))}
                 </ul>
 
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -651,19 +643,14 @@ const BuildingRow = ({ project, index }: { project: BuildingProject; index: numb
             <p className="text-fg-soft text-[15px] leading-relaxed font-light mb-5">{project.summary}</p>
 
             <ul className="space-y-2 mb-6">
-                {project.highlights.map((h) => {
-                    const lead = typeof h === "string" ? null : h.lead;
-                    const text = typeof h === "string" ? h : h.text;
-                    return (
-                        <li key={lead ? `${lead}:${text}` : text} className="flex items-start gap-3 text-sm text-fg-soft font-light">
-                            <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
-                            <span>
-                                {lead && <span className="font-medium text-fg">{lead}: </span>}
-                                {text}
-                            </span>
-                        </li>
-                    );
-                })}
+                {project.highlights.map((h) => (
+                    <li key={highlightKey(h)} className="flex items-start gap-3 text-sm text-fg-soft font-light">
+                        <span aria-hidden className="w-1.5 h-1.5 mt-2 rounded-full bg-accent-warm flex-shrink-0" />
+                        <span>
+                            <HighlightText highlight={h} />
+                        </span>
+                    </li>
+                ))}
             </ul>
 
             <div className="flex flex-wrap gap-2 mb-6">
