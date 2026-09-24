@@ -189,7 +189,7 @@ const BUILDING: BuildingProject[] = [
         title: "SceneSense",
         kind: "0→1 Product · Multimodal AI",
         context: "Imentiv AI · 2026",
-        stage: "In design",
+        stage: "In development",
         room: "the stage",
         visual: "scene",
         summary:
@@ -206,7 +206,7 @@ const BUILDING: BuildingProject[] = [
         title: "Pitch Coach",
         kind: "Full-stack · Emotion AI",
         context: "Imentiv AI · 2026",
-        stage: "Pre-launch",
+        stage: "Just released",
         room: "the sales call",
         visual: "pitch",
         summary:

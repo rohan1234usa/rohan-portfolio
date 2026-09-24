@@ -9,7 +9,9 @@ export const contentType = "image/png";
 
 const NAME = "Rohan Singh";
 const EYEBROW = "CS @ UC Irvine · Class of 2027";
-const TAGLINE = "From product vision to computer vision.";
+// Two lines, broken where the hero breaks its headline, so the card never strands "vision." alone.
+const TAGLINE_LINES = ["From product vision", "to computer vision."];
+const TAGLINE = TAGLINE_LINES.join(" ");
 const FOCUS = "Full-Stack · Product · AI & Vision";
 const DOMAIN = "built-by-rohan.vercel.app";
 const PLACARD = "UC Irvine ’27";
@@ -43,8 +45,10 @@ export default async function OpengraphImage() {
                         <div style={{ fontWeight: 700, fontSize: 96, lineHeight: 1.05, color: BRAND.cream, letterSpacing: -3.5 }}>
                             {NAME}
                         </div>
-                        <div style={{ marginTop: 28, fontSize: 34, lineHeight: 1.35, color: "rgba(251,247,239,0.8)", maxWidth: 560 }}>
-                            {TAGLINE}
+                        <div style={{ display: "flex", flexDirection: "column", marginTop: 28, fontSize: 34, lineHeight: 1.35, color: "rgba(251,247,239,0.8)", maxWidth: 560 }}>
+                            {TAGLINE_LINES.map((line) => (
+                                <div key={line}>{line}</div>
+                            ))}
                         </div>
                     </div>
 
