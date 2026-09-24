@@ -95,7 +95,7 @@ const EXPERIENCE: JobProps[] = [
             },
             {
                 lead: "Pipelines",
-                text: "Built a Gemini place recommender that plans its own Google Places searches yet can’t invent a fact; receipt scanning into itemized bill splits; a travel-time and timeline solver; route optimization for carpools; and detour-based matching for peer-to-peer rides."
+                text: "Built a Gemini place recommender that plans its own Google Places searches, then grounds and verifies every pick against the results; receipt scanning into itemized bill splits; a travel-time and timeline solver; route optimization for carpools; and detour-based matching for peer-to-peer rides."
             },
             {
                 lead: "Security & quality",
