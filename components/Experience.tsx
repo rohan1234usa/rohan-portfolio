@@ -105,8 +105,8 @@ const EXPERIENCE: JobProps[] = [
     },
     {
         company: "Imentiv AI",
-        role: "Software Engineer Intern",
-        date: "June 2026 – Sept 2026",
+        role: "Full-Stack Engineer",
+        date: "June 2026 – Present",
         location: "Cupertino, CA",
         url: "https://www.imentiv.ai",
         points: [

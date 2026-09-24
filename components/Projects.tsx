@@ -38,7 +38,7 @@ interface Collaborator {
 interface ProjectBase {
     title: string;
     kind: string;
-    /** Provenance line under the title, e.g. "Imentiv AI · 2026 internship". */
+    /** Provenance line under the title, e.g. "Imentiv AI · 2026". */
     context?: string;
     /** Teammates — renders a "With …" credit line. Lives on the base so the credit
      *  survives a move from BUILDING to FEATURED on launch day. Omit it rather than
@@ -188,7 +188,7 @@ const BUILDING: BuildingProject[] = [
     {
         title: "SceneSense",
         kind: "0→1 Product · Multimodal AI",
-        context: "Imentiv AI · 2026 internship",
+        context: "Imentiv AI · 2026",
         stage: "In design",
         room: "the stage",
         visual: "scene",
@@ -205,7 +205,7 @@ const BUILDING: BuildingProject[] = [
     {
         title: "Pitch Coach",
         kind: "Full-stack · Emotion AI",
-        context: "Imentiv AI · 2026 internship",
+        context: "Imentiv AI · 2026",
         stage: "Pre-launch",
         room: "the sales call",
         visual: "pitch",
