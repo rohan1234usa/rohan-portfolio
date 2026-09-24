@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { Reveal } from "./motion/Reveal";
 import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
+import { HighlightText, highlightKey, type Highlight } from "./Highlight";
 
 interface JobProps {
     company: string;
@@ -14,7 +15,8 @@ interface JobProps {
     date: string;
     location: string;
     url?: string;
-    points: string[];
+    /** Plain text, or `{ lead, text }` to name the stage of work a bullet covers, as Merge's do. */
+    points: Highlight[];
 }
 
 const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => {
@@ -52,15 +54,17 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
             </div>
 
             <StaggerGroup as="ul" className="space-y-3" stagger={0.06}>
-                {job.points.map((point: string, i: number) => (
+                {job.points.map((point) => (
                     <StaggerItem
                         as="li"
-                        key={i}
+                        key={highlightKey(point)}
                         y={10}
                         className="flex items-start gap-4 text-fg-soft text-sm leading-relaxed font-light"
                     >
-                        <div className="w-1.5 h-1.5 bg-accent-warm rounded-full mt-2 flex-shrink-0"></div>
-                        <span>{point}</span>
+                        <div aria-hidden className="w-1.5 h-1.5 bg-accent-warm rounded-full mt-2 flex-shrink-0"></div>
+                        <span>
+                            <HighlightText highlight={point} />
+                        </span>
                     </StaggerItem>
                 ))}
             </StaggerGroup>
@@ -76,11 +80,27 @@ const EXPERIENCE: JobProps[] = [
         role: "Founding Designer & Full-Stack Engineer",
         date: "March 2026 – Present",
         location: "Irvine, CA",
+        // One bullet per stage of the build, scope first, with an instance only as its evidence.
+        // Figures are from Merge’s merged history as of 2026-09-23. The "N+" counts are floors that
+        // stay true; the shares (half the data model, most rules, ~3/4 of test files) can shrink as
+        // the other engineer merges, so recheck those. Recount everything before editing.
         points: [
-            "Originated Merge, a social platform for making real-life plans with friends. Developed UC Irvine student personas, feature specs, and a clickable prototype, then built the first working iOS app in SwiftUI and wrote the migration plan the production Flutter codebase was built from.",
-            "Own the plan board, calendar, chat, AI suggester, peer-to-peer rides, and expense surfaces as one of two engineers, with 440+ of the team’s 1,100+ merged PRs across a Flutter client and 110+ TypeScript Cloud Functions.",
-            "Designed the “What’s the Move?” AI planner so that Gemini plans the Places searches while the server owns every fact on a card, making a fabricated address or opening time impossible by construction.",
-            "Led a privacy overhaul spanning ~70 audit findings, each backed by a red-first test and a mutation probe; wrote 62 of the 82 security-rules suites ever added to the repo."
+            {
+                lead: "Product design",
+                text: "Originated Merge as a carpool app and widened it into a social platform for real-life plans with friends, then defined it through student personas, ranked use cases, feature specs, and a 62-screen clickable prototype."
+            },
+            {
+                lead: "Architecture",
+                text: "One of two engineers (450+ of the team’s 1,150+ merged PRs) and the lead on system design for a Flutter + Firebase app with 110+ TypeScript Cloud Functions, from half its data model to the access model where the server, not the app, decides what each person sees."
+            },
+            {
+                lead: "Pipelines",
+                text: "Built a Gemini place recommender that plans its own Google Places searches yet can’t invent a fact; receipt scanning into itemized bill splits; a travel-time and timeline solver; route optimization for carpools; and detour-based matching for peer-to-peer rides."
+            },
+            {
+                lead: "Security & quality",
+                text: "Wrote most of the Firestore security rules and about three quarters of the app’s 1,600+ test files and set up its first CI; fixes land test-first, re-verified by deliberately breaking them."
+            }
         ]
     },
     {
