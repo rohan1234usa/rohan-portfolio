@@ -95,7 +95,7 @@ const EXPERIENCE: JobProps[] = [
             },
             {
                 lead: "Pipelines",
-                text: "Built a Gemini place recommender that plans its own Google Places searches yet can’t invent a fact; receipt scanning into itemized bill splits; a travel-time and timeline solver; route optimization for carpools; and detour-based matching for peer-to-peer rides."
+                text: "Built a Gemini place recommender that plans its own Google Places searches, then grounds and verifies every pick against the results; receipt scanning into itemized bill splits; a travel-time and timeline solver; route optimization for carpools; and detour-based matching for peer-to-peer rides."
             },
             {
                 lead: "Security & quality",
@@ -110,9 +110,11 @@ const EXPERIENCE: JobProps[] = [
         location: "Cupertino, CA",
         url: "https://www.imentiv.ai",
         points: [
-            "Architected the PitchSense pipeline behind Pitch Coach: one FastAPI service, three products, with Postgres and S3 call history.",
-            "Grounded every AI answer in a real measurement: baseline-normalized scores and transcript-derived delivery mechanics.",
-            "Scoped SceneSense, a 0→1 AI acting coach that grades a take against the script's emotional arc."
+            "Led PitchSense from brief to release: Imentiv’s sales-call intelligence platform, with three products on one FastAPI + Next.js pipeline — Pitch Coach sharpens a rep’s delivery, Reaction reads the audience, and Full Call shows how one moves the other.",
+            "Designed the scoring behind them: five engagement and six delivery constructs, each normalized to the speaker’s own resting baseline so a reserved rep isn’t graded on a showman’s scale, plus transcript-derived mechanics like fillers, hedges, pace, and pauses. The AI coach explains only those numbers.",
+            "Built A/B testing end to end: reps compare pitch variants on real viewer reactions across about 40 signals, with bootstrap 95% confidence intervals and minimum-sample guardrails before any winner is called, at no extra analysis cost.",
+            "Cut about 120 per-frame API calls from each analysis by reusing frames already fetched, and built a harness that meters every Imentiv call, its latency, and its credit cost, which showed where else to save, like skipping speaker matching on solo clips.",
+            "Designed SceneSense, a 0→1 acting coach that grades a take against a sentence-level map of the script’s emotional arc and tells an improvised line from a forgotten one; now building it."
         ]
     },
     {
