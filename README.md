@@ -4,12 +4,12 @@
 
 **Computer Science @ UC Irvine | Class of 2027 | Full-Stack Engineer & Product Designer**
 
-> *Products people use, and the AI inside them.*
+> *From product vision to computer vision.*
 
 ---
 
 ## 🚀 About Me
-I own products end to end — from personas and prototypes to the mobile client, the backend, and the models inside it. Alongside that, three years of **Computer Vision** and **Generative AI** research, with two publications.
+I own products end to end, from personas and prototypes to the iOS and Android apps, the backend, and the models that power them, drawing on three years of **Computer Vision** and **Generative AI** research and two publications.
 
 - **GPA**: 3.92
 - **Focus**: Mobile & full-stack product, grounded LLM features, real-time CV pipelines.
