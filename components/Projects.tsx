@@ -83,21 +83,23 @@ interface ShippedApp {
     tile: string;
 }
 
-// Recruiter-facing copy: a hook, then three proof points (what it does → how → a number where
-// possible). Every claim traces to the project's code, README, or store listing — interviewers
-// will ask about each one.
+// Recruiter-facing copy: a hook, then four bullets. The first three are Rohan's own words from his
+// 2025 résumé, corrected only where the code disagreed (SikhAI has no retrieval step; the Coach has
+// never measured eye contact or pacing); the fourth is a feature built since. Every claim traces to
+// the project's code, README, or store listing — interviewers will ask about each one.
 const FEATURED: FeaturedProject[] = [
     {
         title: "Behavioral Interview Coach",
         kind: "Full-stack · Multimodal AI",
         summary:
-            "Soft-skills-first interview simulator that quantifies subconscious cues like facial expression, vocal tone, and pacing to improve delivery.",
+            "Soft-skills-first interview simulator that quantifies subconscious cues like facial expression and vocal tone to improve delivery.",
         highlights: [
-            "Multimodal pipeline fuses face, voice, and transcript signals into four delivery scores: confidence, clarity, resilience, and engagement.",
-            "Gemini 2.5 Flash streams résumé-tailored questions for any company and role, then turns your session history into a personalized coaching plan.",
-            "Post-session reports pin your strongest and weakest moments to a clickable emotional timeline, with video replay and one-click PDF export.",
+            "Architected a ‘Soft-Skills First’ analysis engine designed to quantify non-technical traits (confidence, clarity, resilience, engagement), filling the critical feedback gap left by technical platforms like LeetCode.",
+            "Created a real-time interview simulation replicating high-pressure screenings in a low-stakes environment.",
+            "Developed a multimodal pipeline that separates semantic content from delivery when evaluating performance.",
+            "Gemini streams résumé-tailored questions for any company and role, then turns your session history into a personalized coaching plan.",
         ],
-        tech: ["Python", "FastAPI", "Next.js", "Docker", "AWS S3", "Gemini", "Computer Vision"],
+        tech: ["Python", "FastAPI", "Imentiv API", "Next.js", "Docker", "AWS S3", "Gemini", "Computer Vision"],
         frame: {
             kind: "site",
             url: "https://behavioral-interview-coach.vercel.app/",
@@ -112,8 +114,9 @@ const FEATURED: FeaturedProject[] = [
         summary:
             "Full-stack spiritual companion: a scripture-grounded AI chatbot, a Punjabi ↔ English translator, Shabad search, the daily Hukamnama, and a community seva board.",
         highlights: [
-            "Streaming Gemini chat answers through the lens of any of the ten Gurus, in five response styles and three languages.",
-            "Grounded in scripture: the daily Hukamnama and all 1,430 Angs are fetched live from the GurbaniNow API and can be attached as chat context.",
+            "Developed a Gemini-powered chatbot to provide spiritual guidance rooted in Sikh teachings.",
+            "Engineered a full-stack community platform featuring Firebase Authentication for a Seva volunteer event organizer.",
+            "Built an accessible, high-performance Shabad search for the Sikh community using Next.js.",
             "Production-grade GenAI: schema-constrained JSON for the translator, graceful Cloud Translation fallback, and nonce-fenced prompts that block injection.",
         ],
         tech: ["Next.js", "TypeScript", "Gemini", "Firebase", "Tailwind"],

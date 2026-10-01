@@ -117,6 +117,9 @@ const EXPERIENCE: JobProps[] = [
             "Designed SceneSense, a 0→1 acting coach that grades a take against a sentence-level map of the script’s emotional arc and tells an improvised line from a forgotten one; now building it."
         ]
     },
+    // Pre-2026 entries from here down use Rohan's own wording from his 2025 résumé, plus two earlier
+    // site bullets he chose to keep (MetaHumans, the Spanish → English translation). They were reworded
+    // once and he asked for his wording back, so keep it verbatim and change a claim only with him.
     {
         company: "Imentiv AI",
         role: "AI/Machine Learning Intern",
@@ -124,9 +127,9 @@ const EXPERIENCE: JobProps[] = [
         location: "Cupertino, CA",
         url: "https://www.imentiv.ai",
         points: [
-            "Boosted face detection accuracy by 6% via automated ground-truth validation pipelines, eliminating false positives.",
-            "Implemented face re-identification tracking using dynamic placeholders, validated against ByteTrack and BoT-FaceSORT.",
-            "Led comparative evaluations that drove the migration from legacy models to optimized YOLO architectures."
+            "Boosted face detection and recognition accuracy by 6% via an automated ground-truth validation pipeline, directly optimizing production YOLO models.",
+            "Implemented a face re-identification mechanism using dynamic placeholders to maintain consistent tracking, validated against ByteTrack and BoT-FaceSORT.",
+            "Conducted comparative evaluations that influenced the engineering team’s decision to migrate from legacy models to updated YOLO architectures."
         ]
     },
     {
@@ -136,9 +139,9 @@ const EXPERIENCE: JobProps[] = [
         location: "Cupertino, CA",
         url: "https://www.imentiv.ai",
         points: [
-            "Engineered an image deduplication tool using DINOv2 and Faiss, removing 95% of redundancies to refine ML datasets.",
-            "Developed algorithms to extract unique video frames, creating diverse datasets for model training.",
-            "Built a facial analysis tool using YOLOv8 to automate emotion labeling across large video datasets."
+            "Engineered an image deduplication pipeline, using DINOv2 and Faiss to filter 95% similarity redundancies.",
+            "Developed an algorithm to identify and extract distinct video frames for dataset diversity.",
+            "Built a facial analysis tool using YOLOv8 to detect faces, create bounding boxes, and label emotions."
         ]
     },
     {
@@ -148,9 +151,9 @@ const EXPERIENCE: JobProps[] = [
         location: "Remote",
         url: "https://asterbyte.com/",
         points: [
-            "Designed ML solutions for emotion detection on human faces in videos.",
+            "Designed and implemented a machine learning solution for emotion detection on human faces in videos and images.",
             "Generated synthetic training data using Unreal Engine MetaHumans to improve model robustness.",
-            "Published research on facial emotion recognition at WCSET 2023."
+            "Conducted research on emotion recognition and published findings at WCSET 2023 and IRAJ 2023."
         ]
     },
     {
@@ -160,9 +163,8 @@ const EXPERIENCE: JobProps[] = [
         location: "Remote",
         url: "https://asterbyte.com/",
         points: [
-            "Developed Hue Christmas, a Philips Hue app that plays festive Christmas light shows.",
-            "Reconstructed the Android app Pitch Prime from the ground up, revamping the GUI and optimizing performance.",
-            "Translated the app from Spanish to English, expanding accessibility to a wider audience."
+            "Engineered mobile application “Hue Christmas” for Philips Hue and reconstructed/optimized “Pitch Prime”.",
+            "Translated Pitch Prime from Spanish to English, expanding accessibility to a wider audience."
         ]
     }
 ];
