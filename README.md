@@ -25,8 +25,8 @@ I own products end to end, from personas and prototypes to the iOS and Android a
 ## 🏆 Featured Projects
 
 ### [Behavioral Interview Coach](https://behavioral-interview-coach.vercel.app/) · [source](https://github.com/rohan1234usa/behavioral-coach)
-*(Python, FastAPI, Next.js, Docker, AWS S3, Gemini)*  
-Soft-skills-first interview simulator that quantifies subconscious cues like facial expression, vocal tone, and pacing to improve delivery. A multimodal pipeline fuses face, voice, and transcript signals into confidence, clarity, resilience, and engagement scores; Gemini streams résumé-tailored questions and builds a coaching plan from past sessions.
+*(Python, FastAPI, Imentiv API, Next.js, Docker, AWS S3, Gemini)*  
+Soft-skills-first interview simulator that quantifies subconscious cues like facial expression and vocal tone to improve delivery. A multimodal pipeline fuses face, voice, and transcript signals into confidence, clarity, resilience, and engagement scores; Gemini streams résumé-tailored questions and builds a coaching plan from past sessions.
 
 ### [SikhAI](https://sikhai.vercel.app/) · [source](https://github.com/rohan1234usa/sikh-ai)
 *(Next.js, TypeScript, Gemini, Firebase)*  
@@ -70,6 +70,7 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 | "Now building" signal art | `components/BuildingVisuals.tsx` — one motif per project, shown until there's a real capture |
 | Work history | `EXPERIENCE` in `components/Experience.tsx` — array order is display order; `url` is optional; a point can be `{ lead, text }` to set a stage label in a heavier weight ahead of the bullet's text (the renderer adds the colon), as Merge's are |
 | A bullet with a lead, on a project card or a job | `Highlight` in `components/Highlight.tsx` — the shared type, key and renderer, so the lead's style cannot drift between Projects and Experience |
+| Publications | `PUBLICATIONS` in `components/Publications.tsx` — `authors` are written as on the résumé, and any name in `SELF` is set in bold; an optional `note` adds a smaller line under the venue, such as a later republication |
 | Degree, GPA, honors, and coursework | `components/Education.tsx` — each school is a `SchoolCard`: a header plus a bar that opens a panel. The UCI card holds the school, dates, GPA and honor pills, and its panel is `COURSES` (array order is display order, so keep it grouped by department rather than sorted by number); the Monta Vista panel is `AP_GROUPS` (subject → course + score). The bars' counts and teasers derive from those arrays |
 | Project screenshots | `public/images/projects/*.webp` — 1920×1080 captures of each live site's hero |
 | What fills a project's frame | `frame` on a `FEATURED` or `BUILDING_LEAD` entry — `{ kind: "site", url, shot }` for a browser-framed capture, `{ kind: "mark", src }` for a square app icon (`public/images/projects/*.png`) |
