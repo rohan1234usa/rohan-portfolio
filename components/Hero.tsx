@@ -37,7 +37,8 @@ export const Hero = () => {
                     </StaggerItem>
 
                     <StaggerItem>
-                        <h1 className="text-4xl sm:text-5xl xl:text-7xl font-bold text-fg leading-[1.1] mb-8 font-display tracking-tight">
+                        {/* Below sm the size tracks the screen (36px from ~380px up), so "From product vision" (317px at 36px) fits on one line down to 320px. */}
+                        <h1 className="text-[length:min(2.25rem,9.5vw)] sm:text-5xl xl:text-7xl font-bold text-fg leading-[1.1] mb-8 font-display tracking-tight">
                             <WordReveal
                                 lines={["From product vision"]}
                                 lineClassName="block"
@@ -131,7 +132,8 @@ export const Hero = () => {
                     style={{ y: photoY }}
                     className="relative flex justify-center lg:justify-end"
                 >
-                    <div className="group relative w-80 h-[420px] lg:w-[440px] lg:h-[560px]">
+                    {/* w-full + max-w-80, not a fixed w-80: a fixed width props the single mobile column open past a 320px screen, and the section clips the overflow. */}
+                    <div className="group relative w-full max-w-80 h-[420px] lg:w-[440px] lg:max-w-none lg:h-[560px]">
                         {/* Matte / outer card */}
                         <div className="absolute inset-0 flex flex-col p-3 bg-surface border border-line-strong shadow-[0_30px_60px_-30px_rgba(0,34,68,0.3)] dark:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)] transition-all duration-500 ease-out group-hover:-translate-y-0.5 group-hover:shadow-[0_40px_70px_-30px_rgba(0,34,68,0.35)] dark:group-hover:shadow-[0_40px_70px_-30px_rgba(0,0,0,0.8)]">
                             {/* Photo cell — square */}
