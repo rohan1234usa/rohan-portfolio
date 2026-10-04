@@ -8,7 +8,7 @@ import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
 import { ScrollProgress } from "./ScrollProgress";
 import { AvailabilityBadge } from "./Availability";
-import { HOME_EVENT, jumpToTop, lockScroll, unlockScroll } from "./SmoothScrollProvider";
+import { HOME_EVENT, lockScroll, scrollToTop, unlockScroll } from "./SmoothScrollProvider";
 import { EASE_OUT_QUAD } from "./motion/tokens";
 import { LINKS } from "@/lib/links";
 
@@ -65,12 +65,12 @@ export const Navbar = () => {
     // The wordmark returns to the start of the page as a fresh load would: top of the page,
     // no #section in the URL, hero entrance replayed. Modified clicks still open a new tab.
     const goHome = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-        e.preventDefault();
-        // Close first: unlocking restarts Lenis, which would otherwise ignore the jump.
+        // Close first, on any click: unlocking restarts Lenis, which would otherwise ignore the jump.
         if (menuOpen) setMenu(false);
-        window.history.replaceState(null, "", "/");
-        jumpToTop();
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        if (window.location.hash || window.location.search) window.history.replaceState(null, "", "/");
+        scrollToTop({ immediate: true });
         window.dispatchEvent(new Event(HOME_EVENT));
     };
 
