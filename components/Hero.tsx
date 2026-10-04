@@ -37,12 +37,14 @@ export const Hero = () => {
                     </StaggerItem>
 
                     <StaggerItem>
-                        <h1 className="text-5xl lg:text-7xl font-bold text-fg leading-[1.1] mb-8 font-display tracking-tight">
+                        <h1 className="text-4xl sm:text-5xl xl:text-7xl font-bold text-fg leading-[1.1] mb-8 font-display tracking-tight">
                             <WordReveal
                                 lines={["From product vision"]}
                                 lineClassName="block"
                                 delay={0.05}
                             />
+                            {/* Invisible between two block lines, but keeps the heading's text from reading "visionto". */}
+                            {" "}
                             <Reveal
                                 as="span"
                                 delay={0.55}
@@ -55,12 +57,11 @@ export const Hero = () => {
                     </StaggerItem>
 
                     <StaggerItem>
-                        <p className="text-xl text-fg-soft mb-10 max-w-lg leading-relaxed font-light">
-                            Full-stack engineer and product designer. I <span className="font-medium text-fg">own products end to end</span>,
-                            from drafting spec docs and testing prototypes to their iOS, Android, and Web releases. Algorithmic design and
-                            problem solving is a strong suit of mine, fueling the efficient and optimized backends powering my builds.
-                            My technical foundation draws on four years working in AI, my senior CS coursework, hands-on projects built for
-                            department faculty, and two computer vision research publications.
+                        <p className="text-lg text-fg-soft mb-10 max-w-2xl leading-relaxed font-light text-pretty">
+                            Full-stack engineer and product designer. I&nbsp;<span className="font-medium text-fg">own products end to end</span>,
+                            from drafting spec docs and testing prototypes to iOS, Android, and Web releases. Algorithmic design and problem
+                            solving is a strong suit of mine, fueling the efficient backends behind my builds. My technical foundation draws
+                            on four years in AI, senior CS coursework, projects for department faculty, and two computer vision publications.
                         </p>
                     </StaggerItem>
 

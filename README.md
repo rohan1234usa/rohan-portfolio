@@ -9,7 +9,7 @@
 ---
 
 ## 🚀 About Me
-I **own products end to end**, from drafting spec docs and testing prototypes to their iOS, Android, and Web releases. Algorithmic design and problem solving is a strong suit of mine, fueling the efficient and optimized backends powering my builds. My technical foundation draws on four years working in AI, my senior CS coursework, hands-on projects built for department faculty, and two computer vision research publications.
+I **own products end to end**, from drafting spec docs and testing prototypes to iOS, Android, and Web releases. Algorithmic design and problem solving is a strong suit of mine, fueling the efficient backends behind my builds. My technical foundation draws on four years in AI, senior CS coursework, projects for department faculty, and two computer vision publications.
 
 - **GPA**: 3.92
 - **Focus**: Mobile & full-stack product, grounded LLM features, real-time CV pipelines.
