@@ -64,7 +64,7 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 
 | To change… | Edit |
 |---|---|
-| Hero headline and intro | `components/Hero.tsx` — the headline is repeated as this README's tagline and as `TAGLINE_LINES` in `app/opengraph-image.tsx`, and the intro (minus its first sentence) as **About Me** above, so change them together |
+| Hero headline and intro | `components/Hero.tsx` — the headline is repeated as this README's tagline and as `TAGLINE_LINES` in `app/opengraph-image.tsx`, and the intro (minus its first sentence) as **About Me** above, so change them together. On phones the headline's size follows the screen width so "From product vision" fits one line at 320px; if its words change, re-check that with the numbers in the comment above the `<h1>` |
 | Project copy, links, and tech chips | `FEATURED` / `BUILDING_LEAD` / `BUILDING` / `SHIPPED` in `components/Projects.tsx` |
 | A project still being built | Add a `BuildingProject` to `BUILDING` (its interface documents each field) — it renders in the "Now building" band with signal art instead of a screenshot. Launching it means moving it into `FEATURED` with a `frame`; the full checklist is the comment above `BUILDING` |
 | The project leading the "Now building" band | `BUILDING_LEAD` — a 0-or-1 array of `FeaturedProject`, so it renders with real art and keeps `prelaunch` while sharing the band rows' column grid. Empty the array to drop the lead; the band self-removes once `BUILDING` is also empty |
