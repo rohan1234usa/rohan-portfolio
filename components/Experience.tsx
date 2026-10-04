@@ -74,9 +74,23 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
 
 const EXPERIENCE: JobProps[] = [
     {
+        company: "Imentiv AI",
+        role: "Full-Stack Engineer",
+        date: "June 2026 – Present",
+        location: "Cupertino, CA",
+        url: "https://www.imentiv.ai",
+        points: [
+            "Led PitchSense from brief to release: Imentiv’s sales-call intelligence platform, with three products on one FastAPI + Next.js pipeline — Pitch Coach sharpens a rep’s delivery, Reaction reads the audience, and Full Call shows how one moves the other.",
+            "Designed the scoring behind them: five engagement and six delivery constructs, each normalized to the speaker’s own resting baseline so a reserved rep isn’t graded on a showman’s scale, plus transcript-derived mechanics like fillers, hedges, pace, and pauses. The AI coach explains only those numbers.",
+            "Built A/B testing end to end: reps compare pitch variants on real viewer reactions across about 40 signals, with bootstrap 95% confidence intervals and minimum-sample guardrails before any winner is called, at no extra analysis cost.",
+            "Cut about 120 per-frame API calls from each analysis by reusing frames already fetched, and built a harness that meters every Imentiv call, its latency, and its credit cost, which showed where else to save, like skipping speaker matching on solo clips.",
+            "Designed SceneSense, a 0→1 acting coach that grades a take against a sentence-level map of the script’s emotional arc and tells an improvised line from a forgotten one; now building it."
+        ]
+    },
+    {
         // No `url`: mergecampus.com is deliberately withheld until it's polished.
         // Add it here (and the store link on the Projects card) on launch day.
-        company: "Merge",
+        company: "Merge Campus",
         role: "Founding Designer & Full-Stack Engineer",
         date: "March 2026 – Present",
         location: "Irvine, CA",
@@ -87,7 +101,7 @@ const EXPERIENCE: JobProps[] = [
         points: [
             {
                 lead: "Product design",
-                text: "Originated Merge as a carpool app and widened it into a social platform for real-life plans with friends, then defined it through student personas, ranked use cases, feature specs, and a 62-screen clickable prototype."
+                text: "Originated Merge as a carpool app and widened it into a social platform for real-life plans with friends, then defined it through student persona-based testing, ranked use cases, feature specs, and a 62-screen clickable prototype."
             },
             {
                 lead: "Architecture",
@@ -101,20 +115,6 @@ const EXPERIENCE: JobProps[] = [
                 lead: "Security & quality",
                 text: "Wrote most of the Firestore security rules and about three quarters of the app’s 1,600+ test files and set up its first CI; fixes land test-first, re-verified by deliberately breaking them."
             }
-        ]
-    },
-    {
-        company: "Imentiv AI",
-        role: "Full-Stack Engineer",
-        date: "June 2026 – Present",
-        location: "Cupertino, CA",
-        url: "https://www.imentiv.ai",
-        points: [
-            "Led PitchSense from brief to release: Imentiv’s sales-call intelligence platform, with three products on one FastAPI + Next.js pipeline — Pitch Coach sharpens a rep’s delivery, Reaction reads the audience, and Full Call shows how one moves the other.",
-            "Designed the scoring behind them: five engagement and six delivery constructs, each normalized to the speaker’s own resting baseline so a reserved rep isn’t graded on a showman’s scale, plus transcript-derived mechanics like fillers, hedges, pace, and pauses. The AI coach explains only those numbers.",
-            "Built A/B testing end to end: reps compare pitch variants on real viewer reactions across about 40 signals, with bootstrap 95% confidence intervals and minimum-sample guardrails before any winner is called, at no extra analysis cost.",
-            "Cut about 120 per-frame API calls from each analysis by reusing frames already fetched, and built a harness that meters every Imentiv call, its latency, and its credit cost, which showed where else to save, like skipping speaker matching on solo clips.",
-            "Designed SceneSense, a 0→1 acting coach that grades a take against a sentence-level map of the script’s emotional arc and tells an improvised line from a forgotten one; now building it."
         ]
     },
     // Pre-2026 entries from here down use Rohan's own wording from his 2025 résumé, plus two earlier
