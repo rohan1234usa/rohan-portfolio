@@ -8,7 +8,7 @@ import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
 import { ScrollProgress } from "./ScrollProgress";
 import { AvailabilityBadge } from "./Availability";
-import { lockScroll, unlockScroll } from "./SmoothScrollProvider";
+import { HOME_EVENT, jumpToTop, lockScroll, unlockScroll } from "./SmoothScrollProvider";
 import { EASE_OUT_QUAD } from "./motion/tokens";
 import { LINKS } from "@/lib/links";
 
@@ -62,6 +62,18 @@ export const Navbar = () => {
         [],
     );
 
+    // The wordmark returns to the start of the page as a fresh load would: top of the page,
+    // no #section in the URL, hero entrance replayed. Modified clicks still open a new tab.
+    const goHome = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        // Close first: unlocking restarts Lenis, which would otherwise ignore the jump.
+        if (menuOpen) setMenu(false);
+        window.history.replaceState(null, "", "/");
+        jumpToTop();
+        window.dispatchEvent(new Event(HOME_EVENT));
+    };
+
     useEffect(() => {
         if (!menuOpen) return;
         firstLinkRef.current?.focus({ preventScroll: true });
@@ -95,7 +107,7 @@ export const Navbar = () => {
                     }`}
             >
                 <div className="container mx-auto px-6 flex justify-between items-center">
-                    <Link href="/" className="group" onClick={() => menuOpen && setMenu(false)}>
+                    <Link href="/" className="group" onClick={goHome}>
                         <span
                             className={`font-display text-xl font-bold tracking-tight transition-colors ${scrolled ? "text-fg" : "text-fg-soft"}`}
                         >

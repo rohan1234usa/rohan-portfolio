@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useReducedMotionSafe } from "./motion/useReducedMotionSafe";
 import { Linkedin } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { WordReveal } from "./motion/WordReveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { Magnetic } from "./motion/Magnetic";
@@ -12,6 +12,7 @@ import { TypingCode } from "./motion/TypingCode";
 import { Reveal } from "./motion/Reveal";
 import { DURATION, EASE_OUT_QUAD } from "./motion/tokens";
 import { AvailabilityBadge } from "./Availability";
+import { HOME_EVENT } from "./SmoothScrollProvider";
 import { LINKS } from "@/lib/links";
 
 export const Hero = () => {
@@ -23,9 +24,18 @@ export const Hero = () => {
     });
     const photoY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, -40]);
 
+    // Going home via the navbar wordmark remounts the content, replaying its entrance like a fresh load.
+    // The section itself stays mounted so the parallax keeps its scroll target.
+    const [entrance, setEntrance] = useState(0);
+    useEffect(() => {
+        const replay = () => setEntrance((n) => n + 1);
+        window.addEventListener(HOME_EVENT, replay);
+        return () => window.removeEventListener(HOME_EVENT, replay);
+    }, []);
+
     return (
         <section ref={sectionRef} className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
-            <div className="container mx-auto px-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
+            <div key={entrance} className="container mx-auto px-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
                 <StaggerGroup immediate delayChildren={0.1} stagger={0.13}>
                     <StaggerItem className="flex flex-wrap gap-3 mb-8">
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium tracking-wide text-fg-soft border-b border-line-strong">
