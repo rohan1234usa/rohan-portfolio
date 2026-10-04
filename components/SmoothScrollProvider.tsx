@@ -20,11 +20,22 @@ export const unlockScroll = () => {
     lenis?.start();
 };
 
-export const scrollToTop = () => {
+/** Glide to the top, or with `immediate` snap there as a fresh load would. */
+export const scrollToTop = ({ immediate = false } = {}) => {
     // No Lenis means reduced motion, so jump instead of animating.
-    if (lenis) lenis.scrollTo(0);
-    else window.scrollTo({ top: 0 });
+    if (!lenis) {
+        window.scrollTo({ top: 0 });
+        return;
+    }
+    // Through Lenis, since a glide still in flight would undo a bare window.scrollTo. resize()
+    // re-reads the real position first: Lenis hears of native jumps (an #anchor link) only on the
+    // next scroll event, and skips a scroll to where it still thinks it is.
+    lenis.resize();
+    lenis.scrollTo(0, { immediate });
 };
+
+/** Fired on window when the navbar wordmark sends the visitor home; the hero replays its entrance. */
+export const HOME_EVENT = "portfolio:home";
 
 export const SmoothScrollProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
