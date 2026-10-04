@@ -9,7 +9,7 @@
 ---
 
 ## 🚀 About Me
-I own products end to end, from personas and prototypes to the iOS and Android apps, the backend, and the models that power them, drawing on three years of **Computer Vision** and **Generative AI** research and two publications.
+I **own products end to end**, from drafting spec docs and testing prototypes to their iOS, Android, and Web releases. Algorithmic design and problem solving is a strong suit of mine, fueling the efficient and optimized backends powering my builds. My technical foundation draws on four years working in AI, my senior CS coursework, hands-on projects built for department faculty, and two computer vision research publications.
 
 - **GPA**: 3.92
 - **Focus**: Mobile & full-stack product, grounded LLM features, real-time CV pipelines.
@@ -64,6 +64,7 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 
 | To change… | Edit |
 |---|---|
+| Hero headline and intro | `components/Hero.tsx` — the headline is repeated as this README's tagline and as `TAGLINE_LINES` in `app/opengraph-image.tsx`, and the intro (minus its first sentence) as **About Me** above, so change them together |
 | Project copy, links, and tech chips | `FEATURED` / `BUILDING_LEAD` / `BUILDING` / `SHIPPED` in `components/Projects.tsx` |
 | A project still being built | Add a `BuildingProject` to `BUILDING` (its interface documents each field) — it renders in the "Now building" band with signal art instead of a screenshot. Launching it means moving it into `FEATURED` with a `frame`; the full checklist is the comment above `BUILDING` |
 | The project leading the "Now building" band | `BUILDING_LEAD` — a 0-or-1 array of `FeaturedProject`, so it renders with real art and keeps `prelaunch` while sharing the band rows' column grid. Empty the array to drop the lead; the band self-removes once `BUILDING` is also empty |

@@ -57,8 +57,10 @@ export const Hero = () => {
                     <StaggerItem>
                         <p className="text-xl text-fg-soft mb-10 max-w-lg leading-relaxed font-light">
                             Full-stack engineer and product designer. I <span className="font-medium text-fg">own products end to end</span>,
-                            from personas and prototypes to the iOS and Android apps, the backend, and the models that power them,
-                            drawing on three years of computer vision and generative AI research and two publications.
+                            from drafting spec docs and testing prototypes to their iOS, Android, and Web releases. Algorithmic design and
+                            problem solving is a strong suit of mine, fueling the efficient and optimized backends powering my builds.
+                            My technical foundation draws on four years working in AI, my senior CS coursework, hands-on projects built for
+                            department faculty, and two computer vision research publications.
                         </p>
                     </StaggerItem>
 
