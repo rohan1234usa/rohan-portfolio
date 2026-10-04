@@ -47,12 +47,15 @@ export const Hero = () => {
                     </StaggerItem>
 
                     <StaggerItem>
-                        <h1 className="text-5xl lg:text-7xl font-bold text-fg leading-[1.1] mb-8 font-display tracking-tight">
+                        {/* Below sm the size tracks the screen (36px from ~380px up), so "From product vision" (317px at 36px) fits on one line down to 320px. */}
+                        <h1 className="text-[length:min(2.25rem,9.5vw)] sm:text-5xl xl:text-7xl font-bold text-fg leading-[1.1] mb-8 font-display tracking-tight">
                             <WordReveal
                                 lines={["From product vision"]}
                                 lineClassName="block"
                                 delay={0.05}
                             />
+                            {/* Invisible between two block lines, but keeps the heading's text from reading "visionto". */}
+                            {" "}
                             <Reveal
                                 as="span"
                                 delay={0.55}
@@ -65,12 +68,11 @@ export const Hero = () => {
                     </StaggerItem>
 
                     <StaggerItem>
-                        <p className="text-xl text-fg-soft mb-10 max-w-lg leading-relaxed font-light">
-                            Full-stack engineer and product designer. I <span className="font-medium text-fg">own products end to end</span>,
-                            from drafting spec docs and testing prototypes to their iOS, Android, and Web releases. Algorithmic design and
-                            problem solving is a strong suit of mine, fueling the efficient and optimized backends powering my builds.
-                            My technical foundation draws on four years working in AI, my senior CS coursework, hands-on projects built for
-                            department faculty, and two computer vision research publications.
+                        <p className="text-lg text-fg-soft mb-10 max-w-2xl leading-relaxed font-light text-pretty">
+                            Full-stack engineer and product designer. I&nbsp;<span className="font-medium text-fg">own products end to end</span>,
+                            from drafting spec docs and testing prototypes to iOS, Android, and Web releases. Algorithmic design and problem
+                            solving is a strong suit of mine, fueling the efficient backends behind my builds. My technical foundation draws
+                            on four years in AI, senior CS coursework, projects for department faculty, and two computer vision publications.
                         </p>
                     </StaggerItem>
 
@@ -140,7 +142,8 @@ export const Hero = () => {
                     style={{ y: photoY }}
                     className="relative flex justify-center lg:justify-end"
                 >
-                    <div className="group relative w-80 h-[420px] lg:w-[440px] lg:h-[560px]">
+                    {/* w-full + max-w-80, not a fixed w-80: a fixed width props the single mobile column open past a 320px screen, and the section clips the overflow. */}
+                    <div className="group relative w-full max-w-80 h-[420px] lg:w-[440px] lg:max-w-none lg:h-[560px]">
                         {/* Matte / outer card */}
                         <div className="absolute inset-0 flex flex-col p-3 bg-surface border border-line-strong shadow-[0_30px_60px_-30px_rgba(0,34,68,0.3)] dark:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)] transition-all duration-500 ease-out group-hover:-translate-y-0.5 group-hover:shadow-[0_40px_70px_-30px_rgba(0,34,68,0.35)] dark:group-hover:shadow-[0_40px_70px_-30px_rgba(0,0,0,0.8)]">
                             {/* Photo cell — square */}
