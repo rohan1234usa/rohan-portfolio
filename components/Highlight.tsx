@@ -1,7 +1,7 @@
 /** A bullet's content: plain text, or a `lead` set in a heavier weight ahead of `text` — for a
- *  list whose bullets name the surface or stage they cover, as the Merge project card's and the
- *  Merge experience entry's do. Shared so the lead's style cannot drift between the two sections.
- *  The renderer adds the colon, so a lead must not carry its own. */
+ *  list whose bullets name the surface or stage they cover, as the Merge Campus project card's
+ *  and the Merge experience entry's do. Shared so the lead's style cannot drift between the
+ *  two sections. The renderer adds the colon, so a lead must not carry its own. */
 export type Highlight = string | { lead: string; text: string };
 
 /** A stable list key: lead and text together, since two bullets in one list can share a lead. */
