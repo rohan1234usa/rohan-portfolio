@@ -126,10 +126,10 @@ const FEATURED: FeaturedProject[] = [
     },
 ];
 
-/** Merge leads the "Now building" band at featured scale: it is the furthest along of the
- *  in-development products and the only one with real art rather than schematic signal art.
- *  Deliberately a FeaturedProject, not a BuildingProject — that keeps the app icon and the
- *  store pill, and makes launch day a move into FEATURED rather than a retype.
+/** Merge Campus leads the "Now building" band at featured scale: it is the furthest along
+ *  of the in-development products and the only one with real art rather than schematic
+ *  signal art. Deliberately a FeaturedProject, not a BuildingProject — that keeps the app
+ *  icon and the store pill, and makes launch day a move into FEATURED rather than a retype.
  *  Pre-launch: mergecampus.com is withheld until it's polished and the repo is private, so
  *  there is no `source`. On launch day swap `frame` to { kind: "site", url, shot }, delete
  *  `prelaunch`, and move this object into FEATURED — emptying this array drops the lead.
@@ -139,16 +139,17 @@ const FEATURED: FeaturedProject[] = [
  *  its initializer, so `: FeaturedProject | null = {…}` makes the no-lead branch `never`
  *  and uncompilable the day you actually use it. Hold at most one entry. */
 const BUILDING_LEAD: FeaturedProject[] = [{
-    title: "Merge",
+    title: "Merge Campus",
     kind: "iOS & Android · Social + AI",
     prelaunch: { label: "Pre-launch", pill: "iOS & Android · coming soon" },
     summary:
-        "Where plans with friends come together. Merge is a social platform built around doing things in real life — exploring your college campus, managing plan logistics and feasibility, both timewise and carpool wise, coordinating a bring list between group members and the correlated expenses, along with many other quality of life features meant to support users in making their ambitious outings come to life.",
+        "Where plans with friends come together. Merge Campus is a social platform built around doing things in real life — exploring your college campus, managing plan logistics and feasibility, both timewise and carpool wise, coordinating a bring list between group members and the correlated expenses, along with many other quality of life features meant to support users in making their ambitious outings come to life.",
     // The surfaces a plan actually passes through, each mapping to shipped code: the plan
     // timeline, the expenses hub with its split modes, the grounded suggester and its
     // at-home mode, carpool grouping with route optimization, and ride asks matched by
     // route fit and the detour each rider adds. Copy is Rohan's own — keep any future
-    // edit to what the app does, and never claim live traffic data.
+    // edit to what the app does, and never claim live traffic data. The bullets say
+    // "Merge", the app's home-screen name, as the short form of the title.
     highlights: [
         {
             lead: "The Timeline",
@@ -247,7 +248,7 @@ const COUNT_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six"];
 
 // Built from the rows beneath it so the count and the rooms cannot drift. The lead is
 // introduced separately: "delivery is a signal you can measure" is the thesis the other
-// three share, and it is not true of Merge, so it is not claimed over it.
+// three share, and it is not true of Merge Campus, so it is not claimed over it.
 const countWord = (n: number) => COUNT_WORDS[n] ?? String(n);
 const HAS_LEAD = BUILDING_LEAD.length > 0;
 const LEAD_TITLE = BUILDING_LEAD[0]?.title ?? "";
@@ -259,7 +260,7 @@ const THESIS = "delivery is a signal you can measure";
 // lead, it is named first and the thesis is scoped to the rows it actually describes;
 // without one, this falls back to the original single sentence.
 const BUILDING_INTRO = HAS_LEAD
-    ? `${countWord(BUILDING_TOTAL)} product${BUILDING_TOTAL === 1 ? "" : "s"} in the works. ${LEAD_TITLE} is a campus social platform launching at UC Irvine${
+    ? `${countWord(BUILDING_TOTAL)} product${BUILDING_TOTAL === 1 ? "" : "s"} in the works. ${LEAD_TITLE} is a social platform launching at UC Irvine${
           BUILDING.length === 0
               ? "."
               : ` — and ${countWord(BUILDING.length).toLowerCase()} ${
