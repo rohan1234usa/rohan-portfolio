@@ -7,6 +7,7 @@ import { ArrowRight, ArrowUpRight, AudioWaveform, Download, FolderGit2, Github, 
 import { SiAppstore, SiGoogleplay } from "react-icons/si";
 import { BuildingVisual, type BuildingVisualKind } from "./BuildingVisuals";
 import { HighlightText, highlightKey, type Highlight } from "./Highlight";
+import { PingDot } from "./PingDot";
 import { TechIcon } from "./TechIcon";
 import { Reveal } from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
@@ -413,15 +414,6 @@ const ShotLink = ({ project, children }: { project: FeaturedProject; children: R
     ) : (
         <div>{children}</div>
     );
-
-/** Same dot geometry as the prelaunch eyebrow above, on --status: this one sits in the
- *  "Now building" band, never beside a prelaunch dot, so the two are not co-visible. */
-const PingDot = () => (
-    <span aria-hidden className="relative flex h-1.5 w-1.5">
-        <span className="absolute inline-flex h-full w-full rounded-full bg-status opacity-75 animate-ping motion-reduce:animate-none" />
-        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-status" />
-    </span>
-);
 
 /** Provenance and team credit. Renders nothing when a project has neither, so it stays
  *  invisible on the existing rows — and keeps the credit when a build ships. */

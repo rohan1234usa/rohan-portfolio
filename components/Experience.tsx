@@ -74,6 +74,21 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
 
 const EXPERIENCE: JobProps[] = [
     {
+        // From Rohan's LinkedIn entry and his own account of the work. The lab's research is unpublished,
+        // so this names the advisor and the field only — never the project or its research question.
+        // Add specifics once the PhD students OK them, and only what Rohan himself built. The same
+        // limit holds for the "Current" card in components/Research.tsx.
+        company: "UC Irvine · Donald Bren School of ICS",
+        role: "Undergraduate Student Researcher",
+        date: "Sept 2026 – Present",
+        location: "Irvine, CA",
+        url: "https://ics.uci.edu",
+        points: [
+            "Research in computer vision and computational geometry under Prof. Gopi Meenakshisundaram, working alongside the lab’s PhD students.",
+            "Building research tools for the lab: pipelines that run vision models and geometry processing over its data."
+        ]
+    },
+    {
         company: "Imentiv AI",
         role: "Full-Stack Engineer",
         date: "June 2026 – Present",

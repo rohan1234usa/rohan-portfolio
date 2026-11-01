@@ -48,6 +48,7 @@ export const Skills = () => {
             "PyTorch",
             "YOLOv8",
             "OpenCV",
+            "Computational Geometry",
             "RAG",
             "Gemini",
             "Gemma",

@@ -110,21 +110,29 @@ export const TypingCode = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Two layers in one grid cell: an invisible copy of the finished text, which sizes the box, and the
+    // text typed so far on top of it. The box is its final size from the first frame, so nothing around
+    // it moves while it types and no caller has to size it by hand.
     const content = (
         <>
-            {segments.map((seg, i) => (
-                <span key={i} className={seg.className}>
-                    {seg.text.slice(0, typed[i])}
-                </span>
-            ))}
-            {caret && (
-                <span
-                    aria-hidden
-                    className={done ? "opacity-0" : "inline-block animate-pulse"}
-                >
-                    {caret}
-                </span>
-            )}
+            <span aria-hidden className="invisible col-start-1 row-start-1">
+                {segments.map((seg) => seg.text).join("")}
+            </span>
+            <span className="col-start-1 row-start-1">
+                {segments.map((seg, i) => (
+                    <span key={i} className={seg.className}>
+                        {seg.text.slice(0, typed[i])}
+                    </span>
+                ))}
+                {caret && (
+                    <span
+                        aria-hidden
+                        className={done ? "opacity-0" : "inline-block animate-pulse"}
+                    >
+                        {caret}
+                    </span>
+                )}
+            </span>
         </>
     );
 
@@ -134,7 +142,7 @@ export const TypingCode = ({
                 ref={(el) => {
                     wrapperRef.current = el;
                 }}
-                className={className}
+                className={`grid ${className ?? ""}`}
             >
                 {content}
             </pre>
@@ -145,7 +153,7 @@ export const TypingCode = ({
             ref={(el) => {
                 wrapperRef.current = el;
             }}
-            className={className}
+            className={`inline-grid ${className ?? ""}`}
         >
             {content}
         </span>

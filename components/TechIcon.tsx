@@ -49,6 +49,7 @@ import {
     ScanFace,
     Captions,
     Waypoints,
+    DraftingCompass,
 } from "lucide-react";
 
 type IconComp = ComponentType<{ size?: number; className?: string; color?: string }>;
@@ -96,6 +97,7 @@ const TECH: Record<string, Entry> = {
     "Gemma": { Icon: Gem, color: "#4285F4", darkColor: "#7DA2F0" },
 
     "Computer Vision": { Icon: ScanEye, color: "#6B2C91", darkColor: "#F4B942" },
+    "Computational Geometry": { Icon: DraftingCompass, color: "#6B2C91", darkColor: "#F4B942" },
     "RAG": { Icon: Database, color: "#6B2C91", darkColor: "#F4B942" },
     "Vertex AI": { Icon: Sparkles, color: "#4285F4", darkColor: "#7DD3FC" },
     "Cloud Functions": { Icon: CloudCog, color: "#FFA000", darkColor: "#FCD34D" },

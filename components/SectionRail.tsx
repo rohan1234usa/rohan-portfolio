@@ -7,7 +7,7 @@ const SECTIONS = [
     { id: "projects", label: "Projects" },
     { id: "skills", label: "Skills" },
     { id: "education", label: "Education" },
-    { id: "publications", label: "Publications" },
+    { id: "research", label: "Research" },
     { id: "contact", label: "Contact" },
 ];
 
@@ -59,7 +59,7 @@ export const SectionRail = () => {
 
     // From 1080px only. The sections' text column (max-w-5xl, px-6) ends at 50vw + 488px and
     // the dots start at 100vw − 36px, so narrower than that they overlap it — and from md up
-    // the navbar carries every section link but Publications. `invisible`, not just
+    // the navbar carries every section link but Research. `invisible`, not just
     // transparent, so the hidden rail also leaves the tab order.
     return (
         <nav
