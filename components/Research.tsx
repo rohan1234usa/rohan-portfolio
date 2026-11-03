@@ -4,6 +4,7 @@ import { Fragment, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Microscope } from "lucide-react";
 import { PingDot } from "./PingDot";
+import { UCI_LAB } from "@/lib/research";
 import { Reveal } from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
@@ -21,6 +22,8 @@ interface CurrentResearch {
     date: string;
     note?: string;
     link: string;
+    /** Where `link` goes, for screen readers: the card text names the field, not the destination. */
+    linkHint: string;
 }
 
 interface Publication {
@@ -37,16 +40,17 @@ interface Publication {
 /** How Rohan's name appears in the author lists, so it can be set in bold. */
 const SELF = new Set(["Rohan Singh", "Rohan S."]);
 
-// Same limit as the lab's entry in components/Experience.tsx: from Rohan's LinkedIn and his own
-// account of the work, role and field only, until the PhD students OK more.
+// The lab's facts come from UCI_LAB in lib/research.ts, shared with its Experience entry; its comment
+// sets what this card may say while the lab's work is unpublished.
 const CURRENT: CurrentResearch[] = [
     {
         area: "Computer Vision & Computational Geometry",
-        byline: "Undergraduate researcher, advised by Prof. Gopi Meenakshisundaram",
-        place: "UC Irvine · Donald Bren School of ICS",
-        date: "Sept 2026 – Present",
+        byline: `Undergraduate researcher, advised by ${UCI_LAB.advisor}`,
+        place: UCI_LAB.place,
+        date: UCI_LAB.date,
         note: "Building research tools with the lab’s PhD students; project details stay within the lab for now.",
-        link: "https://www.ics.uci.edu/~gopi",
+        link: UCI_LAB.advisorPage,
+        linkHint: `${UCI_LAB.advisor}’s faculty page`,
     },
 ];
 
@@ -91,12 +95,14 @@ const ResearchCard = ({
     meta,
     note,
     link,
+    linkHint,
 }: {
     title: string;
     people: ReactNode;
     meta: string;
     note?: string;
     link: string;
+    linkHint?: string;
 }) => (
     <a
         href={link}
@@ -113,6 +119,7 @@ const ResearchCard = ({
                 <p className="text-sm text-fg-soft mt-2">{people}</p>
                 <p className="text-sm text-fg-soft mt-1 font-mono">{meta}</p>
                 {note && <p className="text-xs text-fg-soft mt-1">{note}</p>}
+                {linkHint && <span className="sr-only">: {linkHint}, opens in a new tab</span>}
             </div>
             <ArrowUpRight className="shrink-0 text-fg-muted group-hover:text-accent transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
@@ -149,6 +156,7 @@ export const Research = () => (
                                     meta={`${r.place} • ${r.date}`}
                                     note={r.note}
                                     link={r.link}
+                                    linkHint={r.linkHint}
                                 />
                             </StaggerItem>
                         ))}
@@ -156,6 +164,8 @@ export const Research = () => (
                 </>
             )}
 
+            {/* The section was #publications until it became Research; this keeps links already shared landing here. */}
+            <div id="publications" aria-hidden />
             <SubLabel>Publications</SubLabel>
             <StaggerGroup className="grid gap-6" stagger={0.1}>
                 {PUBLICATIONS.map((pub) => (

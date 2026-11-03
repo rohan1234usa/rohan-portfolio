@@ -8,6 +8,7 @@ import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { Reveal } from "./motion/Reveal";
 import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 import { HighlightText, highlightKey, type Highlight } from "./Highlight";
+import { UCI_LAB } from "@/lib/research";
 
 interface JobProps {
     company: string;
@@ -74,17 +75,15 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
 
 const EXPERIENCE: JobProps[] = [
     {
-        // From Rohan's LinkedIn entry and his own account of the work. The lab's research is unpublished,
-        // so this names the advisor and the field only — never the project or its research question.
-        // Add specifics once the PhD students OK them, and only what Rohan himself built. The same
-        // limit holds for the "Current" card in components/Research.tsx.
-        company: "UC Irvine · Donald Bren School of ICS",
+        // Place, date and advisor come from UCI_LAB in lib/research.ts, which the Research section's
+        // "Current" card shares; its comment sets what this entry may say while the lab's work is unpublished.
+        company: UCI_LAB.place,
         role: "Undergraduate Student Researcher",
-        date: "Sept 2026 – Present",
+        date: UCI_LAB.date,
         location: "Irvine, CA",
-        url: "https://ics.uci.edu",
+        url: UCI_LAB.site,
         points: [
-            "Research in computer vision and computational geometry under Prof. Gopi Meenakshisundaram, working alongside the lab’s PhD students.",
+            `Research in computer vision and computational geometry under ${UCI_LAB.advisor}, working alongside the lab’s PhD students.`,
             "Building research tools for the lab: pipelines that run vision models and geometry processing over its data."
         ]
     },
