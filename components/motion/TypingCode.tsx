@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
 interface Segment {
@@ -110,6 +110,9 @@ export const TypingCode = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Built once rather than on every typed character.
+    const fullText = useMemo(() => segments.map((seg) => seg.text).join(""), [segments]);
+
     const content = (
         <>
             {segments.map((seg, i) => (
@@ -129,17 +132,24 @@ export const TypingCode = ({
     );
 
     if (pre) {
+        // Two layers in one grid cell: an invisible copy of the finished text, which sizes the block, and
+        // the text typed so far on top of it. The block is its final size from the first frame, so nothing
+        // around it moves while it types and no caller has to size it by hand.
         return (
             <pre
                 ref={(el) => {
                     wrapperRef.current = el;
                 }}
-                className={className}
+                className={`grid ${className ?? ""}`}
             >
-                {content}
+                <span aria-hidden className="invisible col-start-1 row-start-1">
+                    {fullText}
+                </span>
+                <span className="col-start-1 row-start-1">{content}</span>
             </pre>
         );
     }
+    // Inline text stays a plain span so it wraps with the words around it; it grows as it types.
     return (
         <span
             ref={(el) => {

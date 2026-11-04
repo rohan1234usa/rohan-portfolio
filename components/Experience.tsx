@@ -8,6 +8,7 @@ import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { Reveal } from "./motion/Reveal";
 import { EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
 import { HighlightText, highlightKey, type Highlight } from "./Highlight";
+import { UCI_LAB } from "@/lib/research";
 
 interface JobProps {
     company: string;
@@ -73,6 +74,19 @@ const ExperienceItem = ({ job, isLast }: { job: JobProps; isLast: boolean }) => 
 };
 
 const EXPERIENCE: JobProps[] = [
+    {
+        // Place, date and advisor come from UCI_LAB in lib/research.ts, which the Research section's
+        // "Current" card shares; its comment sets what this entry may say while the lab's work is unpublished.
+        company: UCI_LAB.place,
+        role: "Undergraduate Student Researcher",
+        date: UCI_LAB.date,
+        location: "Irvine, CA",
+        url: UCI_LAB.site,
+        points: [
+            `Research in computer vision and computational geometry under ${UCI_LAB.advisor}, working alongside the lab’s PhD students.`,
+            "Building research tools for the lab: pipelines that run vision models and geometry processing over its data."
+        ]
+    },
     {
         company: "Imentiv AI",
         role: "Full-Stack Engineer",

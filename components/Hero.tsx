@@ -116,7 +116,7 @@ export const Hero = () => {
                             </span>
                         </div>
                         <TypingCode
-                            className="px-4 py-3 whitespace-pre min-h-[7.5rem]"
+                            className="px-4 py-3 whitespace-pre"
                             speed={22}
                             startDelay={1100}
                             caret={<span className="ml-0.5 text-accent">▍</span>}
@@ -129,6 +129,8 @@ export const Hero = () => {
                                 { text: "\"Grounded LLM features\"", className: "text-fg-soft" },
                                 { text: ",\n  " },
                                 { text: "\"CV pipelines @ scale\"", className: "text-fg-soft" },
+                                { text: ",\n  " },
+                                { text: "\"Vision + geometry research\"", className: "text-fg-soft" },
                                 { text: ",\n];" },
                             ]}
                         />

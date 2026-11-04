@@ -13,13 +13,14 @@ I **own products end to end**, from drafting spec docs and testing prototypes to
 
 - **GPA**: 3.92
 - **Focus**: Mobile & full-stack product, grounded LLM features, real-time CV pipelines.
+- **Research**: Undergraduate researcher in computer vision & computational geometry at UC Irvine, advised by Prof. Gopi Meenakshisundaram.
 
 ## 🛠️ Technical Arsenal
 
 | Category | Skills |
 |----------|--------|
 | **Languages** | Python, Dart, TypeScript, C++, Java, Kotlin, SQL, C# |
-| **AI & Vision** | PyTorch, YOLOv8, OpenCV, RAG, Embeddings, Gemini, Gemma, LangGraph, DINOv2, Faiss, ElevenLabs, Speech-to-Text |
+| **AI & Vision** | PyTorch, YOLOv8, OpenCV, Computational Geometry, RAG, Embeddings, Gemini, Gemma, LangGraph, DINOv2, Faiss, ElevenLabs, Speech-to-Text |
 | **Engineering** | Flutter, Next.js, Firebase, Cloud Functions, Docker, AWS, GCP, FastAPI, PostgreSQL, MongoDB |
 
 ## 🏆 Featured Projects
@@ -65,13 +66,14 @@ The contact form sends mail through Gmail SMTP — copy `.env.example` to `.env.
 | To change… | Edit |
 |---|---|
 | Hero headline and intro | `components/Hero.tsx` — the headline is repeated as this README's tagline and as `TAGLINE_LINES` in `app/opengraph-image.tsx`, and the intro (minus its first sentence) as **About Me** above, so change them together. On phones the headline's size follows the screen width so "From product vision" fits one line at 320px; if its words change, re-check that with the numbers in the comment above the `<h1>` |
+| The hero's `now.ts` focus list | The `segments` passed to `TypingCode` in `components/Hero.tsx`. The box sizes itself to the finished text, so lines can be added or removed freely. Keep each line no longer than the longest one now (31 characters, counting the indent, quotes and comma), or it runs past the card on a 320px phone |
 | Project copy, links, and tech chips | `FEATURED` / `BUILDING_LEAD` / `BUILDING` / `SHIPPED` in `components/Projects.tsx` |
 | A project still being built | Add a `BuildingProject` to `BUILDING` (its interface documents each field) — it renders in the "Now building" band with signal art instead of a screenshot. Launching it means moving it into `FEATURED` with a `frame`; the full checklist is the comment above `BUILDING` |
 | The project leading the "Now building" band | `BUILDING_LEAD` — a 0-or-1 array of `FeaturedProject`, so it renders with real art and keeps `prelaunch` while sharing the band rows' column grid. Empty the array to drop the lead; the band self-removes once `BUILDING` is also empty |
 | "Now building" signal art | `components/BuildingVisuals.tsx` — one motif per project, shown until there's a real capture |
 | Work history | `EXPERIENCE` in `components/Experience.tsx` — array order is display order; `url` is optional; a point can be `{ lead, text }` to set a stage label in a heavier weight ahead of the bullet's text (the renderer adds the colon), as Merge's are |
 | A bullet with a lead, on a project card or a job | `Highlight` in `components/Highlight.tsx` — the shared type, key and renderer, so the lead's style cannot drift between Projects and Experience |
-| Publications | `PUBLICATIONS` in `components/Publications.tsx` — `authors` are written as on the résumé, and any name in `SELF` is set in bold; an optional `note` adds a smaller line under the venue, such as a later republication |
+| Research and publications | `components/Research.tsx` — `CURRENT` is research still under way, shown under a "Current" label above the papers. The UC Irvine lab's place, date, advisor and links live once in `UCI_LAB` in `lib/research.ts`, shared by the card and the lab's `EXPERIENCE` entry. While the lab's work is unpublished, both name the field and role only; add specifics once the lab clears them. The empty `#publications` anchor keeps old links to the section working. `PUBLICATIONS` holds the papers: `authors` are written as on the résumé, and any name in `SELF` is set in bold; an optional `note` adds a smaller line under the venue, such as a later republication |
 | Degree, GPA, honors, and coursework | `components/Education.tsx` — each school is a `SchoolCard`: a header plus a bar that opens a panel. The UCI card holds the school, dates, GPA and honor pills, and its panel is `COURSES` (array order is display order, so keep it grouped by department rather than sorted by number); the Monta Vista panel is `AP_GROUPS` (subject → course + score). The bars' counts and teasers derive from those arrays |
 | Project screenshots | `public/images/projects/*.webp` — 1920×1080 captures of each live site's hero |
 | What fills a project's frame | `frame` on a `FEATURED` or `BUILDING_LEAD` entry — `{ kind: "site", url, shot }` for a browser-framed capture, `{ kind: "mark", src }` for a square app icon (`public/images/projects/*.png`) |

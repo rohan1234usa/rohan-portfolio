@@ -6,7 +6,7 @@ import "./globals.css";
 const SITE_URL = "https://built-by-rohan.vercel.app";
 const TITLE = "Rohan Singh — Full-Stack Engineer & Product Designer";
 const DESCRIPTION =
-  "CS @ UC Irvine ’27. Founding designer and full-stack engineer on Merge, a social platform for real-life plans. Computer vision research, two publications.";
+  "CS @ UC Irvine ’27. Founding designer and full-stack engineer on Merge, a social platform for real-life plans. Computer vision research at UC Irvine, two publications.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
