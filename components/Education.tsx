@@ -24,6 +24,9 @@ const COURSES = [
     { code: "MATH 3A", name: "Linear Algebra" },
 ];
 
+// The plain outlined pill: the UCI card's GPA and the "Up next" card's status.
+const OUTLINE_PILL = "inline-flex items-center gap-2 px-4 py-2 border border-line text-sm font-medium text-fg-soft self-start md:self-auto";
+
 interface PlannedStudy {
     /** Sits where a school's name goes. */
     eyebrow: string;
@@ -145,7 +148,7 @@ const PlannedCard = ({ eyebrow, degree, meta, status }: PlannedStudy) => (
             degree={degree}
             meta={meta}
             pills={
-                <div className="inline-flex items-center gap-2 px-4 py-2 border border-line text-sm font-medium text-fg-soft self-start md:self-auto">
+                <div className={OUTLINE_PILL}>
                     <PingDot />
                     {status}
                 </div>
@@ -249,7 +252,7 @@ export const Education = () => (
                     pills={
                         <>
                             {/* GPA pill */}
-                            <div className="inline-flex items-center gap-2 px-4 py-2 border border-line text-sm font-medium text-fg-soft self-start md:self-auto">
+                            <div className={OUTLINE_PILL}>
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-warm flex-shrink-0" />
                                 GPA 3.92
                             </div>

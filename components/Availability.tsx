@@ -20,6 +20,8 @@ export const AvailabilityBadge = ({ className = "" }: { className?: string }) =>
         </span>
         <Briefcase size={12} className="text-fg" />
         <span>{AVAILABILITY}</span>
+        {/* Absolutely positioned, so it takes no grid cell: makes screen readers pause between the two lines */}
+        <span className="sr-only">. </span>
         {/* fg-soft, not fg-muted: muted is ~3:1 on white, too faint at 12px. The lighter weight sets it apart. */}
         <span className="col-start-3 font-normal">{MS_PLAN}</span>
     </div>
