@@ -7,6 +7,7 @@ import { Reveal } from "./motion/Reveal";
 import { StaggerGroup, StaggerItem } from "./motion/StaggerGroup";
 import { DURATION, EASE_OUT_QUAD, STAGGER, VIEWPORT } from "./motion/tokens";
 import { useReducedMotionSafe } from "./motion/useReducedMotionSafe";
+import { PingDot } from "./PingDot";
 
 const COURSES = [
     { code: "CS 171", name: "Artificial Intelligence" },
@@ -22,6 +23,30 @@ const COURSES = [
     { code: "STATS 67", name: "Probability & Statistics" },
     { code: "MATH 3A", name: "Linear Algebra" },
 ];
+
+// The plain outlined pill: the UCI card's GPA and the "Up next" card's status.
+const OUTLINE_PILL = "inline-flex items-center gap-2 px-4 py-2 border border-line text-sm font-medium text-fg-soft self-start md:self-auto";
+
+interface PlannedStudy {
+    /** Sits where a school's name goes. */
+    eyebrow: string;
+    degree: string;
+    meta: string;
+    /** The pill beside the live dot. */
+    status: string;
+}
+
+// Applications only so far, so the card names the field and says "applying", never a school or "incoming".
+// Once an offer is accepted, put the school in the eyebrow, keep the degree, and swap this dashed card for
+// a solid SchoolCard. The status badge's MS_PLAN (components/Availability.tsx) says the same in brief.
+// The \u00a0 (no-break space) keeps "Computer Science" together: phones wrap the title, and without it
+// "Science" sits alone on the second line.
+const NEXT_STUDY: PlannedStudy = {
+    eyebrow: "Up next · Graduate school",
+    degree: "M.S. in AI & Computer\u00a0Science",
+    meta: "Applying now · Fall 2027 start",
+    status: "Applications in progress",
+};
 
 interface ApCourse {
     name: string;
@@ -82,6 +107,8 @@ const scoreBadge = (score: ApCourse["score"]) =>
 interface SchoolCardProps {
     school: string;
     degree: string;
+    /** A line between the degree and the dates, such as a specialization. */
+    specialization?: string;
     meta: string;
     /** Right-hand column of the header. Omit when a school has nothing to summarise there. */
     pills?: ReactNode;
@@ -93,26 +120,53 @@ interface SchoolCardProps {
     children: ReactNode;
 }
 
+type SchoolHeaderProps = Pick<SchoolCardProps, "school" | "degree" | "specialization" | "meta" | "pills">;
+
+/** The header every Education card shares: school, degree and dates on the left, pills on the right. */
+const SchoolHeader = ({ school, degree, specialization, meta, pills }: SchoolHeaderProps) => (
+    <div className="p-8 md:p-10 flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+        {/* From lg the left column keeps its natural lines and the pills wrap instead, which is
+            also what brings the collapsed UCI card level with Monta Vista's. Not from md: at 768px
+            with classic scrollbars the pills column would be narrower than the widest pill. */}
+        <div className="lg:shrink-0">
+            <p className="text-xs font-medium tracking-widest text-accent uppercase mb-2">{school}</p>
+            <h3 className="text-2xl font-bold text-fg font-display mb-1">{degree}</h3>
+            {/* fg-soft, not the dates' fg-muted: muted is ~3:1 on white, too faint for part of the degree */}
+            {specialization && <p className="text-sm text-fg-soft mb-1">{specialization}</p>}
+            <p className="text-sm text-fg-muted font-light">{meta}</p>
+        </div>
+        {pills && <div className="flex flex-wrap gap-3 md:text-right items-start">{pills}</div>}
+    </div>
+);
+
+/** Study that hasn't started: a school header in a dashed border, with no bar or panel, so it reads as
+ *  planned rather than enrolled. The live dot is the one Research uses for its "Current" label. */
+const PlannedCard = ({ eyebrow, degree, meta, status }: PlannedStudy) => (
+    <StaggerItem className="border border-dashed border-line-strong">
+        <SchoolHeader
+            school={eyebrow}
+            degree={degree}
+            meta={meta}
+            pills={
+                <div className={OUTLINE_PILL}>
+                    <PingDot />
+                    {status}
+                </div>
+            }
+        />
+    </StaggerItem>
+);
+
 /** One school: the header every card shares, then a full-width bar that opens a panel beneath it.
  *  Each card owns its `open`, so both can be open at once and neither closes the other. */
-const SchoolCard = ({ school, degree, meta, pills, label, count, teaser, children }: SchoolCardProps) => {
+const SchoolCard = ({ school, degree, specialization, meta, pills, label, count, teaser, children }: SchoolCardProps) => {
     const [open, setOpen] = useState(false);
     const panelId = useId();
     const reduce = useReducedMotionSafe();
 
     return (
         <StaggerItem className="border border-line bg-surface">
-            <div className="p-8 md:p-10 flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                {/* From lg the left column keeps its natural lines and the pills wrap instead, which is
-                    also what brings the collapsed UCI card level with Monta Vista's. Not from md: at 768px
-                    with classic scrollbars the pills column would be narrower than the widest pill. */}
-                <div className="lg:shrink-0">
-                    <p className="text-xs font-medium tracking-widest text-accent uppercase mb-2">{school}</p>
-                    <h3 className="text-2xl font-bold text-fg font-display mb-1">{degree}</h3>
-                    <p className="text-sm text-fg-muted font-light">{meta}</p>
-                </div>
-                {pills && <div className="flex flex-wrap gap-3 md:text-right items-start">{pills}</div>}
-            </div>
+            <SchoolHeader school={school} degree={degree} specialization={specialization} meta={meta} pills={pills} />
 
             {/* cursor-pointer: v4 preflight leaves buttons on cursor: default. outline-hidden, not -none:
                 it keeps a transparent outline that forced-colors mode renders where the ring can't show.
@@ -188,14 +242,17 @@ export const Education = () => (
             </Reveal>
 
             <StaggerGroup stagger={0.15} className="space-y-6">
+                <PlannedCard {...NEXT_STUDY} />
+
                 <SchoolCard
                     school="University of California, Irvine"
                     degree="B.S. Computer Science"
+                    specialization="Specialization in Intelligent Systems"
                     meta="Sept 2024 – Jun 2027 (expected) · Class of 2027"
                     pills={
                         <>
                             {/* GPA pill */}
-                            <div className="inline-flex items-center gap-2 px-4 py-2 border border-line text-sm font-medium text-fg-soft self-start md:self-auto">
+                            <div className={OUTLINE_PILL}>
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-warm flex-shrink-0" />
                                 GPA 3.92
                             </div>
