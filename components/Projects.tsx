@@ -3,7 +3,7 @@
 import { ComponentType, ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, AudioWaveform, Download, FolderGit2, Github, Lightbulb, Lock, Users } from "lucide-react";
+import { ArrowRight, ArrowUpRight, AudioWaveform, Download, FileText, FolderGit2, Github, Lightbulb, Lock, Users } from "lucide-react";
 import { SiAppstore, SiGoogleplay } from "react-icons/si";
 import { BuildingVisual, type BuildingVisualKind } from "./BuildingVisuals";
 import { HighlightText, highlightKey, type Highlight } from "./Highlight";
@@ -56,6 +56,10 @@ interface ProjectBase {
 interface FeaturedProject extends ProjectBase {
     prelaunch?: Prelaunch;
     frame: Frame;
+    /** A public page that shows the product working with no sign-in, such as a sample
+     *  report. Renders as a CTA beside "Live site", so a visitor who can't sign in still
+     *  sees real output. Scheme-qualified for the same reason as `Frame["url"]`. */
+    sample?: { label: string; url: `https://${string}` };
 }
 
 /** A product with nothing to screenshot yet — no site, no store listing, no app icon.
@@ -92,21 +96,28 @@ const FEATURED: FeaturedProject[] = [
     {
         title: "Behavioral Interview Coach",
         kind: "Full-stack · Multimodal AI",
+        // Summary, bullet 4 and chips describe the finished app (Nov 2026): mock interviews, the
+        // STAR review, the voice timeline. The STAR review may give a verdict with no quote, so
+        // claim only that the quotes it shows are checked. No "Computer Vision" chip: the face
+        // reading is Imentiv's API, not in-house CV.
         summary:
-            "Soft-skills-first interview simulator that quantifies subconscious cues like facial expression and vocal tone to improve delivery.",
+            "Practice behavioral answers on camera and see how you actually came across: four delivery scores, a transcript lined up with your voice’s tone, and a STAR review of what you said.",
         highlights: [
             "Architected a ‘Soft-Skills First’ analysis engine designed to quantify non-technical traits (confidence, clarity, resilience, engagement), filling the critical feedback gap left by technical platforms like LeetCode.",
             "Created a real-time interview simulation replicating high-pressure screenings in a low-stakes environment.",
             "Developed a multimodal pipeline that separates semantic content from delivery when evaluating performance.",
-            "Gemini streams résumé-tailored questions for any company and role, then turns your session history into a personalized coaching plan.",
+            "Built a mock-interview mode that asks three résumé-tailored Gemini questions back to back, and a STAR review whose quotes are checked word for word against the transcript.",
         ],
-        tech: ["Python", "FastAPI", "Imentiv API", "Next.js", "Docker", "AWS S3", "Gemini", "Computer Vision"],
+        tech: ["Python", "FastAPI", "Imentiv API", "Next.js", "PostgreSQL", "Docker", "AWS S3", "Gemini"],
         frame: {
             kind: "site",
             url: "https://behavioral-interview-coach.vercel.app/",
             shot: "/images/projects/behavioral-coach.webp",
         },
-        source: "https://github.com/rohan1234usa/behavioral-coach",
+        // Signing in to record needs Google, so the sample report is the one-click look.
+        sample: { label: "Sample report", url: "https://behavioral-interview-coach.vercel.app/demo" },
+        // No `source` while github.com/rohan1234usa/behavioral-coach is private (it 404s for
+        // visitors). Add it back once the repo is public again, here and in README.md.
         glow: "#4F8FE0",
     },
     {
@@ -581,6 +592,18 @@ const FeaturedRow = ({
                             Live site
                             <span className="sr-only">: {project.title}</span>
                             <ArrowUpRight aria-hidden size={16} />
+                        </a>
+                    )}
+                    {project.sample && (
+                        <a
+                            href={project.sample.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 border border-line-strong text-fg-soft text-sm font-medium rounded-sm hover:border-accent hover:text-accent"
+                        >
+                            <FileText aria-hidden size={16} />
+                            {project.sample.label}
+                            <span className="sr-only">: {project.title}</span>
                         </a>
                     )}
                     {project.source && (
