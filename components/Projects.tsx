@@ -323,6 +323,10 @@ const TechChip = ({ name }: { name: string }) => (
 const FRAME_CHROME =
     "ring-1 ring-black/10 dark:ring-white/10 shadow-[0_28px_56px_-24px_rgba(0,34,68,0.55)] dark:shadow-[0_28px_64px_-24px_rgba(0,0,0,0.85)] transition-transform duration-500 ease-out group-hover/shot:-translate-y-1.5 motion-reduce:transition-none";
 
+/** The outlined CTA beside "Live site" (Sample report, Source), shared so the two can't drift. */
+const OUTLINE_CTA =
+    "inline-flex items-center gap-2 px-5 py-2.5 border border-line-strong text-fg-soft text-sm font-medium rounded-sm hover:border-accent hover:text-accent";
+
 /** Dot grid behind a tile, faded toward the edges. Shared so the pitch and mask can't
  *  drift between the featured and building tiles. */
 const DotGrid = () => (
@@ -599,7 +603,7 @@ const FeaturedRow = ({
                             href={project.sample.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 border border-line-strong text-fg-soft text-sm font-medium rounded-sm hover:border-accent hover:text-accent"
+                            className={OUTLINE_CTA}
                         >
                             <FileText aria-hidden size={16} />
                             {project.sample.label}
@@ -611,7 +615,7 @@ const FeaturedRow = ({
                             href={project.source}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 border border-line-strong text-fg-soft text-sm font-medium rounded-sm hover:border-accent hover:text-accent"
+                            className={OUTLINE_CTA}
                         >
                             <Github aria-hidden size={16} />
                             Source
