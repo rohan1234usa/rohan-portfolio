@@ -123,16 +123,23 @@ const FEATURED: FeaturedProject[] = [
     {
         title: "SikhAI",
         kind: "Full-stack · Generative AI",
+        // Summary and bullet 4 describe the app as of Nov 2026: the Gurbani quote check, Talk
+        // (voice translation) and Learn Punjabi. There is still no retrieval step, so no "RAG" or
+        // "grounded": the check runs after each reply, covers the first six quoted lines
+        // (MAX_CITATIONS in the app's lib/gurbani/citations.ts), and flags a mismatch without
+        // editing the reply.
         summary:
-            "Full-stack spiritual companion: a scripture-grounded AI chatbot, a Punjabi ↔ English translator, Shabad search, the daily Hukamnama, and a community seva board.",
+            "Ask about Sikh teachings and see the Gurbani each answer quotes checked against the source, alongside a Punjabi ↔ English translator by text or voice, Punjabi lessons, Shabad search, the daily Hukamnama, and a seva board.",
         highlights: [
             "Developed a Gemini-powered chatbot to provide spiritual guidance rooted in Sikh teachings.",
             "Engineered a full-stack community platform featuring Firebase Authentication for a Seva volunteer event organizer.",
             "Built an accessible, high-performance Shabad search for the Sikh community using Next.js.",
-            "Production-grade GenAI: schema-constrained JSON for the translator, graceful Cloud Translation fallback, and nonce-fenced prompts that block injection.",
+            "Built a check that runs after each chat reply: up to six quoted Gurbani lines are looked up in the source and matched word for word, and a changed word or a wrong Ang is flagged under the answer.",
         ],
         tech: ["Next.js", "TypeScript", "Gemini", "Firebase", "Tailwind"],
         frame: { kind: "site", url: "https://sikhai.vercel.app/", shot: "/images/projects/sikhai.webp" },
+        // No `sample`: chat, the translator, lessons and Shabad search all work signed out
+        // (joining or hosting a seva needs Google), so "Live site" is the one-click look.
         source: "https://github.com/rohan1234usa/sikh-ai",
         glow: "#F59E0B",
     },
