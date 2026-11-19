@@ -94,11 +94,13 @@ const EXPERIENCE: JobProps[] = [
         location: "Cupertino, CA",
         url: "https://www.imentiv.ai",
         points: [
+            // Mirrors the résumé's Imentiv block (2026-11-18): Dissonance AI leads, then its validation
+            // method, PitchSense, and SceneSense. Dissonance AI is a review aid, never a lie detector, and
+            // its validation harness is built but not yet run, so claim the method and no results.
+            "Built Dissonance AI solo, from brief to a tested build in seven weeks: an analysis tool that supports investigators reviewing recorded interviews. Not a lie detector: each flag is a prompt for a named reviewer, never a verdict.",
+            "Took a research-based approach: built a validation harness that checks each measured signal against human-coded ground truth (a 121-clip courtroom corpus), with outcome labels sealed and pass bars fixed before any run.",
             "Led PitchSense from brief to release: Imentiv’s sales-call intelligence platform, with three products on one FastAPI + Next.js pipeline — Pitch Coach sharpens a rep’s delivery, Reaction reads the audience, and Full Call shows how one moves the other.",
-            "Designed the scoring behind them: five engagement and six delivery constructs, each normalized to the speaker’s own resting baseline so a reserved rep isn’t graded on a showman’s scale, plus transcript-derived mechanics like fillers, hedges, pace, and pauses. The AI coach explains only those numbers.",
-            "Built A/B testing end to end: reps compare pitch variants on real viewer reactions across about 40 signals, with bootstrap 95% confidence intervals and minimum-sample guardrails before any winner is called, at no extra analysis cost.",
-            "Cut about 120 per-frame API calls from each analysis by reusing frames already fetched, and built a harness that meters every Imentiv call, its latency, and its credit cost, which showed where else to save, like skipping speaker matching on solo clips.",
-            "Designed SceneSense, a 0→1 acting coach that grades a take against a sentence-level map of the script’s emotional arc and tells an improvised line from a forgotten one; now building it."
+            "Built SceneSense, an AI acting coach: it maps each line’s emotional intent, then scores a take’s face, voice, and words against it with Imentiv’s video, real-time, and Insights APIs, telling a choice from a dropped line."
         ]
     },
     {

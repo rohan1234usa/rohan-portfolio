@@ -209,6 +209,27 @@ const BUILDING_LEAD: FeaturedProject[] = [{
 // The intro sentence counts the band and lists each `room`, so it re-words itself.
 const BUILDING: BuildingProject[] = [
     {
+        // First in the band, directly under the Merge Campus lead, at Rohan's request (2026-11-18).
+        // The wording matters: it is a review aid that supports investigations, never a lie detector
+        // or "deception detection", and it has run only on synthetic interviews and a fake vendor.
+        // Its validation harness is built but not run, so the card describes the method, not results.
+        title: "Dissonance AI",
+        kind: "Full-stack · Multimodal AI",
+        context: "Imentiv AI · 2026",
+        stage: "Tested build",
+        room: "the investigative interview",
+        visual: "dissonance",
+        summary:
+            "An analysis tool that supports investigators reviewing recorded interviews. It marks the moments where face, voice, words, and speech timing move away from a person’s own baseline, and points the reviewer to what was being said. It is not a lie detector.",
+        highlights: [
+            "Signals, not verdicts: a flag’s strength is the number of independent channels that agree, never a probability, and every flag is a prompt for a named reviewer who makes the decision.",
+            "Research-based from the start: a validation harness checks each measured signal against human-coded ground truth, a 121-clip courtroom corpus, with outcome labels sealed and pass bars fixed before any run.",
+            "Written for scrutiny: a compliance gate before any session, a hash-chained audit log of every action, and a report built on the assumption that opposing counsel will read it.",
+        ],
+        tech: ["TypeScript", "React", "Node.js", "Claude", "Imentiv API", "Playwright"],
+        glow: "#F2B84B",
+    },
+    {
         title: "SceneSense",
         kind: "0→1 Product · Multimodal AI",
         context: "Imentiv AI · 2026",

@@ -17,7 +17,7 @@ import { DURATION, EASE_OUT_QUAD, VIEWPORT } from "./motion/tokens";
  * every subpath — so a multi-subpath path "draws" all its pieces at once and finishes in a
  * fraction of the duration. Those marks use `fade`; only single-subpath strokes use `draw`.
  */
-export type BuildingVisualKind = "scene" | "pitch" | "clarity";
+export type BuildingVisualKind = "dissonance" | "scene" | "pitch" | "clarity";
 
 // Fixed inks — the frame body is #0B0B0F in both themes, so white alphas are safe.
 const HI = "rgba(255,255,255,0.85)";
@@ -258,9 +258,56 @@ const ClarityVisual = ({ glow, reduce }: { glow: string; reduce: boolean }) => {
     );
 };
 
+/* ── Dissonance AI ──────────────────────────────────────────────────────────
+   Four channels, each against the person's own range. Where several leave their
+   range at the same moment, that moment is marked for a reviewer to read: the
+   mark is a prompt, not a finding, and the art carries no score.               */
+const DISSONANCE_TRACKS = [
+    { label: "FACE", y: 48, d: "M72 48C92 45 108 51 128 48C148 45 168 50 196 48C204 48 207 34 212 34C217 34 220 48 228 48C252 48 276 51 304 48" },
+    { label: "VOICE", y: 78, d: "M72 78C96 81 112 75 132 78C152 81 172 77 196 78C203 78 207 92 212 92C217 92 221 78 228 78C250 78 278 75 304 78" },
+    { label: "WORDS", y: 108, d: "M72 108C94 106 114 110 136 108C160 106 184 110 212 108C236 106 270 110 304 108" },
+    { label: "TIMING", y: 138, d: "M72 138C92 140 110 136 130 138C152 140 174 137 196 138C203 138 208 125 213 125C218 125 221 138 228 138C254 138 280 140 304 138" },
+] as const;
+
+const DissonanceVisual = ({ glow, reduce }: { glow: string; reduce: boolean }) => {
+    const drawTrack = draw(reduce, 1.3);
+    const f = fade(reduce);
+    return (
+        <Svg>
+            {/* Legend */}
+            <rect x={16} y={15} width={18} height={8} rx={2} fill={GRID} stroke={LO} strokeWidth={0.75} />
+            <text x={40} y={23} fill={MID} {...TAG}>THEIR OWN RANGE</text>
+
+            {DISSONANCE_TRACKS.map((t, i) => (
+                <g key={t.label}>
+                    <text x={16} y={t.y + 3} fill={MID} {...TAG}>{t.label}</text>
+                    {/* The person's own range for this channel */}
+                    <rect x={72} y={t.y - 7} width={232} height={14} rx={3} fill={GRID} />
+                    <motion.path
+                        d={t.d}
+                        stroke={HI}
+                        strokeWidth={1.5}
+                        strokeLinecap="round"
+                        variants={drawTrack}
+                        custom={0.1 + i * 0.12}
+                    />
+                </g>
+            ))}
+
+            {/* The moment several channels leave their range together */}
+            <motion.g variants={f} custom={1.5}>
+                <rect x={198} y={30} width={28} height={120} rx={4} fill={glow} fillOpacity={0.1} stroke={glow} strokeWidth={1.25} strokeDasharray="3 3" />
+                <text x={212} y={164} fill={glow} textAnchor="middle" {...TAG}>READ THIS MOMENT</text>
+            </motion.g>
+        </Svg>
+    );
+};
+
 export const BuildingVisual = ({ kind, glow }: { kind: BuildingVisualKind; glow: string }) => {
     const reduce = useReducedMotionSafe();
     switch (kind) {
+        case "dissonance":
+            return <DissonanceVisual glow={glow} reduce={reduce} />;
         case "scene":
             return <SceneVisual glow={glow} reduce={reduce} />;
         case "pitch":
