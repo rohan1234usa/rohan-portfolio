@@ -32,6 +32,9 @@ import {
     SiMongodb,
     SiElevenlabs,
     SiLanggraph,
+    SiReact,
+    SiNodedotjs,
+    SiClaude,
 } from "react-icons/si";
 import {
     ScanEye,
@@ -50,6 +53,7 @@ import {
     Captions,
     Waypoints,
     DraftingCompass,
+    FlaskConical,
 } from "lucide-react";
 
 type IconComp = ComponentType<{ size?: number; className?: string; color?: string }>;
@@ -93,6 +97,9 @@ const TECH: Record<string, Entry> = {
     "MongoDB": { Icon: SiMongodb, color: "#47A248" },
     "ElevenLabs": { Icon: SiElevenlabs, color: "#0C2340", darkColor: "#FDF8F0" },
     "LangGraph": { Icon: SiLanggraph, color: "#1C3C3C", darkColor: "#5EEAD4" },
+    "React": { Icon: SiReact, color: "#087EA4", darkColor: "#61DAFB" },
+    "Node.js": { Icon: SiNodedotjs, color: "#3C873A", darkColor: "#7BC96F" },
+    "Claude": { Icon: SiClaude, color: "#C15F3C", darkColor: "#E08A6B" },
     // Gemma has no brand mark in Simple Icons — a generic glyph beats borrowing Gemini's.
     "Gemma": { Icon: Gem, color: "#4285F4", darkColor: "#7DA2F0" },
 
@@ -107,6 +114,8 @@ const TECH: Record<string, Entry> = {
     "ByteTrack": { Icon: Move3d, color: "#6B2C91", darkColor: "#F4B942" },
     "Imentiv API": { Icon: ScanFace, color: "#6B2C91", darkColor: "#F4B942" },
     "Speech-to-Text": { Icon: Captions, color: "#6B2C91", darkColor: "#F4B942" },
+    // Playwright has no brand mark in Simple Icons; a test-tube glyph says "browser tests".
+    "Playwright": { Icon: FlaskConical, color: "#6B2C91", darkColor: "#F4B942" },
     "Embeddings": { Icon: Waypoints, color: "#6B2C91", darkColor: "#F4B942" },
 };
 
